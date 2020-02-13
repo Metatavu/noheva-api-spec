@@ -201,13 +201,13 @@ paths:
               schema:
                 $ref: "#/components/schemas/Error"
 
-  /exhibitions/{exhibitionId}/userVisitorSessions:
+  /exhibitions/{exhibitionId}/visitorSessions:
     get:
-      operationId: listUserVisitorSessions
+      operationId: listVisitorSessions
       summary: List visitor sessions
       description: List exhibition visitor sessions
       tags:
-        - UserVisitorSessions
+        - VisitorSessions
       parameters:
         - name: exhibitionId
           required: true
@@ -224,7 +224,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: "#/components/schemas/UserVisitorSession"
+                  $ref: "#/components/schemas/VisitorSession"
         "400":
           description: Invalid request was sent to the server
           content:
@@ -244,11 +244,11 @@ paths:
               schema:
                 $ref: "#/components/schemas/Error"
     post:
-      operationId: createUserVisitorSession
+      operationId: createVisitorSession
       summary: Create a visitor session
       description: Creates new exhibition visitor session
       tags:
-        - UserVisitorSessions
+        - VisitorSessions
       parameters:
         - name: exhibitionId
           required: true
@@ -261,7 +261,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/UserVisitorSession"
+              $ref: "#/components/schemas/VisitorSession"
         description: Payload
         required: true
       responses:
@@ -270,7 +270,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/UserVisitorSession"
+                $ref: "#/components/schemas/VisitorSession"
         "400":
           description: Invalid request was sent to the server
           content:
@@ -290,13 +290,13 @@ paths:
               schema:
                 $ref: "#/components/schemas/Error"
 
-  /exhibitions/{exhibitionId}/userVisitorSessions/{userVisitorSessionId}:
+  /exhibitions/{exhibitionId}/visitorSessions/{visitorSessionId}:
     get:
-      operationId: findUserVisitorSession
+      operationId: findVisitorSession
       summary: Find a visitor session
       description: Finds a visitor session by id
       tags:
-        - UserVisitorSessions
+        - VisitorSessions
       parameters:
         - name: exhibitionId
           required: true
@@ -305,7 +305,7 @@ paths:
           schema:
             type: string
             format: uuid
-        - name: userVisitorSessionId
+        - name: visitorSessionId
           required: true
           in: path
           description: visitor session id
@@ -318,7 +318,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/UserVisitorSession"
+                $ref: "#/components/schemas/VisitorSession"
         "400":
           description: Invalid request was sent to the server
           content:
@@ -338,16 +338,16 @@ paths:
               schema:
                 $ref: "#/components/schemas/Error"
     put:
-      operationId: updateUserVisitorSession
+      operationId: updateVisitorSession
       summary: Updates visitor session.
       description: Updates visitor session.
       tags:
-        - UserVisitorSessions
+        - VisitorSessions
       requestBody:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/UserVisitorSession"
+              $ref: "#/components/schemas/VisitorSession"
         description: Payload
         required: true
       parameters:
@@ -358,7 +358,7 @@ paths:
           schema:
             type: string
             format: uuid
-        - name: userVisitorSessionId
+        - name: visitorSessionId
           required: true
           in: path
           description: visitor session id
@@ -371,7 +371,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/UserVisitorSession"
+                $ref: "#/components/schemas/VisitorSession"
         "400":
           description: Invalid request was sent to the server
           content:
@@ -391,11 +391,11 @@ paths:
               schema:
                 $ref: "#/components/schemas/Error"
     delete:
-      operationId: deleteUserVisitorSession
+      operationId: deleteVisitorSession
       summary: Deletes visitor session.
       description: Delets exhibition visitor session.
       tags:
-        - UserVisitorSessions
+        - VisitorSessions
       parameters:
         - name: exhibitionId
           required: true
@@ -404,239 +404,7 @@ paths:
           schema:
             type: string
             format: uuid
-        - name: userVisitorSessionId
-          required: true
-          in: path
-          description: visitor session id
-          schema:
-            type: string
-            format: uuid
-      responses:
-        "204":
-          description: Success
-        "400":
-          description: Invalid request was sent to the server
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
-        "403":
-          description: Attempted to make a call with unauthorized client
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
-        "500":
-          description: Internal server error
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
-
-  /exhibitions/{exhibitionId}/groupVisitorSessions:
-    get:
-      operationId: listGroupVisitorSessions
-      summary: List visitor sessions
-      description: List exhibition visitor sessions
-      tags:
-        - GroupVisitorSessions
-      parameters:
-        - name: exhibitionId
-          required: true
-          in: path
-          description: exhibition id
-          schema:
-            type: string
-            format: uuid
-      responses:
-        "200":
-          description: A visitor session list
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: "#/components/schemas/GroupVisitorSession"
-        "400":
-          description: Invalid request was sent to the server
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
-        "403":
-          description: Attempted to make a call with unauthorized client
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
-        "500":
-          description: Internal server error
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
-    post:
-      operationId: createGroupVisitorSession
-      summary: Create a visitor session
-      description: Creates new exhibition visitor session
-      tags:
-        - GroupVisitorSessions
-      parameters:
-        - name: exhibitionId
-          required: true
-          in: path
-          description: exhibition id
-          schema:
-            type: string
-            format: uuid
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/GroupVisitorSession"
-        description: Payload
-        required: true
-      responses:
-        "200":
-          description: Created exhibition visitor session
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/GroupVisitorSession"
-        "400":
-          description: Invalid request was sent to the server
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
-        "403":
-          description: Attempted to make a call with unauthorized client
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
-        "500":
-          description: Internal server error
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
-
-  /exhibitions/{exhibitionId}/groupVisitorSessions/{groupVisitorSessionId}:
-    get:
-      operationId: findGroupVisitorSession
-      summary: Find a visitor session
-      description: Finds a visitor session by id
-      tags:
-        - GroupVisitorSessions
-      parameters:
-        - name: exhibitionId
-          required: true
-          in: path
-          description: exhibition id
-          schema:
-            type: string
-            format: uuid
-        - name: groupVisitorSessionId
-          required: true
-          in: path
-          description: visitor session id
-          schema:
-            type: string
-            format: uuid
-      responses:
-        "200":
-          description: A exhibition
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/GroupVisitorSession"
-        "400":
-          description: Invalid request was sent to the server
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
-        "403":
-          description: Attempted to make a call with unauthorized client
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
-        "500":
-          description: Internal server error
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
-    put:
-      operationId: updateGroupVisitorSession
-      summary: Updates visitor session.
-      description: Updates visitor session.
-      tags:
-        - GroupVisitorSessions
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/GroupVisitorSession"
-        description: Payload
-        required: true
-      parameters:
-        - name: exhibitionId
-          required: true
-          in: path
-          description: exhibition id
-          schema:
-            type: string
-            format: uuid
-        - name: groupVisitorSessionId
-          required: true
-          in: path
-          description: visitor session id
-          schema:
-            type: string
-            format: uuid
-      responses:
-        "200":
-          description: Updated exhibition
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/GroupVisitorSession"
-        "400":
-          description: Invalid request was sent to the server
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
-        "403":
-          description: Attempted to make a call with unauthorized client
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
-        "500":
-          description: Internal server error
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
-    delete:
-      operationId: deleteGroupVisitorSession
-      summary: Deletes visitor session.
-      description: Delets exhibition visitor session.
-      tags:
-        - GroupVisitorSessions
-      parameters:
-        - name: exhibitionId
-          required: true
-          in: path
-          description: exhibition id
-          schema:
-            type: string
-            format: uuid
-        - name: groupVisitorSessionId
+        - name: visitorSessionId
           required: true
           in: path
           description: visitor session id
@@ -742,8 +510,7 @@ components:
     VisitorSession:
       type: object
       required:
-        - tagId
-        - userId
+        - users
       properties:
         id:
           type: string
@@ -755,15 +522,16 @@ components:
           format: uuid
           readOnly: true
           description: Exhibition id the visiotr was attending to
-        tagId:
-          type: string
-          description: Visitor RFID tag id, used to identify user in exhibition UI application
         state:
           $ref: '#/components/schemas/VisitorSessionState'
         variables:
           type: array
           items:
            $ref: '#/components/schemas/VisitorSessionVariable'
+        users:
+          type: array
+          items:
+           $ref: '#/components/schemas/VisitorSessionUser'
         creatorId:
           type: string
           format: uuid
@@ -782,27 +550,17 @@ components:
           format: date-time
           description: Date modified
           readOnly: true
-        
-    UserVisitorSession:
-      allOf: 
-        - $ref: '#/components/schemas/VisitorSession'
-        - type: object
-          properties:
-            userId:
-              type: string
-              format: uuid
-              description: Visitor Keycloak user id
-        
-    GroupVisitorSession:
-      allOf: 
-        - $ref: '#/components/schemas/VisitorSession'
-        - type: object
-          properties:
-            userIds:
-              type: array
-              items:
-                type: string
-                format: uuid
+                
+    VisitorSessionUser:
+      type: object
+      required:
+        - userid
+        - tagid
+      properties:
+        userid:
+          type: string
+        tagid:
+          type: string
 
     Error:
       type: object
