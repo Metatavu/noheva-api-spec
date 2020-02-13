@@ -554,12 +554,12 @@ components:
     VisitorSessionUser:
       type: object
       required:
-        - userid
-        - tagid
+        - userId
+        - tagId
       properties:
-        userid:
+        userId:
           type: string
-        tagid:
+        tagId:
           type: string
 
     Error:
