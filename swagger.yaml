@@ -433,6 +433,703 @@ paths:
               schema:
                 $ref: "#/components/schemas/Error"
 
+  /exhibitions/{exhibitionId}/rooms:
+    get:
+      operationId: listRooms
+      summary: List rooms
+      description: List exhibition rooms
+      tags:
+        - Rooms
+      parameters:
+        - name: exhibitionId
+          required: true
+          in: path
+          description: exhibition id
+          schema:
+            type: string
+            format: uuid
+      responses:
+        "200":
+          description: A room list
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/ExhibitionRoom"
+        "400":
+          description: Invalid request was sent to the server
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "403":
+          description: Attempted to make a call with unauthorized client
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "500":
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+    post:
+      operationId: createRoom
+      summary: Create a room
+      description: Creates new exhibition room
+      tags:
+        - Rooms
+      parameters:
+        - name: exhibitionId
+          required: true
+          in: path
+          description: exhibition id
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ExhibitionRoom"
+        description: Payload
+        required: true
+      responses:
+        "200":
+          description: Created exhibition room
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ExhibitionRoom"
+        "400":
+          description: Invalid request was sent to the server
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "403":
+          description: Attempted to make a call with unauthorized client
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "500":
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
+  /exhibitions/{exhibitionId}/rooms/{roomId}:
+    get:
+      operationId: findRoom
+      summary: Find a room
+      description: Finds a room by id
+      tags:
+        - Rooms
+      parameters:
+        - name: exhibitionId
+          required: true
+          in: path
+          description: exhibition id
+          schema:
+            type: string
+            format: uuid
+        - name: roomId
+          required: true
+          in: path
+          description: room id
+          schema:
+            type: string
+            format: uuid
+      responses:
+        "200":
+          description: A exhibition
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ExhibitionRoom"
+        "400":
+          description: Invalid request was sent to the server
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "403":
+          description: Attempted to make a call with unauthorized client
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "500":
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+    put:
+      operationId: updateRoom
+      summary: Updates room.
+      description: Updates room.
+      tags:
+        - Rooms
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ExhibitionRoom"
+        description: Payload
+        required: true
+      parameters:
+        - name: exhibitionId
+          required: true
+          in: path
+          description: exhibition id
+          schema:
+            type: string
+            format: uuid
+        - name: roomId
+          required: true
+          in: path
+          description: room id
+          schema:
+            type: string
+            format: uuid
+      responses:
+        "200":
+          description: Updated exhibition
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ExhibitionRoom"
+        "400":
+          description: Invalid request was sent to the server
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "403":
+          description: Attempted to make a call with unauthorized client
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "500":
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+    delete:
+      operationId: deleteRoom
+      summary: Deletes room.
+      description: Delets exhibition room.
+      tags:
+        - Rooms
+      parameters:
+        - name: exhibitionId
+          required: true
+          in: path
+          description: exhibition id
+          schema:
+            type: string
+            format: uuid
+        - name: roomId
+          required: true
+          in: path
+          description: room id
+          schema:
+            type: string
+            format: uuid
+      responses:
+        "204":
+          description: Success
+        "400":
+          description: Invalid request was sent to the server
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "403":
+          description: Attempted to make a call with unauthorized client
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "500":
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+                
+
+  /exhibitions/{exhibitionId}/deviceGroups:
+    get:
+      operationId: listDeviceGroups
+      summary: List device groups
+      description: List exhibition device groups
+      tags:
+        - DeviceGroups
+      parameters:
+        - name: exhibitionId
+          required: true
+          in: path
+          description: exhibition id
+          schema:
+            type: string
+            format: uuid
+      responses:
+        "200":
+          description: A device group list
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/DeviceGroup"
+        "400":
+          description: Invalid request was sent to the server
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "403":
+          description: Attempted to make a call with unauthorized client
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "500":
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+    post:
+      operationId: createDeviceGroup
+      summary: Create a device group
+      description: Creates new exhibition device group
+      tags:
+        - DeviceGroups
+      parameters:
+        - name: exhibitionId
+          required: true
+          in: path
+          description: exhibition id
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DeviceGroup"
+        description: Payload
+        required: true
+      responses:
+        "200":
+          description: Created exhibition device group
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DeviceGroup"
+        "400":
+          description: Invalid request was sent to the server
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "403":
+          description: Attempted to make a call with unauthorized client
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "500":
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
+  /exhibitions/{exhibitionId}/deviceGroups/{deviceGroupId}:
+    get:
+      operationId: findDeviceGroup
+      summary: Find a device group
+      description: Finds a device group by id
+      tags:
+        - DeviceGroups
+      parameters:
+        - name: exhibitionId
+          required: true
+          in: path
+          description: exhibition id
+          schema:
+            type: string
+            format: uuid
+        - name: deviceGroupId
+          required: true
+          in: path
+          description: device group id
+          schema:
+            type: string
+            format: uuid
+      responses:
+        "200":
+          description: A exhibition
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DeviceGroup"
+        "400":
+          description: Invalid request was sent to the server
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "403":
+          description: Attempted to make a call with unauthorized client
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "500":
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+    put:
+      operationId: updateDeviceGroup
+      summary: Updates device group.
+      description: Updates device group.
+      tags:
+        - DeviceGroups
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DeviceGroup"
+        description: Payload
+        required: true
+      parameters:
+        - name: exhibitionId
+          required: true
+          in: path
+          description: exhibition id
+          schema:
+            type: string
+            format: uuid
+        - name: deviceGroupId
+          required: true
+          in: path
+          description: device group id
+          schema:
+            type: string
+            format: uuid
+      responses:
+        "200":
+          description: Updated exhibition
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DeviceGroup"
+        "400":
+          description: Invalid request was sent to the server
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "403":
+          description: Attempted to make a call with unauthorized client
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "500":
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+    delete:
+      operationId: deleteDeviceGroup
+      summary: Deletes device group.
+      description: Delets exhibition device group.
+      tags:
+        - DeviceGroups
+      parameters:
+        - name: exhibitionId
+          required: true
+          in: path
+          description: exhibition id
+          schema:
+            type: string
+            format: uuid
+        - name: deviceGroupId
+          required: true
+          in: path
+          description: device group id
+          schema:
+            type: string
+            format: uuid
+      responses:
+        "204":
+          description: Success
+        "400":
+          description: Invalid request was sent to the server
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "403":
+          description: Attempted to make a call with unauthorized client
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "500":
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+                
+  /exhibitions/{exhibitionId}/devices:
+    get:
+      operationId: listDevices
+      summary: List devices
+      description: List exhibition devices
+      tags:
+        - Devices
+      parameters:
+        - name: exhibitionId
+          required: true
+          in: path
+          description: exhibition id
+          schema:
+            type: string
+            format: uuid
+      responses:
+        "200":
+          description: A device list
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Device"
+        "400":
+          description: Invalid request was sent to the server
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "403":
+          description: Attempted to make a call with unauthorized client
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "500":
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+    post:
+      operationId: createDevice
+      summary: Create a device
+      description: Creates new exhibition device
+      tags:
+        - Devices
+      parameters:
+        - name: exhibitionId
+          required: true
+          in: path
+          description: exhibition id
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Device"
+        description: Payload
+        required: true
+      responses:
+        "200":
+          description: Created exhibition device
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Device"
+        "400":
+          description: Invalid request was sent to the server
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "403":
+          description: Attempted to make a call with unauthorized client
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "500":
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
+  /exhibitions/{exhibitionId}/devices/{deviceId}:
+    get:
+      operationId: findDevice
+      summary: Find a device
+      description: Finds a device by id
+      tags:
+        - Devices
+      parameters:
+        - name: exhibitionId
+          required: true
+          in: path
+          description: exhibition id
+          schema:
+            type: string
+            format: uuid
+        - name: deviceId
+          required: true
+          in: path
+          description: device id
+          schema:
+            type: string
+            format: uuid
+      responses:
+        "200":
+          description: A exhibition
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Device"
+        "400":
+          description: Invalid request was sent to the server
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "403":
+          description: Attempted to make a call with unauthorized client
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "500":
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+    put:
+      operationId: updateDevice
+      summary: Updates device.
+      description: Updates device.
+      tags:
+        - Devices
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Device"
+        description: Payload
+        required: true
+      parameters:
+        - name: exhibitionId
+          required: true
+          in: path
+          description: exhibition id
+          schema:
+            type: string
+            format: uuid
+        - name: deviceId
+          required: true
+          in: path
+          description: device id
+          schema:
+            type: string
+            format: uuid
+      responses:
+        "200":
+          description: Updated exhibition
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Device"
+        "400":
+          description: Invalid request was sent to the server
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "403":
+          description: Attempted to make a call with unauthorized client
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "500":
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+    delete:
+      operationId: deleteDevice
+      summary: Deletes device.
+      description: Delets exhibition device.
+      tags:
+        - Devices
+      parameters:
+        - name: exhibitionId
+          required: true
+          in: path
+          description: exhibition id
+          schema:
+            type: string
+            format: uuid
+        - name: deviceId
+          required: true
+          in: path
+          description: device id
+          schema:
+            type: string
+            format: uuid
+      responses:
+        "204":
+          description: Success
+        "400":
+          description: Invalid request was sent to the server
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "403":
+          description: Attempted to make a call with unauthorized client
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "500":
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+                
   /system/ping:
     get:
       summary: System ping endpoint
@@ -469,6 +1166,101 @@ components:
           type: string
           format: uuid
           readOnly: true
+        name:
+          type: string
+        creatorId:
+          type: string
+          format: uuid
+          readOnly: true
+        lastModifierId:
+          type: string
+          format: uuid
+          readOnly: true
+        createdAt:
+          type: string
+          format: date-time
+          description: Created date
+          readOnly: true
+        modifiedAt:
+          type: string
+          format: date-time
+          description: Date modified
+          readOnly: true
+          
+    ExhibitionRoom:
+      type: object
+      required:
+        - name
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        name:
+          type: string
+        creatorId:
+          type: string
+          format: uuid
+          readOnly: true
+        lastModifierId:
+          type: string
+          format: uuid
+          readOnly: true
+        createdAt:
+          type: string
+          format: date-time
+          description: Created date
+          readOnly: true
+        modifiedAt:
+          type: string
+          format: date-time
+          description: Date modified
+          readOnly: true
+          
+    DeviceGroup:
+      type: object
+      required:
+        - name
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        name:
+          type: string
+        creatorId:
+          type: string
+          format: uuid
+          readOnly: true
+        lastModifierId:
+          type: string
+          format: uuid
+          readOnly: true
+        createdAt:
+          type: string
+          format: date-time
+          description: Created date
+          readOnly: true
+        modifiedAt:
+          type: string
+          format: date-time
+          description: Date modified
+          readOnly: true
+          
+    Device:
+      type: object
+      required:
+        - name
+        - groupId
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        groupId:
+          type: string
+          format: uuid
+          description: Device group id
         name:
           type: string
         creatorId:
