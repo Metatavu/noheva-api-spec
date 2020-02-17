@@ -439,7 +439,7 @@ paths:
       summary: List rooms
       description: List exhibition rooms
       tags:
-        - Rooms
+        - ExhibitionRooms
       parameters:
         - name: exhibitionId
           required: true
@@ -480,7 +480,7 @@ paths:
       summary: Create a room
       description: Creates new exhibition room
       tags:
-        - Rooms
+        - ExhibitionRooms
       parameters:
         - name: exhibitionId
           required: true
@@ -528,7 +528,7 @@ paths:
       summary: Find a room
       description: Finds a room by id
       tags:
-        - Rooms
+        - ExhibitionRooms
       parameters:
         - name: exhibitionId
           required: true
@@ -574,7 +574,7 @@ paths:
       summary: Updates room.
       description: Updates room.
       tags:
-        - Rooms
+        - ExhibitionRooms
       requestBody:
         content:
           application/json:
@@ -627,7 +627,7 @@ paths:
       summary: Deletes room.
       description: Delets exhibition room.
       tags:
-        - Rooms
+        - ExhibitionRooms
       parameters:
         - name: exhibitionId
           required: true
