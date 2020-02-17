@@ -1196,6 +1196,10 @@ components:
           type: string
           format: uuid
           readOnly: true
+        exhibitionId:
+          type: string
+          format: uuid
+          readOnly: true
         name:
           type: string
         creatorId:
