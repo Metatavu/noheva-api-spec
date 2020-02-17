@@ -435,7 +435,7 @@ paths:
 
   /exhibitions/{exhibitionId}/rooms:
     get:
-      operationId: listRooms
+      operationId: listExhibitionRooms
       summary: List rooms
       description: List exhibition rooms
       tags:
@@ -476,7 +476,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/Error"
     post:
-      operationId: createRoom
+      operationId: createExhibitionRoom
       summary: Create a room
       description: Creates new exhibition room
       tags:
@@ -524,7 +524,7 @@ paths:
 
   /exhibitions/{exhibitionId}/rooms/{roomId}:
     get:
-      operationId: findRoom
+      operationId: findExhibitionRoom
       summary: Find a room
       description: Finds a room by id
       tags:
@@ -570,7 +570,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/Error"
     put:
-      operationId: updateRoom
+      operationId: updateExhibitionRoom
       summary: Updates room.
       description: Updates room.
       tags:
@@ -623,7 +623,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/Error"
     delete:
-      operationId: deleteRoom
+      operationId: deleteExhibitionRoom
       summary: Deletes room.
       description: Delets exhibition room.
       tags:
