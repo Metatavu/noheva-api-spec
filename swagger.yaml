@@ -909,7 +909,13 @@ paths:
         - name: exhibitionId
           required: true
           in: path
-          description: exhibition id
+          description: Exhibition id
+          schema:
+            type: string
+            format: uuid
+        - name: exhibitionGroupId
+          in: query
+          description: Filter by exhibition group id
           schema:
             type: string
             format: uuid
