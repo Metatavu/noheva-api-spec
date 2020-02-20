@@ -900,11 +900,11 @@ paths:
                 
   /exhibitions/{exhibitionId}/devices:
     get:
-      operationId: listDevices
+      operationId: listExhibitionDevices
       summary: List devices
       description: List exhibition devices
       tags:
-        - Devices
+        - ExhibitionDevices
       parameters:
         - name: exhibitionId
           required: true
@@ -921,7 +921,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: "#/components/schemas/Device"
+                  $ref: "#/components/schemas/ExhibitionDevice"
         "400":
           description: Invalid request was sent to the server
           content:
@@ -941,11 +941,11 @@ paths:
               schema:
                 $ref: "#/components/schemas/Error"
     post:
-      operationId: createDevice
+      operationId: createExhibitionDevice
       summary: Create a device
       description: Creates new exhibition device
       tags:
-        - Devices
+        - ExhibitionDevices
       parameters:
         - name: exhibitionId
           required: true
@@ -958,7 +958,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/Device"
+              $ref: "#/components/schemas/ExhibitionDevice"
         description: Payload
         required: true
       responses:
@@ -967,7 +967,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Device"
+                $ref: "#/components/schemas/ExhibitionDevice"
         "400":
           description: Invalid request was sent to the server
           content:
@@ -989,11 +989,11 @@ paths:
 
   /exhibitions/{exhibitionId}/devices/{deviceId}:
     get:
-      operationId: findDevice
+      operationId: findExhibitionDevice
       summary: Find a device
       description: Finds a device by id
       tags:
-        - Devices
+        - ExhibitionDevices
       parameters:
         - name: exhibitionId
           required: true
@@ -1011,11 +1011,11 @@ paths:
             format: uuid
       responses:
         "200":
-          description: A exhibition
+          description: A exhibition device
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Device"
+                $ref: "#/components/schemas/ExhibitionDevice"
         "400":
           description: Invalid request was sent to the server
           content:
@@ -1035,16 +1035,16 @@ paths:
               schema:
                 $ref: "#/components/schemas/Error"
     put:
-      operationId: updateDevice
+      operationId: updateExhibitionDevice
       summary: Updates device.
       description: Updates device.
       tags:
-        - Devices
+        - ExhibitionDevices
       requestBody:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/Device"
+              $ref: "#/components/schemas/ExhibitionDevice"
         description: Payload
         required: true
       parameters:
@@ -1068,7 +1068,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Device"
+                $ref: "#/components/schemas/ExhibitionDevice"
         "400":
           description: Invalid request was sent to the server
           content:
@@ -1088,11 +1088,11 @@ paths:
               schema:
                 $ref: "#/components/schemas/Error"
     delete:
-      operationId: deleteDevice
+      operationId: deleteExhibitionDevice
       summary: Deletes device.
       description: Delets exhibition device.
       tags:
-        - Devices
+        - ExhibitionDevices
       parameters:
         - name: exhibitionId
           required: true
@@ -1255,13 +1255,17 @@ components:
           description: Date modified
           readOnly: true
           
-    Device:
+    ExhibitionDevice:
       type: object
       required:
         - name
         - groupId
       properties:
         id:
+          type: string
+          format: uuid
+          readOnly: true
+        exhibitionId:
           type: string
           format: uuid
           readOnly: true
