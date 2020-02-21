@@ -1281,6 +1281,8 @@ components:
           description: Device group id
         name:
           type: string
+        location:
+          $ref: '#/components/schemas/Point'
         creatorId:
           type: string
           format: uuid
@@ -1299,6 +1301,17 @@ components:
           format: date-time
           description: Date modified
           readOnly: true
+          
+    Point: 
+      type: object
+      description: Describes a single point in a exhibition floor plan
+      properties:
+        x:
+          type: number
+          format: double
+        y:
+          type: number
+          format: double
         
     VisitorSessionState:
       type: string
