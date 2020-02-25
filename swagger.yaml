@@ -1334,6 +1334,7 @@ components:
       type: object
       required:
         - users
+        - state
       properties:
         id:
           type: string
