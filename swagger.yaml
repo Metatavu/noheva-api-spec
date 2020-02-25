@@ -1622,6 +1622,8 @@ components:
     ExhibitionDeviceModelCapabilities: 
       type: object
       description: Describes device model capabilities
+      required:
+        - touch
       properties:
         touch:
           description: Whether device supports touching
