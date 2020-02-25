@@ -1302,6 +1302,52 @@ components:
           description: Date modified
           readOnly: true
           
+    ExhibitionDeviceModel:
+      type: object
+      description: Describes device model used in exhibition
+      required:
+        - manufacturer
+        - model
+        - dimensions
+        - resolution
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        exhibitionId:
+          type: string
+          format: uuid
+          readOnly: true
+        manufacturer:
+          type: string
+        model:
+          type: string
+        dimensions:
+          $ref: '#/components/schemas/ExhibitionDeviceModelDimensions'
+        resolution:
+          $ref: '#/components/schemas/ExhibitionDeviceModelResolution'
+        capabilities:
+          $ref: '#/components/schemas/ExhibitionDeviceModelCapabilities'
+        creatorId:
+          type: string
+          format: uuid
+          readOnly: true
+        lastModifierId:
+          type: string
+          format: uuid
+          readOnly: true
+        createdAt:
+          type: string
+          format: date-time
+          description: Created date
+          readOnly: true
+        modifiedAt:
+          type: string
+          format: date-time
+          description: Date modified
+          readOnly: true
+
     Point: 
       type: object
       description: Describes a single point in a exhibition floor plan
@@ -1312,6 +1358,36 @@ components:
         y:
           type: number
           format: double
+
+    ExhibitionDeviceModelDimensions: 
+      type: object
+      description: Describes device model physical dimensions
+      properties:
+        width:
+          type: number
+          format: double
+        height:
+          type: number
+          format: double
+
+    ExhibitionDeviceModelResolution: 
+      type: object
+      description: Describes device model resolution
+      properties:
+        x:
+          type: number
+          format: double
+        y:
+          type: number
+          format: double
+
+    ExhibitionDeviceModelCapabilities: 
+      type: object
+      description: Describes device model capabilities
+      properties:
+        touch:
+          description: Whether device supports touching
+          type: boolean
         
     VisitorSessionState:
       type: string
