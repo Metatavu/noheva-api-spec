@@ -1498,6 +1498,7 @@ components:
       required:
         - name
         - groupId
+        - modelId
       properties:
         id:
           type: string
@@ -1511,6 +1512,10 @@ components:
           type: string
           format: uuid
           description: Device group id
+        modelId:
+          type: string
+          format: uuid
+          description: Device model id
         name:
           type: string
         location:
