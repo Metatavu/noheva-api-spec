@@ -1940,6 +1940,7 @@ components:
       description: Describes a layout for a page in an exhibition
       required:
         - name
+        - data
       properties:
         id:
           type: string
@@ -1976,6 +1977,11 @@ components:
     
     ExhibitionPageLayoutView:
       type: object
+      required:
+         - id
+         - widget
+         - properties
+         - children
       properties: 
         id:
           type: string
@@ -1992,6 +1998,10 @@ components:
          
     ExhibitionPageLayoutViewProperty:
        type: object
+       required:
+         - name
+         - value
+         - type
        properties: 
          name:
            type: string
