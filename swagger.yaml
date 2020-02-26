@@ -1940,6 +1940,7 @@ components:
       description: Describes a layout for a page in an exhibition
       required:
         - name
+        - data
       properties:
         id:
           type: string
@@ -1954,8 +1955,7 @@ components:
           type: string
           description: Human readable name for the layout
         data:
-          type: string
-          description: Android layout XML for the layout 
+           $ref: '#/components/schemas/ExhibitionPageLayoutView'
         creatorId:
           type: string
           format: uuid
@@ -1974,6 +1974,228 @@ components:
           format: date-time
           description: Date modified
           readOnly: true
+    
+    ExhibitionPageLayoutView:
+      type: object
+      required:
+         - id
+         - widget
+         - properties
+         - children
+      properties: 
+        id:
+          type: string
+          format: uuid
+        widget:
+          type: string
+        properties:
+          type: array
+          items:
+           $ref: '#/components/schemas/ExhibitionPageLayoutViewProperty'
+        children:
+          type: array
+          items:
+           $ref: '#/components/schemas/ExhibitionPageLayoutView'
+         
+    ExhibitionPageLayoutViewProperty:
+       type: object
+       required:
+         - name
+         - value
+         - type
+       properties: 
+         name:
+           type: string
+         value:
+           type: string
+         type:
+           $ref: '#/components/schemas/ExhibitionPageLayoutViewPropertyType'
+      
+    ExhibitionPageLayoutViewPropertyType:
+      type: string
+      enum:
+        - string
+        - boolean
+        - number
+
+    ExhibitionPage:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        exhibitionId:
+          type: string
+          format: uuid
+          readOnly: true
+          description: Id of exhibition this layout belongs to
+        name:
+          type: string
+          description: Human readable name for the layout
+        resources:
+          type: array
+          items:
+            $ref: '#/components/schemas/ExhibitionPageResource'
+        eventTriggers:            
+            $ref: '#/components/schemas/ExhibitionPageEventTriggers'
+        events:
+          type: array
+          items:
+            $ref: '#/components/schemas/ExhibitionPageEvent'
+        creatorId:
+          type: string
+          format: uuid
+          readOnly: true
+        lastModifierId:
+          type: string
+          format: uuid
+          readOnly: true
+        createdAt:
+          type: string
+          format: date-time
+          description: Created date
+          readOnly: true
+        modifiedAt:
+          type: string
+          format: date-time
+          description: Date modified
+          readOnly: true
+        
+    ExhibitionPageResource:
+      type: object
+      required:
+        - data
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        data:
+          type: string
+          
+    ExhibitionPageEventTriggers:
+      type: object
+      properties:
+        timed:
+          type: array
+          items:
+            $ref: '#/components/schemas/ExhibitionPageEventTimedTrigger'
+        click:
+          type: array
+          items:
+            $ref: '#/components/schemas/ExhibitionPageEventClickTrigger'
+          
+    ExhibitionPageEventTimedTrigger:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        eventId:
+          type: string
+          format: uuid
+        delay:
+          type: number
+          format: double
+        next:
+          type: array
+          items:
+            $ref: '#/components/schemas/ExhibitionPageEventTimedTrigger'
+          
+    ExhibitionPageEventClickTrigger:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        eventId:
+          type: string
+          format: uuid
+        viewId:
+          type: string
+          format: uuid
+          
+    ExhibitionPageEvent:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        type:
+          $ref: '#/components/schemas/ExhibitionPageEventType'
+        data:
+          $ref: '#/components/schemas/ExhibitionPageEventData'
+            
+    ExhibitionPageEventData:
+      type: object
+      oneOf:
+        - $ref: '#/components/schemas/ExhibitionPageEventHideData'
+        - $ref: '#/components/schemas/ExhibitionPageEventShowData'
+        - $ref: '#/components/schemas/ExhibitionPageEventTriggerData'
+        - $ref: '#/components/schemas/ExhibitionPageEventSetUserValueData'
+        - $ref: '#/components/schemas/ExhibitionPageEventNavigateData'
+    
+    ExhibitionPageEventHideData:
+      type: object
+      properties:
+        viewId:
+          type: string
+          format: uuid
+        transition:
+          $ref: '#/components/schemas/ExhibitionPageEventTransition'
+        transitionTime:
+          type: number
+          format: double
+            
+    ExhibitionPageEventShowData:
+      type: object
+      properties:
+        viewId:
+          type: string
+          format: uuid
+        transition:
+          $ref: '#/components/schemas/ExhibitionPageEventTransition'
+        transitionTime:
+          type: number
+          format: double
+            
+    ExhibitionPageEventTriggerData:
+      type: object
+      properties:
+        eventId:
+          type: string
+          format: uuid
+            
+    ExhibitionPageEventSetUserValueData:
+      type: object
+      properties:
+        name:
+          type: string
+        value:
+          type: string
+            
+    ExhibitionPageEventNavigateData:
+      type: object
+      properties:
+        pageId:
+          type: string
+          format: uuid
+        
+          
+    ExhibitionPageEventType:
+      type: string
+      enum:
+        - hide
+        - show
+        - trigger
+        - setuservalue
+        - navigate
+          
+    ExhibitionPageEventTransition:
+      type: string
+      enum:
+        - fade
 
     Error:
       type: object
