@@ -1612,7 +1612,8 @@ paths:
           content:
             text/plain:
               schema:
-                description: Returns PING
+                $ref: "#/components/schemas/ExhibitionPage"
+                # description: Returns PING
         default:
           description: unexpected error
           content:
@@ -2114,13 +2115,17 @@ components:
         type:
           $ref: '#/components/schemas/ExhibitionPageEventType'
         data:
-          oneOf:
-            - $ref: '#/components/schemas/ExhibitionPageEventHideData'
-            - $ref: '#/components/schemas/ExhibitionPageEventShowData'
-            - $ref: '#/components/schemas/ExhibitionPageEventTriggerData'
-            - $ref: '#/components/schemas/ExhibitionPageEventSetUserValueData'
-            - $ref: '#/components/schemas/ExhibitionPageEventNavigateData'
-                
+          $ref: '#/components/schemas/ExhibitionPageEventData'
+            
+    ExhibitionPageEventData:
+      type: object
+      oneOf:
+        - $ref: '#/components/schemas/ExhibitionPageEventHideData'
+        - $ref: '#/components/schemas/ExhibitionPageEventShowData'
+        - $ref: '#/components/schemas/ExhibitionPageEventTriggerData'
+        - $ref: '#/components/schemas/ExhibitionPageEventSetUserValueData'
+        - $ref: '#/components/schemas/ExhibitionPageEventNavigateData'
+    
     ExhibitionPageEventHideData:
       type: object
       properties:
