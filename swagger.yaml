@@ -1985,6 +1985,7 @@ components:
       properties: 
         id:
           type: string
+          format: uuid
         widget:
           type: string
         properties:
