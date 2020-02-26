@@ -1366,8 +1366,8 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Error"  
-  
+                $ref: "#/components/schemas/Error"
+                
   /exhibitions/{exhibitionId}/pageLayouts:
     get:
       operationId: listExhibitionPageLayouts
@@ -1571,7 +1571,7 @@ paths:
           schema:
             type: string
             format: uuid
-        - name: PageLayoutId
+        - name: pageLayoutId
           required: true
           in: path
           description: page layout id
@@ -1854,6 +1854,8 @@ components:
     ExhibitionDeviceModelCapabilities: 
       type: object
       description: Describes device model capabilities
+      required:
+        - touch
       properties:
         touch:
           description: Whether device supports touching
