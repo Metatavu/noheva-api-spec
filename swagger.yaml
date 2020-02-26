@@ -1366,6 +1366,238 @@ paths:
           content:
             application/json:
               schema:
+                $ref: "#/components/schemas/Error"  
+  
+  /exhibitions/{exhibitionId}/pageLayouts:
+    get:
+      operationId: listExhibitionPageLayouts
+      summary: List page layouts
+      description: List exhibition page layouts
+      tags:
+        - ExhibitionPageLayouts
+      parameters:
+        - name: exhibitionId
+          required: true
+          in: path
+          description: exhibition id
+          schema:
+            type: string
+            format: uuid
+      responses:
+        "200":
+          description: A page layout list
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/ExhibitionPageLayout"
+        "400":
+          description: Invalid request was sent to the server
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "403":
+          description: Attempted to make a call with unauthorized client
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "500":
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+    post:
+      operationId: createExhibitionPageLayout
+      summary: Create a page layout
+      description: Creates new exhibition page layout
+      tags:
+        - ExhibitionPageLayouts
+      parameters:
+        - name: exhibitionId
+          required: true
+          in: path
+          description: exhibition id
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ExhibitionPageLayout"
+        description: Payload
+        required: true
+      responses:
+        "200":
+          description: Created exhibition page layout
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ExhibitionPageLayout"
+        "400":
+          description: Invalid request was sent to the server
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "403":
+          description: Attempted to make a call with unauthorized client
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "500":
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
+  /exhibitions/{exhibitionId}/pageLayouts/{pageLayoutId}:
+    get:
+      operationId: findExhibitionPageLayout
+      summary: Find a page layout
+      description: Finds a page layout by id
+      tags:
+        - ExhibitionPageLayouts
+      parameters:
+        - name: exhibitionId
+          required: true
+          in: path
+          description: exhibition id
+          schema:
+            type: string
+            format: uuid
+        - name: pageLayoutId
+          required: true
+          in: path
+          description: page layout id
+          schema:
+            type: string
+            format: uuid
+      responses:
+        "200":
+          description: A exhibition
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ExhibitionPageLayout"
+        "400":
+          description: Invalid request was sent to the server
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "403":
+          description: Attempted to make a call with unauthorized client
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "500":
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+    put:
+      operationId: updateExhibitionPageLayout
+      summary: Updates page layout.
+      description: Updates page layout.
+      tags:
+        - ExhibitionPageLayouts
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ExhibitionPageLayout"
+        description: Payload
+        required: true
+      parameters:
+        - name: exhibitionId
+          required: true
+          in: path
+          description: exhibition id
+          schema:
+            type: string
+            format: uuid
+        - name: pageLayoutId
+          required: true
+          in: path
+          description: page layout id
+          schema:
+            type: string
+            format: uuid
+      responses:
+        "200":
+          description: Updated exhibition
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ExhibitionPageLayout"
+        "400":
+          description: Invalid request was sent to the server
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "403":
+          description: Attempted to make a call with unauthorized client
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "500":
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+    delete:
+      operationId: deleteExhibitionPageLayout
+      summary: Deletes page layout.
+      description: Delets exhibition page layout.
+      tags:
+        - ExhibitionPageLayouts
+      parameters:
+        - name: exhibitionId
+          required: true
+          in: path
+          description: exhibition id
+          schema:
+            type: string
+            format: uuid
+        - name: PageLayoutId
+          required: true
+          in: path
+          description: page layout id
+          schema:
+            type: string
+            format: uuid
+      responses:
+        "204":
+          description: Success
+        "400":
+          description: Invalid request was sent to the server
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "403":
+          description: Attempted to make a call with unauthorized client
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "500":
+          description: Internal server error
+          content:
+            application/json:
+              schema:
                 $ref: "#/components/schemas/Error"
                 
   /system/ping:
@@ -1622,8 +1854,6 @@ components:
     ExhibitionDeviceModelCapabilities: 
       type: object
       description: Describes device model capabilities
-      required:
-        - touch
       properties:
         touch:
           description: Whether device supports touching
@@ -1702,6 +1932,46 @@ components:
           format: uuid
         tagId:
           type: string
+          
+    ExhibitionPageLayout:
+      type: object
+      description: Describes a layout for a page in an exhibition
+      required:
+        - name
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        exhibitionId:
+          type: string
+          format: uuid
+          readOnly: true
+          description: Id of exhibition this layout belongs to
+        name:
+          type: string
+          description: Human readable name for the layout
+        data:
+          type: string
+          description: Android layout XML for the layout 
+        creatorId:
+          type: string
+          format: uuid
+          readOnly: true
+        lastModifierId:
+          type: string
+          format: uuid
+          readOnly: true
+        createdAt:
+          type: string
+          format: date-time
+          description: Created date
+          readOnly: true
+        modifiedAt:
+          type: string
+          format: date-time
+          description: Date modified
+          readOnly: true
 
     Error:
       type: object
