@@ -1985,7 +1985,6 @@ components:
       properties: 
         id:
           type: string
-          format: uuid
         widget:
           type: string
         properties:
@@ -2065,12 +2064,11 @@ components:
     ExhibitionPageResource:
       type: object
       required:
+        - id
         - data
       properties:
         id:
           type: string
-          format: uuid
-          readOnly: true
         data:
           type: string
           
@@ -2088,13 +2086,13 @@ components:
           
     ExhibitionPageEventTimedTrigger:
       type: object
+      required:
+        - id
       properties:
         id:
           type: string
-          format: uuid
         eventId:
           type: string
-          format: uuid
         delay:
           type: number
           format: double
@@ -2105,23 +2103,23 @@ components:
           
     ExhibitionPageEventClickTrigger:
       type: object
+      required:
+        - id
       properties:
         id:
           type: string
-          format: uuid
         eventId:
           type: string
-          format: uuid
         viewId:
           type: string
-          format: uuid
           
     ExhibitionPageEvent:
       type: object
+      required:
+        - id
       properties:
         id:
           type: string
-          format: uuid
         type:
           $ref: '#/components/schemas/ExhibitionPageEventType'
         data:
