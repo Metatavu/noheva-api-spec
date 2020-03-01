@@ -2251,6 +2251,12 @@ components:
 
     ExhibitionPage:
       type: object
+      required: 
+        - name
+        - layoutId
+        - resources
+        - eventTriggers
+        - events
       properties:
         id:
           type: string
@@ -2260,7 +2266,11 @@ components:
           type: string
           format: uuid
           readOnly: true
-          description: Id of exhibition this layout belongs to
+          description: Id of exhibition this page belongs to
+        layoutId:
+          type: string
+          format: uuid
+          description: Id of page layout
         name:
           type: string
           description: Human readable name for the layout
