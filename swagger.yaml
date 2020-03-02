@@ -2398,14 +2398,19 @@ components:
       enum:
         - hide_viewid
         - show_viewid
+        - trigger_eventid
+        - setuservalue_name
+        - setuservalue_value
+        - navigate_pageId
 
     ExhibitionPageEventPropertyType:
       type: string
       enum:
         - string
-        - boolean
-        - number
         - color
+        - view
+        - page
+        - event
 
     ExhibitionPageEventType:
       type: string
