@@ -664,7 +664,7 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Error"
-                
+
 
   /exhibitions/{exhibitionId}/deviceGroups:
     get:
@@ -897,7 +897,7 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Error"
-                
+
   /exhibitions/{exhibitionId}/deviceModels:
     get:
       operationId: listExhibitionDeviceModels
@@ -1129,7 +1129,7 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Error"
-                
+
   /exhibitions/{exhibitionId}/devices:
     get:
       operationId: listExhibitionDevices
@@ -1367,7 +1367,7 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Error"
-                
+
   /exhibitions/{exhibitionId}/pageLayouts:
     get:
       operationId: listExhibitionPageLayouts
@@ -1599,7 +1599,7 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Error"
-                
+
   /exhibitions/{exhibitionId}/pages:
     get:
       operationId: listExhibitionPages
@@ -1831,7 +1831,7 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Error"
-                
+
   /system/ping:
     get:
       summary: System ping endpoint
@@ -1888,7 +1888,7 @@ components:
           format: date-time
           description: Date modified
           readOnly: true
-          
+
     ExhibitionRoom:
       type: object
       required:
@@ -1922,7 +1922,7 @@ components:
           format: date-time
           description: Date modified
           readOnly: true
-          
+
     ExhibitionDeviceGroup:
       type: object
       required:
@@ -1956,7 +1956,7 @@ components:
           format: date-time
           description: Date modified
           readOnly: true
-          
+
     ExhibitionDevice:
       type: object
       required:
@@ -2002,7 +2002,7 @@ components:
           format: date-time
           description: Date modified
           readOnly: true
-          
+
     ExhibitionDeviceModel:
       type: object
       description: Describes device model used in exhibition
@@ -2050,7 +2050,7 @@ components:
           description: Date modified
           readOnly: true
 
-    Point: 
+    Point:
       type: object
       description: Describes a single point in a exhibition floor plan
       properties:
@@ -2061,7 +2061,7 @@ components:
           type: number
           format: double
 
-    ExhibitionDeviceModelDimensions: 
+    ExhibitionDeviceModelDimensions:
       type: object
       description: Describes device model physical dimensions
       properties:
@@ -2072,7 +2072,7 @@ components:
           type: number
           format: double
 
-    ExhibitionDeviceModelResolution: 
+    ExhibitionDeviceModelResolution:
       type: object
       description: Describes device model resolution
       properties:
@@ -2083,7 +2083,7 @@ components:
           type: number
           format: double
 
-    ExhibitionDeviceModelCapabilities: 
+    ExhibitionDeviceModelCapabilities:
       type: object
       description: Describes device model capabilities
       required:
@@ -2092,14 +2092,14 @@ components:
         touch:
           description: Whether device supports touching
           type: boolean
-        
+
     VisitorSessionState:
       type: string
-      enum: 
+      enum:
         - PENDING
         - ACTIVE
         - COMPLETE
-        
+
     VisitorSessionVariable:
       type: object
       required:
@@ -2107,9 +2107,9 @@ components:
       properties:
         name:
           type: string
-        value: 
+        value:
           type: string
-          
+
     VisitorSession:
       type: object
       required:
@@ -2131,11 +2131,11 @@ components:
         variables:
           type: array
           items:
-           $ref: '#/components/schemas/VisitorSessionVariable'
+            $ref: '#/components/schemas/VisitorSessionVariable'
         users:
           type: array
           items:
-           $ref: '#/components/schemas/VisitorSessionUser'
+            $ref: '#/components/schemas/VisitorSessionUser'
         creatorId:
           type: string
           format: uuid
@@ -2154,7 +2154,7 @@ components:
           format: date-time
           description: Date modified
           readOnly: true
-                
+
     VisitorSessionUser:
       type: object
       required:
@@ -2166,7 +2166,7 @@ components:
           format: uuid
         tagId:
           type: string
-          
+
     ExhibitionPageLayout:
       type: object
       description: Describes a layout for a page in an exhibition
@@ -2187,7 +2187,7 @@ components:
           type: string
           description: Human readable name for the layout
         data:
-           $ref: '#/components/schemas/ExhibitionPageLayoutView'
+          $ref: '#/components/schemas/ExhibitionPageLayoutView'
         creatorId:
           type: string
           format: uuid
@@ -2206,15 +2206,15 @@ components:
           format: date-time
           description: Date modified
           readOnly: true
-    
+
     ExhibitionPageLayoutView:
       type: object
       required:
-         - id
-         - widget
-         - properties
-         - children
-      properties: 
+        - id
+        - widget
+        - properties
+        - children
+      properties:
         id:
           type: string
         widget:
@@ -2222,36 +2222,37 @@ components:
         properties:
           type: array
           items:
-           $ref: '#/components/schemas/ExhibitionPageLayoutViewProperty'
+            $ref: '#/components/schemas/ExhibitionPageLayoutViewProperty'
         children:
           type: array
           items:
-           $ref: '#/components/schemas/ExhibitionPageLayoutView'
-         
+            $ref: '#/components/schemas/ExhibitionPageLayoutView'
+
     ExhibitionPageLayoutViewProperty:
-       type: object
-       required:
-         - name
-         - value
-         - type
-       properties: 
-         name:
-           type: string
-         value:
-           type: string
-         type:
-           $ref: '#/components/schemas/ExhibitionPageLayoutViewPropertyType'
-      
+      type: object
+      required:
+        - name
+        - value
+        - type
+      properties:
+        name:
+          type: string
+        value:
+          type: string
+        type:
+          $ref: '#/components/schemas/ExhibitionPageLayoutViewPropertyType'
+
     ExhibitionPageLayoutViewPropertyType:
       type: string
       enum:
         - string
         - boolean
         - number
+        - color
 
     ExhibitionPage:
       type: object
-      required: 
+      required:
         - name
         - layoutId
         - resources
@@ -2278,8 +2279,8 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/ExhibitionPageResource'
-        eventTriggers:            
-            $ref: '#/components/schemas/ExhibitionPageEventTriggers'
+        eventTriggers:
+          $ref: '#/components/schemas/ExhibitionPageEventTriggers'
         events:
           type: array
           items:
@@ -2302,7 +2303,7 @@ components:
           format: date-time
           description: Date modified
           readOnly: true
-        
+
     ExhibitionPageResource:
       type: object
       required:
@@ -2313,7 +2314,7 @@ components:
           type: string
         data:
           type: string
-          
+
     ExhibitionPageEventTriggers:
       type: object
       required:
@@ -2328,7 +2329,7 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/ExhibitionPageEventClickTrigger'
-          
+
     ExhibitionPageEventTimedTrigger:
       type: object
       required:
@@ -2347,7 +2348,7 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/ExhibitionPageEventTimedTrigger'
-          
+
     ExhibitionPageEventClickTrigger:
       type: object
       required:
@@ -2361,7 +2362,7 @@ components:
           type: string
         viewId:
           type: string
-          
+
     ExhibitionPageEvent:
       type: object
       required:
@@ -2373,71 +2374,38 @@ components:
           type: string
         type:
           $ref: '#/components/schemas/ExhibitionPageEventType'
-        data:
-          $ref: '#/components/schemas/ExhibitionPageEventData'
-            
-    ExhibitionPageEventData:
-      type: object
-      oneOf:
-        - $ref: '#/components/schemas/ExhibitionPageEventHideData'
-        - $ref: '#/components/schemas/ExhibitionPageEventShowData'
-        - $ref: '#/components/schemas/ExhibitionPageEventTriggerData'
-        - $ref: '#/components/schemas/ExhibitionPageEventSetUserValueData'
-        - $ref: '#/components/schemas/ExhibitionPageEventNavigateData'
-    
-    ExhibitionPageEventHideData:
-      type: object
-      required:
-        - viewId
-      properties:
-        viewId:
-          type: string
-        transition:
-          $ref: '#/components/schemas/ExhibitionPageEventTransition'
-        transitionTime:
-          type: number
-          format: double
-            
-    ExhibitionPageEventShowData:
-      type: object
-      required:
-        - viewId
-      properties:
-        viewId:
-          type: string
-        transition:
-          $ref: '#/components/schemas/ExhibitionPageEventTransition'
-        transitionTime:
-          type: number
-          format: double
-            
-    ExhibitionPageEventTriggerData:
-      type: object
-      required:
-        - eventId
-      properties:
-        eventId:
-          type: string
-            
-    ExhibitionPageEventSetUserValueData:
+        properties:
+          type: array
+          items:
+            $ref: '#/components/schemas/ExhibitionPageEventProperty'
+
+    ExhibitionPageEventProperty:
       type: object
       required:
         - name
         - value
+        - type
       properties:
         name:
-          type: string
+          $ref: '#/components/schemas/ExhibitionPageEventPropertyName'
         value:
           type: string
-            
-    ExhibitionPageEventNavigateData:
-      type: object
-      required:
-        - pageId
-      properties:
-        pageId:
-          type: string
-          format: uuid 
+        type:
+          $ref: '#/components/schemas/ExhibitionPageEventPropertyType'
+
+    ExhibitionPageEventPropertyName:
+      type: string
+      enum:
+        - hide_viewid
+        - show_viewid
+
+    ExhibitionPageEventPropertyType:
+      type: string
+      enum:
+        - string
+        - boolean
+        - number
+        - color
 
     ExhibitionPageEventType:
       type: string
@@ -2447,7 +2415,7 @@ components:
         - trigger
         - setuservalue
         - navigate
-          
+
     ExhibitionPageEventTransition:
       type: string
       enum:
