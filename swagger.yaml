@@ -2316,6 +2316,9 @@ components:
           
     ExhibitionPageEventTriggers:
       type: object
+      required:
+        - timed
+        - click
       properties:
         timed:
           type: array
@@ -2330,6 +2333,8 @@ components:
       type: object
       required:
         - id
+        - eventId
+        - delay
       properties:
         id:
           type: string
@@ -2347,6 +2352,8 @@ components:
       type: object
       required:
         - id
+        - eventId
+        - viewId
       properties:
         id:
           type: string
@@ -2359,6 +2366,8 @@ components:
       type: object
       required:
         - id
+        - type
+        - data
       properties:
         id:
           type: string
@@ -2378,10 +2387,11 @@ components:
     
     ExhibitionPageEventHideData:
       type: object
+      required:
+        - viewId
       properties:
         viewId:
           type: string
-          format: uuid
         transition:
           $ref: '#/components/schemas/ExhibitionPageEventTransition'
         transitionTime:
@@ -2390,10 +2400,11 @@ components:
             
     ExhibitionPageEventShowData:
       type: object
+      required:
+        - viewId
       properties:
         viewId:
           type: string
-          format: uuid
         transition:
           $ref: '#/components/schemas/ExhibitionPageEventTransition'
         transitionTime:
@@ -2402,13 +2413,17 @@ components:
             
     ExhibitionPageEventTriggerData:
       type: object
+      required:
+        - eventId
       properties:
         eventId:
           type: string
-          format: uuid
             
     ExhibitionPageEventSetUserValueData:
       type: object
+      required:
+        - name
+        - value
       properties:
         name:
           type: string
@@ -2417,12 +2432,13 @@ components:
             
     ExhibitionPageEventNavigateData:
       type: object
+      required:
+        - pageId
       properties:
         pageId:
           type: string
-          format: uuid
-        
-          
+          format: uuid 
+
     ExhibitionPageEventType:
       type: string
       enum:
