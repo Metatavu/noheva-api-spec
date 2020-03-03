@@ -2280,11 +2280,9 @@ components:
           items:
             $ref: '#/components/schemas/ExhibitionPageResource'
         eventTriggers:
-          $ref: '#/components/schemas/ExhibitionPageEventTriggers'
-        events:
           type: array
           items:
-            $ref: '#/components/schemas/ExhibitionPageEvent'
+            $ref: '#/components/schemas/ExhibitionPageEventTrigger'
         creatorId:
           type: string
           format: uuid
@@ -2309,69 +2307,47 @@ components:
       required:
         - id
         - data
+        - type
       properties:
         id:
           type: string
         data:
           type: string
+        type:
+          $ref: '#/components/schemas/ExhibitionPageResourceType'
 
-    ExhibitionPageEventTriggers:
+    ExhibitionPageResourceType:
+      type: string
+      enum:
+        - text
+        - image
+        - video
+
+    ExhibitionPageEventTrigger:
       type: object
       required:
-        - timed
-        - click
-      properties:
-        timed:
-          type: array
-          items:
-            $ref: '#/components/schemas/ExhibitionPageEventTimedTrigger'
-        click:
-          type: array
-          items:
-            $ref: '#/components/schemas/ExhibitionPageEventClickTrigger'
-
-    ExhibitionPageEventTimedTrigger:
-      type: object
-      required:
-        - id
         - eventId
-        - delay
       properties:
-        id:
-          type: string
-        eventId:
-          type: string
+        events:
+          type: array
+          items:
+            $ref: '#/components/schemas/ExhibitionPageEvent'
         delay:
           type: number
           format: double
+        clickViewId:
+          type: string
         next:
           type: array
           items:
-            $ref: '#/components/schemas/ExhibitionPageEventTimedTrigger'
-
-    ExhibitionPageEventClickTrigger:
-      type: object
-      required:
-        - id
-        - eventId
-        - viewId
-      properties:
-        id:
-          type: string
-        eventId:
-          type: string
-        viewId:
-          type: string
+            $ref: '#/components/schemas/ExhibitionPageEventTrigger'
 
     ExhibitionPageEvent:
       type: object
       required:
-        - id
         - type
         - data
       properties:
-        id:
-          type: string
         type:
           $ref: '#/components/schemas/ExhibitionPageEventType'
         properties:
@@ -2387,39 +2363,30 @@ components:
         - type
       properties:
         name:
-          $ref: '#/components/schemas/ExhibitionPageEventPropertyName'
+          type: string
         value:
           type: string
         type:
           $ref: '#/components/schemas/ExhibitionPageEventPropertyType'
-
-    ExhibitionPageEventPropertyName:
-      type: string
-      enum:
-        - hide_viewid
-        - show_viewid
-        - trigger_eventid
-        - setuservalue_name
-        - setuservalue_value
-        - navigate_pageId
-
+        
     ExhibitionPageEventPropertyType:
       type: string
       enum:
         - string
+        - boolean
+        - number
         - color
-        - view
-        - page
-        - event
-
+        
     ExhibitionPageEventType:
       type: string
       enum:
         - hide
         - show
-        - trigger
         - setuservalue
         - navigate
+        - setstyle
+        - setsrc
+        - settext
 
     ExhibitionPageEventTransition:
       type: string
