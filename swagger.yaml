@@ -2240,6 +2240,9 @@ components:
         name:
           type: string
           description: Human readable name for the layout
+        thumbnailUrl:
+          type: string
+          format: url
         resources:
           type: array
           items:
