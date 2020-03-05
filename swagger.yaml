@@ -1766,13 +1766,6 @@ paths:
       tags:
         - PageLayouts
       parameters:
-        - name: exhibitionId
-          required: true
-          in: path
-          description: exhibition id
-          schema:
-            type: string
-            format: uuid
         - name: pageLayoutId
           required: true
           in: path
