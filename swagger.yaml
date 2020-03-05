@@ -1368,238 +1368,6 @@ paths:
               schema:
                 $ref: "#/components/schemas/Error"
 
-  /exhibitions/{exhibitionId}/pageLayouts:
-    get:
-      operationId: listExhibitionPageLayouts
-      summary: List page layouts
-      description: List exhibition page layouts
-      tags:
-        - ExhibitionPageLayouts
-      parameters:
-        - name: exhibitionId
-          required: true
-          in: path
-          description: exhibition id
-          schema:
-            type: string
-            format: uuid
-      responses:
-        "200":
-          description: A page layout list
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: "#/components/schemas/ExhibitionPageLayout"
-        "400":
-          description: Invalid request was sent to the server
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
-        "403":
-          description: Attempted to make a call with unauthorized client
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
-        "500":
-          description: Internal server error
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
-    post:
-      operationId: createExhibitionPageLayout
-      summary: Create a page layout
-      description: Creates new exhibition page layout
-      tags:
-        - ExhibitionPageLayouts
-      parameters:
-        - name: exhibitionId
-          required: true
-          in: path
-          description: exhibition id
-          schema:
-            type: string
-            format: uuid
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/ExhibitionPageLayout"
-        description: Payload
-        required: true
-      responses:
-        "200":
-          description: Created exhibition page layout
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ExhibitionPageLayout"
-        "400":
-          description: Invalid request was sent to the server
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
-        "403":
-          description: Attempted to make a call with unauthorized client
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
-        "500":
-          description: Internal server error
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
-
-  /exhibitions/{exhibitionId}/pageLayouts/{pageLayoutId}:
-    get:
-      operationId: findExhibitionPageLayout
-      summary: Find a page layout
-      description: Finds a page layout by id
-      tags:
-        - ExhibitionPageLayouts
-      parameters:
-        - name: exhibitionId
-          required: true
-          in: path
-          description: exhibition id
-          schema:
-            type: string
-            format: uuid
-        - name: pageLayoutId
-          required: true
-          in: path
-          description: page layout id
-          schema:
-            type: string
-            format: uuid
-      responses:
-        "200":
-          description: A exhibition
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ExhibitionPageLayout"
-        "400":
-          description: Invalid request was sent to the server
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
-        "403":
-          description: Attempted to make a call with unauthorized client
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
-        "500":
-          description: Internal server error
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
-    put:
-      operationId: updateExhibitionPageLayout
-      summary: Updates page layout.
-      description: Updates page layout.
-      tags:
-        - ExhibitionPageLayouts
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/ExhibitionPageLayout"
-        description: Payload
-        required: true
-      parameters:
-        - name: exhibitionId
-          required: true
-          in: path
-          description: exhibition id
-          schema:
-            type: string
-            format: uuid
-        - name: pageLayoutId
-          required: true
-          in: path
-          description: page layout id
-          schema:
-            type: string
-            format: uuid
-      responses:
-        "200":
-          description: Updated exhibition
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ExhibitionPageLayout"
-        "400":
-          description: Invalid request was sent to the server
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
-        "403":
-          description: Attempted to make a call with unauthorized client
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
-        "500":
-          description: Internal server error
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
-    delete:
-      operationId: deleteExhibitionPageLayout
-      summary: Deletes page layout.
-      description: Delets exhibition page layout.
-      tags:
-        - ExhibitionPageLayouts
-      parameters:
-        - name: exhibitionId
-          required: true
-          in: path
-          description: exhibition id
-          schema:
-            type: string
-            format: uuid
-        - name: pageLayoutId
-          required: true
-          in: path
-          description: page layout id
-          schema:
-            type: string
-            format: uuid
-      responses:
-        "204":
-          description: Success
-        "400":
-          description: Invalid request was sent to the server
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
-        "403":
-          description: Attempted to make a call with unauthorized client
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
-        "500":
-          description: Internal server error
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
-
   /exhibitions/{exhibitionId}/pages:
     get:
       operationId: listExhibitionPages
@@ -1807,6 +1575,201 @@ paths:
           required: true
           in: path
           description: page id
+          schema:
+            type: string
+            format: uuid
+      responses:
+        "204":
+          description: Success
+        "400":
+          description: Invalid request was sent to the server
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "403":
+          description: Attempted to make a call with unauthorized client
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "500":
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
+  /pageLayouts:
+    get:
+      operationId: listPageLayouts
+      summary: List page layouts
+      description: List page layouts
+      tags:
+        - PageLayouts
+      responses:
+        "200":
+          description: A page layout list
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/PageLayout"
+        "400":
+          description: Invalid request was sent to the server
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "403":
+          description: Attempted to make a call with unauthorized client
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "500":
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+    post:
+      operationId: createPageLayout
+      summary: Create a page layout
+      description: Creates new page layout
+      tags:
+        - PageLayouts
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PageLayout"
+        description: Payload
+        required: true
+      responses:
+        "200":
+          description: Created exhibition page layout
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PageLayout"
+        "400":
+          description: Invalid request was sent to the server
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "403":
+          description: Attempted to make a call with unauthorized client
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "500":
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
+  /pageLayouts/{pageLayoutId}:
+    get:
+      operationId: findPageLayout
+      summary: Find a page layout
+      description: Finds a page layout by id
+      tags:
+        - PageLayouts
+      parameters:
+        - name: pageLayoutId
+          required: true
+          in: path
+          description: page layout id
+          schema:
+            type: string
+            format: uuid
+      responses:
+        "200":
+          description: A exhibition
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PageLayout"
+        "400":
+          description: Invalid request was sent to the server
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "403":
+          description: Attempted to make a call with unauthorized client
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "500":
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+    put:
+      operationId: updatePageLayout
+      summary: Updates page layout.
+      description: Updates page layout.
+      tags:
+        - PageLayouts
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PageLayout"
+        description: Payload
+        required: true
+      parameters:
+        - name: pageLayoutId
+          required: true
+          in: path
+          description: page layout id
+          schema:
+            type: string
+            format: uuid
+      responses:
+        "200":
+          description: Updated exhibition
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PageLayout"
+        "400":
+          description: Invalid request was sent to the server
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "403":
+          description: Attempted to make a call with unauthorized client
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "500":
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+    delete:
+      operationId: deletePageLayout
+      summary: Deletes page layout.
+      description: Delets page layout.
+      tags:
+        - PageLayouts
+      parameters:
+        - name: pageLayoutId
+          required: true
+          in: path
+          description: page layout id
           schema:
             type: string
             format: uuid
@@ -2167,9 +2130,9 @@ components:
         tagId:
           type: string
 
-    ExhibitionPageLayout:
+    PageLayout:
       type: object
-      description: Describes a layout for a page in an exhibition
+      description: Describes a layout for a page
       required:
         - name
         - data
@@ -2178,16 +2141,14 @@ components:
           type: string
           format: uuid
           readOnly: true
-        exhibitionId:
-          type: string
-          format: uuid
-          readOnly: true
-          description: Id of exhibition this layout belongs to
         name:
           type: string
           description: Human readable name for the layout
         data:
-          $ref: '#/components/schemas/ExhibitionPageLayoutView'
+          $ref: '#/components/schemas/PageLayoutView'
+        thumbnailUrl:
+          type: string
+          format: url
         creatorId:
           type: string
           format: uuid
@@ -2207,7 +2168,7 @@ components:
           description: Date modified
           readOnly: true
 
-    ExhibitionPageLayoutView:
+    PageLayoutView:
       type: object
       required:
         - id
@@ -2222,13 +2183,13 @@ components:
         properties:
           type: array
           items:
-            $ref: '#/components/schemas/ExhibitionPageLayoutViewProperty'
+            $ref: '#/components/schemas/PageLayoutViewProperty'
         children:
           type: array
           items:
-            $ref: '#/components/schemas/ExhibitionPageLayoutView'
+            $ref: '#/components/schemas/PageLayoutView'
 
-    ExhibitionPageLayoutViewProperty:
+    PageLayoutViewProperty:
       type: object
       required:
         - name
@@ -2240,9 +2201,9 @@ components:
         value:
           type: string
         type:
-          $ref: '#/components/schemas/ExhibitionPageLayoutViewPropertyType'
+          $ref: '#/components/schemas/PageLayoutViewPropertyType'
 
-    ExhibitionPageLayoutViewPropertyType:
+    PageLayoutViewPropertyType:
       type: string
       enum:
         - string
@@ -2384,7 +2345,6 @@ components:
         - show
         - setuservalue
         - navigate
-        - setstyle
         - setsrc
         - settext
 
