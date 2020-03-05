@@ -2146,6 +2146,9 @@ components:
           description: Human readable name for the layout
         data:
           $ref: '#/components/schemas/PageLayoutView'
+        thumbnailUrl:
+          type: string
+          format: url
         creatorId:
           type: string
           format: uuid
@@ -2233,9 +2236,6 @@ components:
         name:
           type: string
           description: Human readable name for the layout
-        thumbnailUrl:
-          type: string
-          format: url
         resources:
           type: array
           items:
