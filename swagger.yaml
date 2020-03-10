@@ -2309,7 +2309,7 @@ components:
         - type
         - data
       properties:
-        type:
+        action:
           $ref: '#/components/schemas/ExhibitionPageEventActionType'
         properties:
           type: array
