@@ -2306,8 +2306,8 @@ components:
     ExhibitionPageEvent:
       type: object
       required:
-        - type
-        - data
+        - action
+        - properties
       properties:
         action:
           $ref: '#/components/schemas/ExhibitionPageEventActionType'
