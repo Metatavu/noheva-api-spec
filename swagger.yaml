@@ -2310,7 +2310,7 @@ components:
         - data
       properties:
         type:
-          $ref: '#/components/schemas/ExhibitionPageEventType'
+          $ref: '#/components/schemas/ExhibitionPageEventActionType'
         properties:
           type: array
           items:
@@ -2338,7 +2338,7 @@ components:
         - number
         - color
         
-    ExhibitionPageEventType:
+    ExhibitionPageEventActionType:
       type: string
       enum:
         - hide
