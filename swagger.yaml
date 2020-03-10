@@ -2294,8 +2294,8 @@ components:
           items:
             $ref: '#/components/schemas/ExhibitionPageEvent'
         delay:
-          type: number
-          format: double
+          type: integer
+          format: int64
         clickViewId:
           type: string
         next:
