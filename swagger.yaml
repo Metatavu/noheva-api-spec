@@ -1990,8 +1990,8 @@ components:
           type: string
         dimensions:
           $ref: '#/components/schemas/ExhibitionDeviceModelDimensions'
-        resolution:
-          $ref: '#/components/schemas/ExhibitionDeviceModelResolution'
+        displayMetrics:
+          $ref: '#/components/schemas/ExhibitionDeviceModelDisplayMetrics'
         capabilities:
           $ref: '#/components/schemas/ExhibitionDeviceModelCapabilities'
         creatorId:
@@ -2035,16 +2035,25 @@ components:
           type: number
           format: double
 
-    ExhibitionDeviceModelResolution:
+    ExhibitionDeviceModelDisplayMetrics:
       type: object
-      description: Describes device model resolution
+      description: Describes device display information
       properties:
-        x:
-          type: number
-          format: double
-        y:
-          type: number
-          format: double
+        heightPixels:
+          type: integer
+          format: int32
+        widthPixels:
+          type: integer
+          format: int32
+        density:
+          type: integer
+          format: int32
+        xdpi:
+          type: integer
+          format: int32
+        ydpi:
+          type: integer
+          format: int32
 
     ExhibitionDeviceModelCapabilities:
       type: object
