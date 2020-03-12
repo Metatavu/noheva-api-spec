@@ -2046,8 +2046,8 @@ components:
           type: integer
           format: int32
         density:
-          type: integer
-          format: int32
+          type: number
+          format: double
         xdpi:
           type: integer
           format: int32
