@@ -2049,11 +2049,11 @@ components:
           type: number
           format: double
         xdpi:
-          type: integer
-          format: int32
+          type: number
+          format: double
         ydpi:
-          type: integer
-          format: int32
+          type: number
+          format: double
 
     ExhibitionDeviceModelCapabilities:
       type: object
