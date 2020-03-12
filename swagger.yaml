@@ -1973,7 +1973,7 @@ components:
         - manufacturer
         - model
         - dimensions
-        - resolution
+        - displayMetrics
         - capabilities
       properties:
         id:
