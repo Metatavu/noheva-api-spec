@@ -2385,3 +2385,45 @@ components:
           format: int32
         message:
           type: string
+          
+    MqttExhibitionPageCreate:
+      type: object
+      description: MQTT notification message about exhibition page creation. This is actually not part of REST API spec but a realtime notification via MQTT channel
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        exhibitionId:
+          type: string
+          format: uuid
+          readOnly: true
+          description: Id of exhibition this page belongs to
+          
+    MqttExhibitionPageUpdate:
+      type: object
+      description: MQTT notification message about exhibition page update. This is actually not part of REST API spec but a realtime notification via MQTT channel
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        exhibitionId:
+          type: string
+          format: uuid
+          readOnly: true
+          description: Id of exhibition this page belongs to
+          
+    MqttExhibitionPageDelete:
+      type: object
+      description: MQTT notification message about exhibition page deletion. This is actually not part of REST API spec but a realtime notification via MQTT channel
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        exhibitionId:
+          type: string
+          format: uuid
+          readOnly: true
+          description: Id of exhibition this page belongs to
