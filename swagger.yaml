@@ -2427,3 +2427,67 @@ components:
           format: uuid
           readOnly: true
           description: Id of exhibition this page belongs to
+          
+    MqttExhibitionVisitorSessionCreate:
+      type: object
+      description: MQTT notification message about exhibition visitor session creation. This is actually not part of REST API spec but a realtime notification via MQTT channel
+      required:
+        - id
+        - exhibitionId
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        exhibitionId:
+          type: string
+          format: uuid
+          readOnly: true
+          description: Id of exhibition this visitor session belongs to
+          
+    MqttExhibitionVisitorSessionUpdate:
+      type: object
+      description: MQTT notification message about exhibition visitor session update. This is actually not part of REST API spec but a realtime notification via MQTT channel
+      required:
+        - id
+        - exhibitionId
+        - variablesChanged
+        - usersChanged
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        exhibitionId:
+          type: string
+          format: uuid
+          readOnly: true
+          description: Id of exhibition this visitor session belongs to
+        variablesChanged:
+          type: boolean
+          description: Whether session variables have changed
+          readOnly: true
+        usersChanged:
+          type: boolean
+          description: Whether session users have changed
+          readOnly: true
+          
+    MqttExhibitionVisitorSessionDelete:
+      type: object
+      description: MQTT notification message about exhibition visitor session deletion. This is actually not part of REST API spec but a realtime notification via MQTT channel
+      required:
+        - id
+        - exhibitionId
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        exhibitionId:
+          type: string
+          format: uuid
+          readOnly: true
+          description: Id of exhibition this visitor session belongs to
+          
+          
+          
