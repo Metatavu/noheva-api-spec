@@ -2447,7 +2447,7 @@ components:
           
     MqttExhibitionVisitorSessionUpdate:
       type: object
-      description: MQTT notification message about exhibition visitor session creation. This is actually not part of REST API spec but a realtime notification via MQTT channel
+      description: MQTT notification message about exhibition visitor session update. This is actually not part of REST API spec but a realtime notification via MQTT channel
       required:
         - id
         - exhibitionId
