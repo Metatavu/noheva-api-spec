@@ -905,14 +905,6 @@ paths:
       description: List exhibition device models
       tags:
         - DeviceModels
-      parameters:
-        - name: exhibitionId
-          required: true
-          in: path
-          description: exhibition id
-          schema:
-            type: string
-            format: uuid
       responses:
         "200":
           description: A device model list
@@ -946,14 +938,6 @@ paths:
       description: Creates new exhibition device model
       tags:
         - DeviceModels
-      parameters:
-        - name: exhibitionId
-          required: true
-          in: path
-          description: exhibition id
-          schema:
-            type: string
-            format: uuid
       requestBody:
         content:
           application/json:
@@ -995,13 +979,6 @@ paths:
       tags:
         - DeviceModels
       parameters:
-        - name: exhibitionId
-          required: true
-          in: path
-          description: exhibition id
-          schema:
-            type: string
-            format: uuid
         - name: deviceModelId
           required: true
           in: path
@@ -1048,13 +1025,6 @@ paths:
         description: Payload
         required: true
       parameters:
-        - name: exhibitionId
-          required: true
-          in: path
-          description: exhibition id
-          schema:
-            type: string
-            format: uuid
         - name: deviceModelId
           required: true
           in: path
@@ -1094,13 +1064,6 @@ paths:
       tags:
         - DeviceModels
       parameters:
-        - name: exhibitionId
-          required: true
-          in: path
-          description: exhibition id
-          schema:
-            type: string
-            format: uuid
         - name: deviceModelId
           required: true
           in: path
