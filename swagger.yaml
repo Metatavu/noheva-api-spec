@@ -898,6 +898,238 @@ paths:
               schema:
                 $ref: "#/components/schemas/Error"
 
+  /exhibitions/{exhibitionId}/deviceModels:
+    get:
+      operationId: listDeviceModels
+      summary: List device models
+      description: List exhibition device models
+      tags:
+        - DeviceModels
+      parameters:
+        - name: exhibitionId
+          required: true
+          in: path
+          description: exhibition id
+          schema:
+            type: string
+            format: uuid
+      responses:
+        "200":
+          description: A device model list
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/DeviceModel"
+        "400":
+          description: Invalid request was sent to the server
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "403":
+          description: Attempted to make a call with unauthorized client
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "500":
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+    post:
+      operationId: createDeviceModel
+      summary: Create a device model
+      description: Creates new exhibition device model
+      tags:
+        - DeviceModels
+      parameters:
+        - name: exhibitionId
+          required: true
+          in: path
+          description: exhibition id
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DeviceModel"
+        description: Payload
+        required: true
+      responses:
+        "200":
+          description: Created exhibition device model
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DeviceModel"
+        "400":
+          description: Invalid request was sent to the server
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "403":
+          description: Attempted to make a call with unauthorized client
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "500":
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
+  /exhibitions/{exhibitionId}/deviceModels/{deviceModelId}:
+    get:
+      operationId: findDeviceModel
+      summary: Find a device model
+      description: Finds a device model by id
+      tags:
+        - DeviceModels
+      parameters:
+        - name: exhibitionId
+          required: true
+          in: path
+          description: exhibition id
+          schema:
+            type: string
+            format: uuid
+        - name: deviceModelId
+          required: true
+          in: path
+          description: device model id
+          schema:
+            type: string
+            format: uuid
+      responses:
+        "200":
+          description: A exhibition
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DeviceModel"
+        "400":
+          description: Invalid request was sent to the server
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "403":
+          description: Attempted to make a call with unauthorized client
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "500":
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+    put:
+      operationId: updateDeviceModel
+      summary: Updates device model.
+      description: Updates device model.
+      tags:
+        - DeviceModels
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DeviceModel"
+        description: Payload
+        required: true
+      parameters:
+        - name: exhibitionId
+          required: true
+          in: path
+          description: exhibition id
+          schema:
+            type: string
+            format: uuid
+        - name: deviceModelId
+          required: true
+          in: path
+          description: device model id
+          schema:
+            type: string
+            format: uuid
+      responses:
+        "200":
+          description: Updated exhibition
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DeviceModel"
+        "400":
+          description: Invalid request was sent to the server
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "403":
+          description: Attempted to make a call with unauthorized client
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "500":
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+    delete:
+      operationId: deleteDeviceModel
+      summary: Deletes device model.
+      description: Delets exhibition device model.
+      tags:
+        - DeviceModels
+      parameters:
+        - name: exhibitionId
+          required: true
+          in: path
+          description: exhibition id
+          schema:
+            type: string
+            format: uuid
+        - name: deviceModelId
+          required: true
+          in: path
+          description: device model id
+          schema:
+            type: string
+            format: uuid
+      responses:
+        "204":
+          description: Success
+        "400":
+          description: Invalid request was sent to the server
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "403":
+          description: Attempted to make a call with unauthorized client
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "500":
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
   /exhibitions/{exhibitionId}/devices:
     get:
       operationId: listExhibitionDevices
@@ -1563,201 +1795,6 @@ paths:
               schema:
                 $ref: "#/components/schemas/Error"
 
-  /deviceModels:
-    get:
-      operationId: listDeviceModels
-      summary: List device models
-      description: List device models
-      tags:
-        - DeviceModels
-      responses:
-        "200":
-          description: A device model list
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: "#/components/schemas/DeviceModel"
-        "400":
-          description: Invalid request was sent to the server
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
-        "403":
-          description: Attempted to make a call with unauthorized client
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
-        "500":
-          description: Internal server error
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
-    post:
-      operationId: createDeviceModel
-      summary: Create a device model
-      description: Creates new device model
-      tags:
-        - DeviceModels
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/DeviceModel"
-        description: Payload
-        required: true
-      responses:
-        "200":
-          description: Created device model
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/DeviceModel"
-        "400":
-          description: Invalid request was sent to the server
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
-        "403":
-          description: Attempted to make a call with unauthorized client
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
-        "500":
-          description: Internal server error
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
-
-  /deviceModels/{deviceModelId}:
-    get:
-      operationId: findDeviceModel
-      summary: Find a device model
-      description: Finds a device model by id
-      tags:
-        - DeviceModels
-      parameters:
-        - name: deviceModelId
-          required: true
-          in: path
-          description: device model id
-          schema:
-            type: string
-            format: uuid
-      responses:
-        "200":
-          description: A exhibition
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/DeviceModel"
-        "400":
-          description: Invalid request was sent to the server
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
-        "403":
-          description: Attempted to make a call with unauthorized client
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
-        "500":
-          description: Internal server error
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
-    put:
-      operationId: updateDeviceModel
-      summary: Updates device model.
-      description: Updates device model.
-      tags:
-        - DeviceModels
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/DeviceModel"
-        description: Payload
-        required: true
-      parameters:
-        - name: deviceModelId
-          required: true
-          in: path
-          description: device model id
-          schema:
-            type: string
-            format: uuid
-      responses:
-        "200":
-          description: Updated exhibition
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/DeviceModel"
-        "400":
-          description: Invalid request was sent to the server
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
-        "403":
-          description: Attempted to make a call with unauthorized client
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
-        "500":
-          description: Internal server error
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
-    delete:
-      operationId: deleteDeviceModel
-      summary: Deletes device model.
-      description: Delets device model.
-      tags:
-        - DeviceModels
-      parameters:
-        - name: deviceModelId
-          required: true
-          in: path
-          description: device model id
-          schema:
-            type: string
-            format: uuid
-      responses:
-        "204":
-          description: Success
-        "400":
-          description: Invalid request was sent to the server
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
-        "403":
-          description: Attempted to make a call with unauthorized client
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
-        "500":
-          description: Internal server error
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
-
   /system/ping:
     get:
       summary: System ping endpoint
@@ -1943,6 +1980,10 @@ components:
         - capabilities
       properties:
         id:
+          type: string
+          format: uuid
+          readOnly: true
+        exhibitionId:
           type: string
           format: uuid
           readOnly: true
@@ -2406,7 +2447,7 @@ components:
           
     MqttExhibitionVisitorSessionUpdate:
       type: object
-      description: MQTT notification message about exhibition visitor session creation. This is actually not part of REST API spec but a realtime notification via MQTT channel
+      description: MQTT notification message about exhibition visitor session update. This is actually not part of REST API spec but a realtime notification via MQTT channel
       required:
         - id
         - exhibitionId
