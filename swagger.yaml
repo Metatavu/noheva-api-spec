@@ -1983,10 +1983,6 @@ components:
           type: string
           format: uuid
           readOnly: true
-        exhibitionId:
-          type: string
-          format: uuid
-          readOnly: true
         manufacturer:
           type: string
         model:
