@@ -2387,6 +2387,33 @@ components:
           readOnly: true
           description: Id of exhibition this page belongs to
           
+    MqttLayoutCreate:
+      type: object
+      description: MQTT notification message about layout creation. This is actually not part of REST API spec but a realtime notification via MQTT channel
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+          
+    MqttLayoutUpdate:
+      type: object
+      description: MQTT notification message about layout update. This is actually not part of REST API spec but a realtime notification via MQTT channel
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+          
+    MqttLayoutDelete:
+      type: object
+      description: MQTT notification message about layout deletion. This is actually not part of REST API spec but a realtime notification via MQTT channel
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+          
     MqttExhibitionVisitorSessionCreate:
       type: object
       description: MQTT notification message about exhibition visitor session creation. This is actually not part of REST API spec but a realtime notification via MQTT channel
