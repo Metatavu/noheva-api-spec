@@ -898,21 +898,13 @@ paths:
               schema:
                 $ref: "#/components/schemas/Error"
 
-  /exhibitions/{exhibitionId}/deviceModels:
+  /deviceModels:
     get:
-      operationId: listExhibitionDeviceModels
+      operationId: listDeviceModels
       summary: List device models
       description: List exhibition device models
       tags:
-        - ExhibitionDeviceModels
-      parameters:
-        - name: exhibitionId
-          required: true
-          in: path
-          description: exhibition id
-          schema:
-            type: string
-            format: uuid
+        - DeviceModels
       responses:
         "200":
           description: A device model list
@@ -921,7 +913,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: "#/components/schemas/ExhibitionDeviceModel"
+                  $ref: "#/components/schemas/DeviceModel"
         "400":
           description: Invalid request was sent to the server
           content:
@@ -941,24 +933,16 @@ paths:
               schema:
                 $ref: "#/components/schemas/Error"
     post:
-      operationId: createExhibitionDeviceModel
+      operationId: createDeviceModel
       summary: Create a device model
       description: Creates new exhibition device model
       tags:
-        - ExhibitionDeviceModels
-      parameters:
-        - name: exhibitionId
-          required: true
-          in: path
-          description: exhibition id
-          schema:
-            type: string
-            format: uuid
+        - DeviceModels
       requestBody:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/ExhibitionDeviceModel"
+              $ref: "#/components/schemas/DeviceModel"
         description: Payload
         required: true
       responses:
@@ -967,7 +951,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/ExhibitionDeviceModel"
+                $ref: "#/components/schemas/DeviceModel"
         "400":
           description: Invalid request was sent to the server
           content:
@@ -987,21 +971,14 @@ paths:
               schema:
                 $ref: "#/components/schemas/Error"
 
-  /exhibitions/{exhibitionId}/deviceModels/{deviceModelId}:
+  /deviceModels/{deviceModelId}:
     get:
-      operationId: findExhibitionDeviceModel
+      operationId: findDeviceModel
       summary: Find a device model
       description: Finds a device model by id
       tags:
-        - ExhibitionDeviceModels
+        - DeviceModels
       parameters:
-        - name: exhibitionId
-          required: true
-          in: path
-          description: exhibition id
-          schema:
-            type: string
-            format: uuid
         - name: deviceModelId
           required: true
           in: path
@@ -1015,7 +992,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/ExhibitionDeviceModel"
+                $ref: "#/components/schemas/DeviceModel"
         "400":
           description: Invalid request was sent to the server
           content:
@@ -1035,26 +1012,19 @@ paths:
               schema:
                 $ref: "#/components/schemas/Error"
     put:
-      operationId: updateExhibitionDeviceModel
+      operationId: updateDeviceModel
       summary: Updates device model.
       description: Updates device model.
       tags:
-        - ExhibitionDeviceModels
+        - DeviceModels
       requestBody:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/ExhibitionDeviceModel"
+              $ref: "#/components/schemas/DeviceModel"
         description: Payload
         required: true
       parameters:
-        - name: exhibitionId
-          required: true
-          in: path
-          description: exhibition id
-          schema:
-            type: string
-            format: uuid
         - name: deviceModelId
           required: true
           in: path
@@ -1068,7 +1038,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/ExhibitionDeviceModel"
+                $ref: "#/components/schemas/DeviceModel"
         "400":
           description: Invalid request was sent to the server
           content:
@@ -1088,19 +1058,12 @@ paths:
               schema:
                 $ref: "#/components/schemas/Error"
     delete:
-      operationId: deleteExhibitionDeviceModel
+      operationId: deleteDeviceModel
       summary: Deletes device model.
       description: Delets exhibition device model.
       tags:
-        - ExhibitionDeviceModels
+        - DeviceModels
       parameters:
-        - name: exhibitionId
-          required: true
-          in: path
-          description: exhibition id
-          schema:
-            type: string
-            format: uuid
         - name: deviceModelId
           required: true
           in: path
@@ -1932,6 +1895,7 @@ components:
         - name
         - groupId
         - modelId
+        - screenOrientation
       properties:
         id:
           type: string
@@ -1953,6 +1917,8 @@ components:
           type: string
         location:
           $ref: '#/components/schemas/Point'
+        screenOrientation:
+          $ref: '#/components/schemas/ScreenOrientation'
         creatorId:
           type: string
           format: uuid
@@ -1972,7 +1938,7 @@ components:
           description: Date modified
           readOnly: true
 
-    ExhibitionDeviceModel:
+    DeviceModel:
       type: object
       description: Describes device model used in exhibition
       required:
@@ -1986,20 +1952,16 @@ components:
           type: string
           format: uuid
           readOnly: true
-        exhibitionId:
-          type: string
-          format: uuid
-          readOnly: true
         manufacturer:
           type: string
         model:
           type: string
         dimensions:
-          $ref: '#/components/schemas/ExhibitionDeviceModelDimensions'
+          $ref: '#/components/schemas/DeviceModelDimensions'
         displayMetrics:
-          $ref: '#/components/schemas/ExhibitionDeviceModelDisplayMetrics'
+          $ref: '#/components/schemas/DeviceModelDisplayMetrics'
         capabilities:
-          $ref: '#/components/schemas/ExhibitionDeviceModelCapabilities'
+          $ref: '#/components/schemas/DeviceModelCapabilities'
         creatorId:
           type: string
           format: uuid
@@ -2030,7 +1992,7 @@ components:
           type: number
           format: double
 
-    ExhibitionDeviceModelDimensions:
+    DeviceModelDimensions:
       type: object
       description: Describes device model physical dimensions
       properties:
@@ -2041,7 +2003,7 @@ components:
           type: number
           format: double
 
-    ExhibitionDeviceModelDisplayMetrics:
+    DeviceModelDisplayMetrics:
       type: object
       description: Describes device display information
       properties:
@@ -2061,7 +2023,7 @@ components:
           type: number
           format: double
 
-    ExhibitionDeviceModelCapabilities:
+    DeviceModelCapabilities:
       type: object
       description: Describes device model capabilities
       required:
@@ -2151,6 +2113,7 @@ components:
       required:
         - name
         - data
+        - screenOrientation
       properties:
         id:
           type: string
@@ -2164,6 +2127,8 @@ components:
         thumbnailUrl:
           type: string
           format: url
+        screenOrientation:
+          $ref: '#/components/schemas/ScreenOrientation'
         creatorId:
           type: string
           format: uuid
@@ -2374,6 +2339,12 @@ components:
       enum:
         - fade
 
+    ScreenOrientation:
+      type: string
+      enum:
+        - landscape
+        - portrait
+      
     Error:
       type: object
       required:
@@ -2385,3 +2356,136 @@ components:
           format: int32
         message:
           type: string
+          
+    MqttExhibitionPageCreate:
+      type: object
+      description: MQTT notification message about exhibition page creation. This is actually not part of REST API spec but a realtime notification via MQTT channel
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        exhibitionId:
+          type: string
+          format: uuid
+          readOnly: true
+          description: Id of exhibition this page belongs to
+          
+    MqttExhibitionPageUpdate:
+      type: object
+      description: MQTT notification message about exhibition page update. This is actually not part of REST API spec but a realtime notification via MQTT channel
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        exhibitionId:
+          type: string
+          format: uuid
+          readOnly: true
+          description: Id of exhibition this page belongs to
+          
+    MqttExhibitionPageDelete:
+      type: object
+      description: MQTT notification message about exhibition page deletion. This is actually not part of REST API spec but a realtime notification via MQTT channel
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        exhibitionId:
+          type: string
+          format: uuid
+          readOnly: true
+          description: Id of exhibition this page belongs to
+          
+    MqttLayoutCreate:
+      type: object
+      description: MQTT notification message about layout creation. This is actually not part of REST API spec but a realtime notification via MQTT channel
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+          
+    MqttLayoutUpdate:
+      type: object
+      description: MQTT notification message about layout update. This is actually not part of REST API spec but a realtime notification via MQTT channel
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+          
+    MqttLayoutDelete:
+      type: object
+      description: MQTT notification message about layout deletion. This is actually not part of REST API spec but a realtime notification via MQTT channel
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+          
+    MqttExhibitionVisitorSessionCreate:
+      type: object
+      description: MQTT notification message about exhibition visitor session creation. This is actually not part of REST API spec but a realtime notification via MQTT channel
+      required:
+        - id
+        - exhibitionId
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        exhibitionId:
+          type: string
+          format: uuid
+          readOnly: true
+          description: Id of exhibition this visitor session belongs to
+          
+    MqttExhibitionVisitorSessionUpdate:
+      type: object
+      description: MQTT notification message about exhibition visitor session update. This is actually not part of REST API spec but a realtime notification via MQTT channel
+      required:
+        - id
+        - exhibitionId
+        - variablesChanged
+        - usersChanged
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        exhibitionId:
+          type: string
+          format: uuid
+          readOnly: true
+          description: Id of exhibition this visitor session belongs to
+        variablesChanged:
+          type: boolean
+          description: Whether session variables have changed
+          readOnly: true
+        usersChanged:
+          type: boolean
+          description: Whether session users have changed
+          readOnly: true
+          
+    MqttExhibitionVisitorSessionDelete:
+      type: object
+      description: MQTT notification message about exhibition visitor session deletion. This is actually not part of REST API spec but a realtime notification via MQTT channel
+      required:
+        - id
+        - exhibitionId
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        exhibitionId:
+          type: string
+          format: uuid
+          readOnly: true
+          description: Id of exhibition this visitor session belongs to
+          
+          
+          
