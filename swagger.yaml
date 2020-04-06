@@ -2272,6 +2272,9 @@ components:
           format: int64
         clickViewId:
           type: string
+        externalKeyCode:
+          type: integer
+          format: int32
         next:
           type: array
           items:
