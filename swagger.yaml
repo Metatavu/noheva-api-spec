@@ -1996,10 +1996,19 @@ components:
       type: object
       description: Describes device model physical dimensions
       properties:
-        width:
+        deviceWidth:
           type: number
           format: double
-        height:
+        deviceHeight:
+          type: number
+          format: double
+        deviceDepth:
+          type: number
+          format: double
+        screenWidth:
+          type: number
+          format: double
+        screenHeight:
           type: number
           format: double
 
@@ -2318,7 +2327,7 @@ components:
           type: string
         type:
           $ref: '#/components/schemas/ExhibitionPageEventPropertyType'
-        
+
     ExhibitionPageEventPropertyType:
       type: string
       enum:
@@ -2326,7 +2335,7 @@ components:
         - boolean
         - number
         - color
-        
+
     ExhibitionPageEventActionType:
       type: string
       enum:
@@ -2347,7 +2356,7 @@ components:
       enum:
         - landscape
         - portrait
-      
+
     Error:
       type: object
       required:
@@ -2359,7 +2368,7 @@ components:
           format: int32
         message:
           type: string
-          
+
     MqttExhibitionPageCreate:
       type: object
       description: MQTT notification message about exhibition page creation. This is actually not part of REST API spec but a realtime notification via MQTT channel
@@ -2373,7 +2382,7 @@ components:
           format: uuid
           readOnly: true
           description: Id of exhibition this page belongs to
-          
+
     MqttExhibitionPageUpdate:
       type: object
       description: MQTT notification message about exhibition page update. This is actually not part of REST API spec but a realtime notification via MQTT channel
@@ -2387,7 +2396,7 @@ components:
           format: uuid
           readOnly: true
           description: Id of exhibition this page belongs to
-          
+
     MqttExhibitionPageDelete:
       type: object
       description: MQTT notification message about exhibition page deletion. This is actually not part of REST API spec but a realtime notification via MQTT channel
@@ -2401,7 +2410,7 @@ components:
           format: uuid
           readOnly: true
           description: Id of exhibition this page belongs to
-          
+
     MqttLayoutCreate:
       type: object
       description: MQTT notification message about layout creation. This is actually not part of REST API spec but a realtime notification via MQTT channel
@@ -2410,7 +2419,7 @@ components:
           type: string
           format: uuid
           readOnly: true
-          
+
     MqttLayoutUpdate:
       type: object
       description: MQTT notification message about layout update. This is actually not part of REST API spec but a realtime notification via MQTT channel
@@ -2419,7 +2428,7 @@ components:
           type: string
           format: uuid
           readOnly: true
-          
+
     MqttLayoutDelete:
       type: object
       description: MQTT notification message about layout deletion. This is actually not part of REST API spec but a realtime notification via MQTT channel
@@ -2428,7 +2437,7 @@ components:
           type: string
           format: uuid
           readOnly: true
-          
+
     MqttExhibitionVisitorSessionCreate:
       type: object
       description: MQTT notification message about exhibition visitor session creation. This is actually not part of REST API spec but a realtime notification via MQTT channel
@@ -2445,7 +2454,7 @@ components:
           format: uuid
           readOnly: true
           description: Id of exhibition this visitor session belongs to
-          
+
     MqttExhibitionVisitorSessionUpdate:
       type: object
       description: MQTT notification message about exhibition visitor session update. This is actually not part of REST API spec but a realtime notification via MQTT channel
@@ -2472,7 +2481,7 @@ components:
           type: boolean
           description: Whether session users have changed
           readOnly: true
-          
+
     MqttExhibitionVisitorSessionDelete:
       type: object
       description: MQTT notification message about exhibition visitor session deletion. This is actually not part of REST API spec but a realtime notification via MQTT channel
