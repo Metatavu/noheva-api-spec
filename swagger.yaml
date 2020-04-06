@@ -1346,6 +1346,12 @@ paths:
           schema:
             type: string
             format: uuid
+        - name: exhibitionDeviceId
+          in: query
+          description: Filter by device id
+          schema:
+            type: string
+            format: uuid
       responses:
         "200":
           description: A page list
@@ -2191,6 +2197,7 @@ components:
         - name
         - layoutId
         - resources
+        - deviceId
         - eventTriggers
         - events
       properties:
@@ -2203,6 +2210,11 @@ components:
           format: uuid
           readOnly: true
           description: Id of exhibition this page belongs to
+        deviceId:
+          type: string
+          format: uuid
+          readOnly: true
+          description: Id of device this page belongs to
         layoutId:
           type: string
           format: uuid
