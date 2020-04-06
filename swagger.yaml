@@ -1579,14 +1579,14 @@ paths:
       parameters:
         - name: deviceModelId
           required: false
-          in: path
+          in: query
           description: device model id
           schema:
             type: string
             format: uuid
         - name: screenOrientation
           required: false
-          in: path
+          in: query
           description: screen orientation
           schema:
             $ref: '#/components/schemas/ScreenOrientation'
@@ -2516,6 +2516,3 @@ components:
           format: uuid
           readOnly: true
           description: Id of exhibition this visitor session belongs to
-          
-          
-          
