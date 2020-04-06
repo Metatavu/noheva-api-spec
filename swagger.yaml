@@ -1956,7 +1956,7 @@ components:
           type: string
         model:
           type: string
-        deviceDimensions:
+        dimensions:
           $ref: '#/components/schemas/DeviceModelDimensions'
         displayMetrics:
           $ref: '#/components/schemas/DeviceModelDisplayMetrics'
