@@ -1589,7 +1589,7 @@ paths:
           in: query
           description: screen orientation
           schema:
-            $ref: '#/components/schemas/ScreenOrientation'
+            type: string
       responses:
         "200":
           description: A page layout list
