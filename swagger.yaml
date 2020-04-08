@@ -1346,6 +1346,12 @@ paths:
           schema:
             type: string
             format: uuid
+        - name: exhibitionContentVersionId
+          in: query
+          description: Filter by device id
+          schema:
+            type: string
+            format: uuid
         - name: exhibitionDeviceId
           in: query
           description: Filter by device id
@@ -1568,7 +1574,7 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Error"
-                
+
   /exhibitions/{exhibitionId}/contentVersions:
     get:
       operationId: listExhibitionContentVersions
@@ -2431,10 +2437,10 @@ components:
         - boolean
         - number
         - color
-        
+
     ExhibitionContentVersion:
       type: object
-      description: Content version (e.g. language) of an exhibition. 
+      description: Content version (e.g. language) of an exhibition.
       required:
         - name
       properties:
