@@ -1814,6 +1814,20 @@ paths:
       description: List page layouts
       tags:
         - PageLayouts
+      parameters:
+        - name: deviceModelId
+          required: false
+          in: query
+          description: device model id
+          schema:
+            type: string
+            format: uuid
+        - name: screenOrientation
+          required: false
+          in: query
+          description: screen orientation
+          schema:
+            type: string
       responses:
         "200":
           description: A page layout list
@@ -2374,6 +2388,10 @@ components:
         thumbnailUrl:
           type: string
           format: url
+        modelId:
+          type: string
+          format: uuid
+          description: Device model id
         screenOrientation:
           $ref: '#/components/schemas/ScreenOrientation'
         creatorId:
@@ -2778,6 +2796,3 @@ components:
           format: uuid
           readOnly: true
           description: Id of exhibition this visitor session belongs to
-          
-          
-          
