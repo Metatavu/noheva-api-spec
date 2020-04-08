@@ -2573,9 +2573,14 @@ components:
           format: int64
         clickViewId:
           type: string
-        externalKeyCode:
-          type: integer
-          format: int32
+        keyUp:
+          type: string
+          minLength: 1
+          maxLength: 1
+        keyDown:
+          type: string
+          minLength: 1
+          maxLength: 1
         next:
           type: array
           items:
@@ -2778,6 +2783,3 @@ components:
           format: uuid
           readOnly: true
           description: Id of exhibition this visitor session belongs to
-          
-          
-          
