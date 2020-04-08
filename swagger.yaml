@@ -448,6 +448,12 @@ paths:
           schema:
             type: string
             format: uuid
+        - name: floorId
+          in: query
+          description: exhibition floor id
+          schema:
+            type: string
+            format: uuid
       responses:
         "200":
           description: A room list
@@ -665,6 +671,237 @@ paths:
               schema:
                 $ref: "#/components/schemas/Error"
 
+  /exhibitions/{exhibitionId}/floors:
+    get:
+      operationId: listExhibitionFloors
+      summary: List floors
+      description: List exhibition floors
+      tags:
+        - ExhibitionFloors
+      parameters:
+        - name: exhibitionId
+          required: true
+          in: path
+          description: exhibition id
+          schema:
+            type: string
+            format: uuid
+      responses:
+        "200":
+          description: A floor list
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/ExhibitionFloor"
+        "400":
+          description: Invalid request was sent to the server
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "403":
+          description: Attempted to make a call with unauthorized client
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "500":
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+    post:
+      operationId: createExhibitionFloor
+      summary: Create a floor
+      description: Creates new exhibition floor
+      tags:
+        - ExhibitionFloors
+      parameters:
+        - name: exhibitionId
+          required: true
+          in: path
+          description: exhibition id
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ExhibitionFloor"
+        description: Payload
+        required: true
+      responses:
+        "200":
+          description: Created exhibition floor
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ExhibitionFloor"
+        "400":
+          description: Invalid request was sent to the server
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "403":
+          description: Attempted to make a call with unauthorized client
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "500":
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
+  /exhibitions/{exhibitionId}/floors/{floorId}:
+    get:
+      operationId: findExhibitionFloor
+      summary: Find a floor
+      description: Finds a floor by id
+      tags:
+        - ExhibitionFloors
+      parameters:
+        - name: exhibitionId
+          required: true
+          in: path
+          description: exhibition id
+          schema:
+            type: string
+            format: uuid
+        - name: floorId
+          required: true
+          in: path
+          description: floor id
+          schema:
+            type: string
+            format: uuid
+      responses:
+        "200":
+          description: A exhibition
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ExhibitionFloor"
+        "400":
+          description: Invalid request was sent to the server
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "403":
+          description: Attempted to make a call with unauthorized client
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "500":
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+    put:
+      operationId: updateExhibitionFloor
+      summary: Updates floor.
+      description: Updates floor.
+      tags:
+        - ExhibitionFloors
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ExhibitionFloor"
+        description: Payload
+        required: true
+      parameters:
+        - name: exhibitionId
+          required: true
+          in: path
+          description: exhibition id
+          schema:
+            type: string
+            format: uuid
+        - name: floorId
+          required: true
+          in: path
+          description: floor id
+          schema:
+            type: string
+            format: uuid
+      responses:
+        "200":
+          description: Updated exhibition
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ExhibitionFloor"
+        "400":
+          description: Invalid request was sent to the server
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "403":
+          description: Attempted to make a call with unauthorized client
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "500":
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+    delete:
+      operationId: deleteExhibitionFloor
+      summary: Deletes floor.
+      description: Delets exhibition floor.
+      tags:
+        - ExhibitionFloors
+      parameters:
+        - name: exhibitionId
+          required: true
+          in: path
+          description: exhibition id
+          schema:
+            type: string
+            format: uuid
+        - name: floorId
+          required: true
+          in: path
+          description: floor id
+          schema:
+            type: string
+            format: uuid
+      responses:
+        "204":
+          description: Success
+        "400":
+          description: Invalid request was sent to the server
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "403":
+          description: Attempted to make a call with unauthorized client
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "500":
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
 
   /exhibitions/{exhibitionId}/deviceGroups:
     get:
@@ -678,6 +915,12 @@ paths:
           required: true
           in: path
           description: exhibition id
+          schema:
+            type: string
+            format: uuid
+        - name: roomId
+          in: query
+          description: filter by room id
           schema:
             type: string
             format: uuid
@@ -2073,7 +2316,7 @@ components:
           description: Date modified
           readOnly: true
 
-    ExhibitionRoom:
+    ExhibitionFloor:
       type: object
       required:
         - name
@@ -2086,6 +2329,44 @@ components:
           type: string
           format: uuid
           readOnly: true
+        name:
+          type: string
+        creatorId:
+          type: string
+          format: uuid
+          readOnly: true
+        lastModifierId:
+          type: string
+          format: uuid
+          readOnly: true
+        createdAt:
+          type: string
+          format: date-time
+          description: Created date
+          readOnly: true
+        modifiedAt:
+          type: string
+          format: date-time
+          description: Date modified
+          readOnly: true
+
+    ExhibitionRoom:
+      type: object
+      required:
+        - name
+        - floorId
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        exhibitionId:
+          type: string
+          format: uuid
+          readOnly: true
+        floorId:
+          type: string
+          format: uuid
         name:
           type: string
         creatorId:
@@ -2120,6 +2401,9 @@ components:
           type: string
           format: uuid
           readOnly: true
+        roomId:
+          type: string
+          format: uuid
         name:
           type: string
         creatorId:
