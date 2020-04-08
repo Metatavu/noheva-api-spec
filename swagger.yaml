@@ -918,6 +918,12 @@ paths:
           schema:
             type: string
             format: uuid
+        - name: roomId
+          in: query
+          description: filter by room id
+          schema:
+            type: string
+            format: uuid
       responses:
         "200":
           description: A device group list
