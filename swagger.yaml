@@ -2441,6 +2441,10 @@ components:
           type: string
           format: uuid
           readOnly: true
+        indexPageId:
+          type: string
+          format: uuid
+          description: Index page for a device
         groupId:
           type: string
           format: uuid
@@ -3085,3 +3089,5 @@ components:
           format: uuid
           readOnly: true
           description: Id of exhibition this visitor session belongs to
+
+
