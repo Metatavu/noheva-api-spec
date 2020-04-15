@@ -2804,7 +2804,6 @@ components:
         deviceId:
           type: string
           format: uuid
-          readOnly: true
           description: Id of device this page belongs to
         layoutId:
           type: string
