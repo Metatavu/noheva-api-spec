@@ -2878,6 +2878,9 @@ components:
           format: int64
         clickViewId:
           type: string
+        deviceGroupEvent:
+          description: Name of triggering device group event
+          type: string
         keyUp:
           type: string
           minLength: 1
@@ -2935,6 +2938,7 @@ components:
         - navigate
         - setsrc
         - settext
+        - triggerdevicegroupevent
 
     ExhibitionPageEventTransition:
       type: string
@@ -3088,5 +3092,18 @@ components:
           format: uuid
           readOnly: true
           description: Id of exhibition this visitor session belongs to
+
+    MqttTriggerDeviceGroupEvent:
+      type: object
+      required:
+        - name
+      description: |
+        MQTT notification message for informing device group members about triggered group event. Event in sent into /events/deviceGroup/{deviceGroupId} -topic and thus does not require id of device group as a property.
+
+        This is actually not part of REST API spec but a realtime notification via MQTT channel
+      properties:
+        event:
+          type: string
+          description: name of triggered event
 
 
