@@ -2883,12 +2883,8 @@ components:
           type: string
         keyUp:
           type: string
-          minLength: 1
-          maxLength: 1
         keyDown:
           type: string
-          minLength: 1
-          maxLength: 1
         next:
           type: array
           items:
