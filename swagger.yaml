@@ -2331,7 +2331,7 @@ components:
           readOnly: true
         name:
           type: string
-        floorPlanURL:
+        floorPlanUrl:
           type: string
           format: url
         creatorId:
