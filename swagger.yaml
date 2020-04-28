@@ -2968,20 +2968,23 @@ components:
       type: object
       description: "GeoJson polygon object"
       properties:
-        coordinates:
+        shapes:
           type: array
           items:
             type: array
             items:
-              $ref: '#/components/schemas/CoordinatePoints'
+              $ref: '#/components/schemas/CoordinatePoint'
 
-    CoordinatePoints:
-      type: array
-      description: "Coordinate points"
-      maxItems: 2
-      minItems: 2
-      items:
-        type: number
+    CoordinatePoint:
+      type: object
+      description: "Coordinate point pair"
+      properties:
+        coordinatePair:
+          type: array
+          maxItems: 2
+          minItems: 2
+          items:
+            type: integer
 
     MqttExhibitionPageCreate:
       type: object
