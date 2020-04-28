@@ -2334,10 +2334,6 @@ components:
         floorPlanUrl:
           type: string
           format: url
-        rooms:
-          type: array
-          items:
-            $ref: '#/components/schemas/RoomPolygon'
         creatorId:
           type: string
           format: uuid
@@ -2376,6 +2372,8 @@ components:
           format: uuid
         name:
           type: string
+        polygon:
+          $ref: '#/components/schemas/RoomPolygon'
         creatorId:
           type: string
           format: uuid
