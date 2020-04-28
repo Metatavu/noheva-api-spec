@@ -2334,6 +2334,10 @@ components:
         floorPlanUrl:
           type: string
           format: url
+        rooms:
+          type: array
+          items:
+            $ref: '#/components/schemas/RoomPolygon'
         creatorId:
           type: string
           format: uuid
@@ -2962,6 +2966,27 @@ components:
         message:
           type: string
 
+    RoomPolygon:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        coordinates:
+          type: array
+          items:
+            type: array
+            items:
+              $ref: '#/components/schemas/Point2D'
+
+    Point2D:
+      type: array
+      maxItems: 2
+      minItems: 2
+      items:
+        type: number
+
     MqttExhibitionPageCreate:
       type: object
       description: MQTT notification message about exhibition page creation. This is actually not part of REST API spec but a realtime notification via MQTT channel
@@ -3104,5 +3129,3 @@ components:
         event:
           type: string
           description: name of triggered event
-
-
