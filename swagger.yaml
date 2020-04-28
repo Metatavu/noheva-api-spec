@@ -2372,8 +2372,8 @@ components:
           format: uuid
         name:
           type: string
-        polygon:
-          $ref: '#/components/schemas/RoomPolygon'
+        geoShape:
+          $ref: '#/components/schemas/Polygon'
         creatorId:
           type: string
           format: uuid
@@ -2964,13 +2964,9 @@ components:
         message:
           type: string
 
-    RoomPolygon:
+    Polygon:
       type: object
       properties:
-        id:
-          type: string
-          format: uuid
-          readOnly: true
         coordinates:
           type: array
           items:
