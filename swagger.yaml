@@ -2966,16 +2966,18 @@ components:
 
     Polygon:
       type: object
+      description: "GeoJson polygon object"
       properties:
         coordinates:
           type: array
           items:
             type: array
             items:
-              $ref: '#/components/schemas/Point2D'
+              $ref: '#/components/schemas/CoordinatePoints'
 
-    Point2D:
+    CoordinatePoints:
       type: array
+      description: "Coordinate points"
       maxItems: 2
       minItems: 2
       items:
