@@ -2372,6 +2372,8 @@ components:
           format: uuid
         name:
           type: string
+        geoShape:
+          $ref: '#/components/schemas/Polygon'
         creatorId:
           type: string
           format: uuid
@@ -2962,6 +2964,28 @@ components:
         message:
           type: string
 
+    Polygon:
+      type: object
+      description: "GeoJson polygon object"
+      properties:
+        shapes:
+          type: array
+          items:
+            type: array
+            items:
+              $ref: '#/components/schemas/CoordinatePoint'
+
+    CoordinatePoint:
+      type: object
+      description: "Coordinate point pair"
+      properties:
+        coordinatePair:
+          type: array
+          maxItems: 2
+          minItems: 2
+          items:
+            type: integer
+
     MqttExhibitionPageCreate:
       type: object
       description: MQTT notification message about exhibition page creation. This is actually not part of REST API spec but a realtime notification via MQTT channel
@@ -3104,5 +3128,3 @@ components:
         event:
           type: string
           description: name of triggered event
-
-
