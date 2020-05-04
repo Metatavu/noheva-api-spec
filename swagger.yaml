@@ -2990,7 +2990,10 @@ components:
 
     Bounds:
       type: object
-      description: Leaflet bounds object
+      description: Geo bounds object
+      required:
+        - southWestCorner
+        - northEastCorner
       properties:
         southWestCorner:
           $ref: '#/components/schemas/Coordinates'
@@ -3000,6 +3003,9 @@ components:
     Coordinates:
       type: object
       description: Coordinate object
+      required:
+        - latitude
+        - longitude
       properties:
         latitude:
           type: number
