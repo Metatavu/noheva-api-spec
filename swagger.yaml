@@ -2970,7 +2970,6 @@ components:
         - fade
         - fade
         - morph
-        - slide
 
     AnimationOption:
       type: object
