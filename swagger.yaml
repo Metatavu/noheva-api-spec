@@ -2334,8 +2334,6 @@ components:
         floorPlanUrl:
           type: string
           format: url
-        floorPlanBounds:
-          $ref: '#/components/schemas/Bounds'
         creatorId:
           type: string
           format: uuid
@@ -2798,6 +2796,8 @@ components:
         - deviceId
         - eventTriggers
         - events
+        - enterTransitions
+        - exitTransitions
       properties:
         id:
           type: string
@@ -2831,6 +2831,14 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/ExhibitionPageEventTrigger'
+        enterTransitions:
+          type: array
+          items:
+            $ref: '#/components/schemas/Transition'
+        exitTransitions:
+          type: array
+          items:
+            $ref: '#/components/schemas/Transition'
         creatorId:
           type: string
           format: uuid
@@ -2849,7 +2857,7 @@ components:
           format: date-time
           description: Date modified
           readOnly: true
-
+          
     ExhibitionPageResource:
       type: object
       required:
@@ -2942,11 +2950,57 @@ components:
         - setsrc
         - settext
         - triggerdevicegroupevent
-
-    ExhibitionPageEventTransition:
+    
+    Animation:
+      type: string
+      enum: 
+        - fade
+        - morph
+        - slide
+    
+    AnimationOption:
+      type: object
+      required:
+        - name
+        - values
+      properties:
+        name:
+          type: string
+        values:
+          type: array
+          items:
+            type: string
+            
+    AnimationTimeInterpolation:
       type: string
       enum:
-        - fade
+        - acceleratedecelerate
+        - accelerate
+        - anticipate
+        - anticipateovershoot
+        - bounce
+        - decelerate
+        - linear
+        - overshoot
+
+    Transition:
+      required:
+        - animation
+        - timeInterpolation
+        - duration
+      type: object
+      properties:
+        animation:
+          $ref: '#/components/schemas/Animation'
+        timeInterpolation:
+          $ref: '#/components/schemas/AnimationTimeInterpolation'
+        duration:
+          type: integer
+          format: int32
+        options:
+          type: array
+          items:
+            $ref: '#/components/schemas/AnimationOption'
 
     ScreenOrientation:
       type: string
@@ -2987,32 +3041,6 @@ components:
           minItems: 2
           items:
             type: integer
-
-    Bounds:
-      type: object
-      description: Geo bounds object
-      required:
-        - southWestCorner
-        - northEastCorner
-      properties:
-        southWestCorner:
-          $ref: '#/components/schemas/Coordinates'
-        northEastCorner:
-          $ref: '#/components/schemas/Coordinates'
-
-    Coordinates:
-      type: object
-      description: Coordinate object
-      required:
-        - latitude
-        - longitude
-      properties:
-        latitude:
-          type: number
-          format: double
-        longitude:
-          type: number
-          format: double
 
     MqttExhibitionPageCreate:
       type: object
