@@ -2968,7 +2968,6 @@ components:
       type: string
       enum: 
         - fade
-        - fade
         - morph
 
     AnimationOption:
