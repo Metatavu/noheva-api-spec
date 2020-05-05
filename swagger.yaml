@@ -2334,6 +2334,8 @@ components:
         floorPlanUrl:
           type: string
           format: url
+        floorPlanBounds:
+          $ref: '#/components/schemas/Bounds'
         creatorId:
           type: string
           format: uuid
@@ -2985,6 +2987,32 @@ components:
           minItems: 2
           items:
             type: integer
+
+    Bounds:
+      type: object
+      description: Geo bounds object
+      required:
+        - southWestCorner
+        - northEastCorner
+      properties:
+        southWestCorner:
+          $ref: '#/components/schemas/Coordinates'
+        northEastCorner:
+          $ref: '#/components/schemas/Coordinates'
+
+    Coordinates:
+      type: object
+      description: Coordinate object
+      required:
+        - latitude
+        - longitude
+      properties:
+        latitude:
+          type: number
+          format: double
+        longitude:
+          type: number
+          format: double
 
     MqttExhibitionPageCreate:
       type: object
