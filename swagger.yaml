@@ -2966,7 +2966,7 @@ components:
 
     Animation:
       type: string
-      enum: 
+      enum:
         - fade
         - morph
 
@@ -3033,21 +3033,16 @@ components:
       properties:
         shapes:
           type: array
+          description: Polygon shapes
           items:
             type: array
+            description: Coordinates
             items:
-              $ref: '#/components/schemas/CoordinatePoint'
-
-    CoordinatePoint:
-      type: object
-      description: "Coordinate point pair"
-      properties:
-        coordinatePair:
-          type: array
-          maxItems: 2
-          minItems: 2
-          items:
-            type: integer
+              type: array
+              description: Coordinate pair
+              items:
+                type: number
+                format: double
 
     Bounds:
       type: object
