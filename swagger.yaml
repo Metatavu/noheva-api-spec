@@ -2798,6 +2798,8 @@ components:
         - deviceId
         - eventTriggers
         - events
+        - enterTransitions
+        - exitTransitions
       properties:
         id:
           type: string
@@ -2831,6 +2833,14 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/ExhibitionPageEventTrigger'
+        enterTransitions:
+          type: array
+          items:
+            $ref: '#/components/schemas/Transition'
+        exitTransitions:
+          type: array
+          items:
+            $ref: '#/components/schemas/Transition'
         creatorId:
           type: string
           format: uuid
@@ -2953,6 +2963,57 @@ components:
       enum:
         - landscape
         - portrait
+
+    Animation:
+      type: string
+      enum: 
+        - fade
+        - morph
+
+    AnimationOption:
+      type: object
+      required:
+        - name
+        - values
+      properties:
+        name:
+          type: string
+        values:
+          type: array
+          items:
+            type: string
+
+    AnimationTimeInterpolation:
+      type: string
+      enum:
+        - acceleratedecelerate
+        - accelerate
+        - anticipate
+        - anticipateovershoot
+        - bounce
+        - decelerate
+        - linear
+        - overshoot
+
+    Transition:
+      required:
+        - animation
+        - timeInterpolation
+        - duration
+        - options
+      type: object
+      properties:
+        animation:
+          $ref: '#/components/schemas/Animation'
+        timeInterpolation:
+          $ref: '#/components/schemas/AnimationTimeInterpolation'
+        duration:
+          type: integer
+          format: int32
+        options:
+          type: array
+          items:
+            $ref: '#/components/schemas/AnimationOption'
 
     Error:
       type: object
