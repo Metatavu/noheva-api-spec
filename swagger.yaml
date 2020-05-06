@@ -3033,10 +3033,13 @@ components:
       properties:
         shapes:
           type: array
+          description: Polygon shapes
           items:
             type: array
+            description: Coordinates
             items:
               type: array
+              description: Coordinate pair
               items:
                 type: number
                 format: double
