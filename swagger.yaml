@@ -2966,7 +2966,7 @@ components:
 
     Animation:
       type: string
-      enum: 
+      enum:
         - fade
         - morph
 
@@ -3036,18 +3036,10 @@ components:
           items:
             type: array
             items:
-              $ref: '#/components/schemas/CoordinatePoint'
-
-    CoordinatePoint:
-      type: object
-      description: "Coordinate point pair"
-      properties:
-        coordinatePair:
-          type: array
-          maxItems: 2
-          minItems: 2
-          items:
-            type: integer
+              type: array
+              items:
+                type: number
+                format: double
 
     Bounds:
       type: object
