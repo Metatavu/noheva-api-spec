@@ -3031,7 +3031,9 @@ components:
       type: object
       description: "GeoJson polygon object"
       properties:
-        shapes:
+        type:
+          type: string
+        coordinates:
           type: array
           description: Polygon shapes
           items:
