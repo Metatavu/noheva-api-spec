@@ -2836,11 +2836,11 @@ components:
         enterTransitions:
           type: array
           items:
-            $ref: '#/components/schemas/Transition'
+            $ref: '#/components/schemas/ExhibitionPageTransition'
         exitTransitions:
           type: array
           items:
-            $ref: '#/components/schemas/Transition'
+            $ref: '#/components/schemas/ExhibitionPageTransition'
         creatorId:
           type: string
           format: uuid
@@ -2970,18 +2970,32 @@ components:
         - fade
         - morph
 
-    AnimationOption:
+    ExhibitionPageTransitionOptions:
+      type: object
+      properties:
+        morph:
+          $ref: '#/components/schemas/ExhibitionPageTransitionOptionsMorph'
+
+    ExhibitionPageTransitionOptionsMorph:
       type: object
       required:
-        - name
-        - values
+        - views
       properties:
-        name:
-          type: string
-        values:
+        views:
           type: array
           items:
-            type: string
+            $ref: '#/components/schemas/ExhibitionPageTransitionOptionsMorphView'
+          
+    ExhibitionPageTransitionOptionsMorphView:
+      type: object
+      required:
+        - sourceId
+        - targetId
+      properties:
+        sourceId:
+          type: string
+        targetId:
+          type: string
 
     AnimationTimeInterpolation:
       type: string
@@ -3010,10 +3024,22 @@ components:
         duration:
           type: integer
           format: int32
+            
+    ExhibitionPageTransition:
+      required:
+        - transition
+      type: object
+      properties:
+        transition:
+          $ref: '#/components/schemas/Transition'
+        sourceLayoutId:
+          type: string
+          format: uuid
+        targetLayoutId:
+          type: string
+          format: uuid
         options:
-          type: array
-          items:
-            $ref: '#/components/schemas/AnimationOption'
+          $ref: '#/components/schemas/ExhibitionPageTransitionOptions'
 
     Error:
       type: object
