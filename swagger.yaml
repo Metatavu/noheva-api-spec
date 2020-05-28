@@ -2955,7 +2955,7 @@ components:
           type: string
           format: uuid
           readOnly: true
-          description: Unique id for the session
+          description: Unique id for the visitor
         exhibitionId:
           type: string
           format: uuid
