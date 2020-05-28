@@ -2960,7 +2960,7 @@ components:
           type: string
           format: uuid
           readOnly: true
-          description: Exhibition id the visiotr was attending to
+          description: Exhibition id the visitor attended
         email:
           type: string
           format: email
