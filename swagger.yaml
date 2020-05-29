@@ -2953,7 +2953,6 @@ components:
       required:
         - tagId
         - email
-        - userId
       properties:
         id:
           type: string
