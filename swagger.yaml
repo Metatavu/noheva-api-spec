@@ -295,7 +295,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/Error"
 
-  /exhibitions/{exhibitionId}/visitors/{visitorSessionId}:
+  /exhibitions/{exhibitionId}/visitors/{visitorId}:
     get:
       operationId: findVisitor
       summary: Find a visitor
@@ -310,7 +310,7 @@ paths:
           schema:
             type: string
             format: uuid
-        - name: visitorSessionId
+        - name: visitorId
           required: true
           in: path
           description: visitor id
@@ -363,7 +363,7 @@ paths:
           schema:
             type: string
             format: uuid
-        - name: visitorSessionId
+        - name: visitorId
           required: true
           in: path
           description: visitor id
@@ -409,7 +409,7 @@ paths:
           schema:
             type: string
             format: uuid
-        - name: visitorSessionId
+        - name: visitorId
           required: true
           in: path
           description: visitor id
