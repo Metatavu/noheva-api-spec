@@ -2901,7 +2901,7 @@ components:
     VisitorSession:
       type: object
       required:
-        - users
+        - visitorIds
         - state
       properties:
         id:
@@ -2950,6 +2950,8 @@ components:
       type: object
       required:
         - tagId
+        - email
+        - userId
       properties:
         id:
           type: string
