@@ -3543,7 +3543,7 @@ components:
         - id
         - exhibitionId
         - variablesChanged
-        - usersChanged
+        - visitorsChanged
       properties:
         id:
           type: string
@@ -3558,9 +3558,9 @@ components:
           type: boolean
           description: Whether session variables have changed
           readOnly: true
-        usersChanged:
+        visitorsChanged:
           type: boolean
-          description: Whether session users have changed
+          description: Whether session visitors have changed
           readOnly: true
 
     MqttExhibitionVisitorSessionDelete:
