@@ -203,7 +203,7 @@ paths:
                 
   /exhibitions/{exhibitionId}/visitor:
     get:
-      operationId: listVisitor
+      operationId: listVisitors
       summary: List visitors
       description: List exhibition visitors
       tags:
