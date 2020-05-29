@@ -207,7 +207,7 @@ paths:
       summary: List visitors
       description: List exhibition visitors
       tags:
-        - Visitor
+        - Visitors
       parameters:
         - name: exhibitionId
           required: true
@@ -253,7 +253,7 @@ paths:
       summary: Create a visitor
       description: Creates new exhibition visitor
       tags:
-        - Visitor
+        - Visitors
       parameters:
         - name: exhibitionId
           required: true
@@ -301,7 +301,7 @@ paths:
       summary: Find a visitor
       description: Finds a visitor by id
       tags:
-        - Visitor
+        - Visitors
       parameters:
         - name: exhibitionId
           required: true
@@ -347,7 +347,7 @@ paths:
       summary: Updates visitor.
       description: Updates visitor.
       tags:
-        - Visitor
+        - Visitors
       requestBody:
         content:
           application/json:
@@ -400,7 +400,7 @@ paths:
       summary: Deletes visitor.
       description: Delets exhibition visitor.
       tags:
-        - Visitor
+        - Visitors
       parameters:
         - name: exhibitionId
           required: true
