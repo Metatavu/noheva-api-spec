@@ -3049,12 +3049,10 @@ components:
         contentVersionId:
           type: string
           format: uuid
-          readOnly: true
           description: Id of content version
         deviceGroupId:
           type: string
           format: uuid
-          readOnly: true
           description: Id of device group
         creatorId:
           type: string
