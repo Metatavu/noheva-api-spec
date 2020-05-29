@@ -2921,8 +2921,10 @@ components:
           items:
             $ref: '#/components/schemas/VisitorSessionVariable'
         visitorIds:
-          type: string
-          format: uuid
+          type: array
+          items:
+            type: string
+            format: uuid
         visitedDeviceGroups:
           type: array
           items:
