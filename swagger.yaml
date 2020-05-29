@@ -3031,6 +3031,8 @@ components:
       required:
         - name
         - status
+        - contentVersionId
+        - deviceGroupId
       properties:
         id:
           type: string
