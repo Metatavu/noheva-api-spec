@@ -681,7 +681,7 @@ paths:
       summary: Find a visitor tag
       description: Finds a visitor tag by tagId
       tags:
-        - Visitor
+        - Visitors
       parameters:
         - name: exhibitionId
           required: true
