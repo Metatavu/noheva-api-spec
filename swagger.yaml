@@ -200,6 +200,243 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Error"
+                
+  /exhibitions/{exhibitionId}/visitor:
+    get:
+      operationId: listVisitors
+      summary: List visitors
+      description: List exhibition visitors
+      tags:
+        - Visitors
+      parameters:
+        - name: exhibitionId
+          required: true
+          in: path
+          description: exhibition id
+          schema:
+            type: string
+            format: uuid
+        - name: tagId
+          in: query
+          description: query by RFID tag
+          schema:
+            type: string
+      responses:
+        "200":
+          description: A visitor list
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Visitor"
+        "400":
+          description: Invalid request was sent to the server
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "403":
+          description: Attempted to make a call with unauthorized client
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "500":
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+    post:
+      operationId: createVisitor
+      summary: Create a visitor
+      description: Creates a new exhibition visitor
+      tags:
+        - Visitors
+      parameters:
+        - name: exhibitionId
+          required: true
+          in: path
+          description: exhibition id
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Visitor"
+        description: Payload
+        required: true
+      responses:
+        "200":
+          description: Created exhibition visitor
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Visitor"
+        "400":
+          description: Invalid request was sent to the server
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "403":
+          description: Attempted to make a call with unauthorized client
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "500":
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
+  /exhibitions/{exhibitionId}/visitors/{visitorId}:
+    get:
+      operationId: findVisitor
+      summary: Find a visitor
+      description: Finds a visitor by id
+      tags:
+        - Visitors
+      parameters:
+        - name: exhibitionId
+          required: true
+          in: path
+          description: exhibition id
+          schema:
+            type: string
+            format: uuid
+        - name: visitorId
+          required: true
+          in: path
+          description: visitor id
+          schema:
+            type: string
+            format: uuid
+      responses:
+        "200":
+          description: A exhibition
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Visitor"
+        "400":
+          description: Invalid request was sent to the server
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "403":
+          description: Attempted to make a call with unauthorized client
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "500":
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+    put:
+      operationId: updateVisitor
+      summary: Updates a visitor.
+      description: Updates a visitor.
+      tags:
+        - Visitors
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Visitor"
+        description: Payload
+        required: true
+      parameters:
+        - name: exhibitionId
+          required: true
+          in: path
+          description: exhibition id
+          schema:
+            type: string
+            format: uuid
+        - name: visitorId
+          required: true
+          in: path
+          description: visitor id
+          schema:
+            type: string
+            format: uuid
+      responses:
+        "200":
+          description: Updated visitor
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Visitor"
+        "400":
+          description: Invalid request was sent to the server
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "403":
+          description: Attempted to make a call with unauthorized client
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "500":
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+    delete:
+      operationId: deleteVisitor
+      summary: Deletes a visitor.
+      description: Deletes an exhibition visitor.
+      tags:
+        - Visitors
+      parameters:
+        - name: exhibitionId
+          required: true
+          in: path
+          description: exhibition id
+          schema:
+            type: string
+            format: uuid
+        - name: visitorId
+          required: true
+          in: path
+          description: visitor id
+          schema:
+            type: string
+            format: uuid
+      responses:
+        "204":
+          description: Success
+        "400":
+          description: Invalid request was sent to the server
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "403":
+          description: Attempted to make a call with unauthorized client
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "500":
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
 
   /exhibitions/{exhibitionId}/visitorSessions:
     get:
@@ -216,6 +453,11 @@ paths:
           schema:
             type: string
             format: uuid
+        - name: tagId
+          in: query
+          description: query by RFID tag
+          schema:
+            type: string
       responses:
         "200":
           description: A visitor session list
@@ -414,6 +656,53 @@ paths:
       responses:
         "204":
           description: Success
+        "400":
+          description: Invalid request was sent to the server
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "403":
+          description: Attempted to make a call with unauthorized client
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "500":
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
+  /exhibitions/{exhibitionId}/visitorTags/{tagId}:
+    get:
+      operationId: findVisitorTag
+      summary: Find a visitor tag
+      description: Finds a visitor tag by tagId
+      tags:
+        - Visitor
+      parameters:
+        - name: exhibitionId
+          required: true
+          in: path
+          description: exhibition id
+          schema:
+            type: string
+            format: uuid
+        - name: tagId
+          required: true
+          in: path
+          description: visitor tag id
+          schema:
+            type: string
+      responses:
+        "200":
+          description: A visitor tag
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/VisitorTag"
         "400":
           description: Invalid request was sent to the server
           content:
@@ -2633,6 +2922,7 @@ components:
       type: object
       required:
         - name
+        - allowVisitorSessionCreation
       properties:
         id:
           type: string
@@ -2647,6 +2937,8 @@ components:
           format: uuid
         name:
           type: string
+        allowVisitorSessionCreation:
+          type: boolean
         creatorId:
           type: string
           format: uuid
@@ -2843,7 +3135,7 @@ components:
     VisitorSession:
       type: object
       required:
-        - users
+        - visitorIds
         - state
       properties:
         id:
@@ -2862,10 +3154,15 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/VisitorSessionVariable'
-        users:
+        visitorIds:
           type: array
           items:
-            $ref: '#/components/schemas/VisitorSessionUser'
+            type: string
+            format: uuid
+        visitedDeviceGroups:
+          type: array
+          items:
+            $ref: '#/components/schemas/VisitorSessionVisitedDeviceGroup'
         creatorId:
           type: string
           format: uuid
@@ -2885,17 +3182,75 @@ components:
           description: Date modified
           readOnly: true
 
-    VisitorSessionUser:
+    Visitor:
       type: object
       required:
-        - userId
         - tagId
+        - email
       properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+          description: Unique id for the visitor
+        exhibitionId:
+          type: string
+          format: uuid
+          readOnly: true
+          description: Exhibition id the visitor attended
+        email:
+          type: string
+          format: email
+        tagId:
+          type: string
         userId:
           type: string
           format: uuid
+          readOnly: true
+        creatorId:
+          type: string
+          format: uuid
+          readOnly: true
+        lastModifierId:
+          type: string
+          format: uuid
+          readOnly: true
+        createdAt:
+          type: string
+          format: date-time
+          description: Created date
+          readOnly: true
+        modifiedAt:
+          type: string
+          format: date-time
+          description: Date modified
+          readOnly: true
+          
+    VisitorTag:
+      type: object
+      required:
+        - tagId
+      properties:
         tagId:
           type: string
+          readOnly: true
+          
+    VisitorSessionVisitedDeviceGroup:
+      type: object
+      required:
+        - deviceGroupId
+      properties:
+        deviceGroupId:
+          type: string
+          format: uuid
+        enteredAt:
+          type: string
+          format: date-time
+          description: Time visitor session entered the device group
+        exitedAt:
+          type: string
+          format: date-time
+          description: Time visitor session exited the device group
 
     PageLayout:
       type: object
@@ -3486,7 +3841,7 @@ components:
         - id
         - exhibitionId
         - variablesChanged
-        - usersChanged
+        - visitorsChanged
       properties:
         id:
           type: string
@@ -3501,9 +3856,9 @@ components:
           type: boolean
           description: Whether session variables have changed
           readOnly: true
-        usersChanged:
+        visitorsChanged:
           type: boolean
-          description: Whether session users have changed
+          description: Whether session visitors have changed
           readOnly: true
 
     MqttExhibitionVisitorSessionDelete:
