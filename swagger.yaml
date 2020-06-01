@@ -397,8 +397,8 @@ paths:
                 $ref: "#/components/schemas/Error"
     delete:
       operationId: deleteVisitor
-      summary: Deletes visitor.
-      description: Delets exhibition visitor.
+      summary: Deletes a visitor.
+      description: Deletes an exhibition visitor.
       tags:
         - Visitors
       parameters:
