@@ -251,7 +251,7 @@ paths:
     post:
       operationId: createVisitor
       summary: Create a visitor
-      description: Creates new exhibition visitor
+      description: Creates a new exhibition visitor
       tags:
         - Visitors
       parameters:
