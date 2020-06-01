@@ -344,8 +344,8 @@ paths:
                 $ref: "#/components/schemas/Error"
     put:
       operationId: updateVisitor
-      summary: Updates visitor.
-      description: Updates visitor.
+      summary: Updates a visitor.
+      description: Updates a visitor.
       tags:
         - Visitors
       requestBody:
