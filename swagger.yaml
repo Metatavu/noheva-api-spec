@@ -3877,6 +3877,57 @@ components:
           format: uuid
           readOnly: true
           description: Id of exhibition this visitor session belongs to
+          
+    MqttVisitorCreate:
+      type: object
+      description: MQTT notification message about exhibition visitor creation. This is actually not part of REST API spec but a realtime notification via MQTT channel
+      required:
+        - id
+        - exhibitionId
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        exhibitionId:
+          type: string
+          format: uuid
+          readOnly: true
+          description: Id of exhibition this visitor belongs to
+
+    MqttVisitorUpdate:
+      type: object
+      description: MQTT notification message about exhibition visitor update. This is actually not part of REST API spec but a realtime notification via MQTT channel
+      required:
+        - id
+        - exhibitionId
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        exhibitionId:
+          type: string
+          format: uuid
+          readOnly: true
+          description: Id of exhibition this visitor belongs to
+
+    MqttVisitorDelete:
+      type: object
+      description: MQTT notification message about exhibition visitor deletion. This is actually not part of REST API spec but a realtime notification via MQTT channel
+      required:
+        - id
+        - exhibitionId
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        exhibitionId:
+          type: string
+          format: uuid
+          readOnly: true
+          description: Id of exhibition this visitor belongs to
 
     MqttTriggerDeviceGroupEvent:
       type: object
