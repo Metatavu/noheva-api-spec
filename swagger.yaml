@@ -4241,6 +4241,167 @@ components:
           readOnly: true
           description: Id of exhibition this visitor belongs to
 
+    MqttDeviceGroupCreate:
+      type: object
+      description: MQTT notification message about device group creation. This is actually not part of REST API spec but a realtime notification via MQTT channel
+      required:
+        - id
+        - exhibitionId
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        exhibitionId:
+          type: string
+          format: uuid
+          readOnly: true
+          description: Id of exhibition this device group belongs to
+
+    MqttDeviceGroupUpdate:
+      type: object
+      description: MQTT notification message about device group update. This is actually not part of REST API spec but a realtime notification via MQTT channel
+      required:
+        - id
+        - exhibitionId
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        exhibitionId:
+          type: string
+          format: uuid
+          readOnly: true
+          description: Id of exhibition this device group belongs to
+
+    MqttDeviceGroupDelete:
+      type: object
+      description: MQTT notification message about device group deletion. This is actually not part of REST API spec but a realtime notification via MQTT channel
+      required:
+        - id
+        - exhibitionId
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        exhibitionId:
+          type: string
+          format: uuid
+          readOnly: true
+          description: Id of exhibition this device group belongs to
+
+    MqttRfidAntennaCreate:
+      type: object
+      description: MQTT notification message about MQTT antenna creation. This is actually not part of REST API spec but a realtime notification via MQTT channel
+      required:
+        - id
+        - exhibitionId
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        exhibitionId:
+          type: string
+          format: uuid
+          readOnly: true
+          description: Id of exhibition this RFID antenna belongs to
+
+    MqttRfidAntennaUpdate:
+      type: object
+      description: MQTT notification message about RFID antenna update. This is actually not part of REST API spec but a realtime notification via MQTT channel
+      required:
+        - id
+        - exhibitionId
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        exhibitionId:
+          type: string
+          format: uuid
+          readOnly: true
+          description: Id of exhibition this RFID antenna belongs to
+        groupChanged:
+          type: boolean
+          description: Whether antenna device group has changed
+          readOnly: true
+
+    MqttRfidAntennaDelete:
+      type: object
+      description: MQTT notification message about RFID antenna deletion. This is actually not part of REST API spec but a realtime notification via MQTT channel
+      required:
+        - id
+        - exhibitionId
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        exhibitionId:
+          type: string
+          format: uuid
+          readOnly: true
+          description: Id of exhibition this RFID antenna belongs to
+
+    MqttDeviceCreate:
+      type: object
+      description: MQTT notification message about antenna creation. This is actually not part of REST API spec but a realtime notification via MQTT channel
+      required:
+        - id
+        - exhibitionId
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        exhibitionId:
+          type: string
+          format: uuid
+          readOnly: true
+          description: Id of exhibition this device belongs to
+
+    MqttDeviceUpdate:
+      type: object
+      description: MQTT notification message about device update. This is actually not part of REST API spec but a realtime notification via MQTT channel
+      required:
+        - id
+        - exhibitionId
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        exhibitionId:
+          type: string
+          format: uuid
+          readOnly: true
+          description: Id of exhibition this device belongs to
+        groupChanged:
+          type: boolean
+          description: Whether antenna device group has changed
+          readOnly: true
+
+    MqttDeviceDelete:
+      type: object
+      description: MQTT notification message about device deletion. This is actually not part of REST API spec but a realtime notification via MQTT channel
+      required:
+        - id
+        - exhibitionId
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        exhibitionId:
+          type: string
+          format: uuid
+          readOnly: true
+          description: Id of exhibition this device belongs to
+
     MqttTriggerDeviceGroupEvent:
       type: object
       required:
