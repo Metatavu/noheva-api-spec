@@ -1967,7 +1967,7 @@ paths:
   /exhibitions/{exhibitionId}/rfidAntennas/{rfidAntennaId}:
     get:
       operationId: findRfidAntenna
-      summary: Find a RFID antenna
+      summary: Find an RFID antenna
       description: Finds an RFID antenna by id
       tags:
         - RfidAntennas
