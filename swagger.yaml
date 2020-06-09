@@ -2067,7 +2067,7 @@ paths:
     delete:
       operationId: deleteRfidAntenna
       summary: Deletes RFID antenna.
-      description: Delets RFID antenna.
+      description: Deletes RFID antenna.
       tags:
         - RfidAntennas
       parameters:
