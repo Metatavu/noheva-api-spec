@@ -1863,6 +1863,250 @@ paths:
               schema:
                 $ref: "#/components/schemas/Error"
 
+  /exhibitions/{exhibitionId}/rfidAntennas:
+    get:
+      operationId: listRfidAntennas
+      summary: List RFID antennas
+      description: List RFID antennas
+      tags:
+        - RfidAntennas
+      parameters:
+        - name: exhibitionId
+          required: true
+          in: path
+          description: Exhibition id
+          schema:
+            type: string
+            format: uuid
+        - name: roomId
+          in: query
+          description: Filter by room id
+          schema:
+            type: string
+            format: uuid
+        - name: deviceGroupId
+          in: query
+          description: Filter by device group id
+          schema:
+            type: string
+            format: uuid
+      responses:
+        "200":
+          description: A RFID antenna list
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/RfidAntenna"
+        "400":
+          description: Invalid request was sent to the server
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "403":
+          description: Attempted to make a call with unauthorized client
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "500":
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+    post:
+      operationId: createRfidAntenna
+      summary: Create an RFID antenna
+      description: Creates a new RFID antenna
+      tags:
+        - RfidAntennas
+      parameters:
+        - name: exhibitionId
+          required: true
+          in: path
+          description: exhibition id
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RfidAntenna"
+        description: Payload
+        required: true
+      responses:
+        "200":
+          description: Created RFID antenna
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RfidAntenna"
+        "400":
+          description: Invalid request was sent to the server
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "403":
+          description: Attempted to make a call with unauthorized client
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "500":
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
+  /exhibitions/{exhibitionId}/rfidAntennas/{rfidAntennaId}:
+    get:
+      operationId: findRfidAntenna
+      summary: Find an RFID antenna
+      description: Finds an RFID antenna by id
+      tags:
+        - RfidAntennas
+      parameters:
+        - name: exhibitionId
+          required: true
+          in: path
+          description: exhibition id
+          schema:
+            type: string
+            format: uuid
+        - name: rfidAntennaId
+          required: true
+          in: path
+          description: RFID antena id
+          schema:
+            type: string
+            format: uuid
+      responses:
+        "200":
+          description: A RFID antenna
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RfidAntenna"
+        "400":
+          description: Invalid request was sent to the server
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "403":
+          description: Attempted to make a call with unauthorized client
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "500":
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+    put:
+      operationId: updateRfidAntenna
+      summary: Updates RFID antenna.
+      description: Updates RFID antenna.
+      tags:
+        - RfidAntennas
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RfidAntenna"
+        description: Payload
+        required: true
+      parameters:
+        - name: exhibitionId
+          required: true
+          in: path
+          description: exhibition id
+          schema:
+            type: string
+            format: uuid
+        - name: rfidAntennaId
+          required: true
+          in: path
+          description: RFID antena id
+          schema:
+            type: string
+            format: uuid
+      responses:
+        "200":
+          description: Updated RFID antenna
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RfidAntenna"
+        "400":
+          description: Invalid request was sent to the server
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "403":
+          description: Attempted to make a call with unauthorized client
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "500":
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+    delete:
+      operationId: deleteRfidAntenna
+      summary: Deletes RFID antenna.
+      description: Deletes RFID antenna.
+      tags:
+        - RfidAntennas
+      parameters:
+        - name: exhibitionId
+          required: true
+          in: path
+          description: exhibition id
+          schema:
+            type: string
+            format: uuid
+        - name: rfidAntennaId
+          required: true
+          in: path
+          description: RFID antena id
+          schema:
+            type: string
+            format: uuid
+      responses:
+        "204":
+          description: Success
+        "400":
+          description: Invalid request was sent to the server
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "403":
+          description: Attempted to make a call with unauthorized client
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "500":
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
   /exhibitions/{exhibitionId}/pages:
     get:
       operationId: listExhibitionPages
@@ -3017,6 +3261,62 @@ components:
           description: Date modified
           readOnly: true
 
+    RfidAntenna:
+      type: object
+      required:
+        - name
+        - roomId
+        - readerId
+        - antennaNumber
+        - location
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        exhibitionId:
+          type: string
+          format: uuid
+          readOnly: true
+        roomId:
+          type: string
+          format: uuid
+          description: Id of room this RFID antenna is located
+        groupId:
+          type: string
+          format: uuid
+          description: Device group id this antenna is conneted to
+        readerId:
+          type: string
+          description: RFID reader module id
+        antennaNumber:
+          type: integer
+          format: int32
+          description: RFID antenna number
+        name:
+          type: string
+          description: Human-readable name for this antenna
+        location:
+          $ref: '#/components/schemas/Point'
+        creatorId:
+          type: string
+          format: uuid
+          readOnly: true
+        lastModifierId:
+          type: string
+          format: uuid
+          readOnly: true
+        createdAt:
+          type: string
+          format: date-time
+          description: Created date
+          readOnly: true
+        modifiedAt:
+          type: string
+          format: date-time
+          description: Date modified
+          readOnly: true
+
     DeviceModel:
       type: object
       description: Describes device model used in exhibition
@@ -3889,7 +4189,7 @@ components:
           format: uuid
           readOnly: true
           description: Id of exhibition this visitor session belongs to
-          
+
     MqttVisitorCreate:
       type: object
       description: MQTT notification message about exhibition visitor creation. This is actually not part of REST API spec but a realtime notification via MQTT channel
