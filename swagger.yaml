@@ -1920,7 +1920,7 @@ paths:
     post:
       operationId: createRfidAntenna
       summary: Create an RFID antenna
-      description: Creates new RFID antenna
+      description: Creates a new RFID antenna
       tags:
         - RfidAntennas
       parameters:
