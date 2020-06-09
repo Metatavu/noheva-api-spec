@@ -200,7 +200,7 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Error"
-                
+
   /exhibitions/{exhibitionId}/visitor:
     get:
       operationId: listVisitors
@@ -2122,6 +2122,12 @@ paths:
           schema:
             type: string
             format: uuid
+        - name: roomId
+          in: query
+          description: Filter by room id
+          schema:
+            type: string
+            format: uuid
       responses:
         "200":
           description: A content version list
@@ -3225,7 +3231,7 @@ components:
           format: date-time
           description: Date modified
           readOnly: true
-          
+
     VisitorTag:
       type: object
       required:
@@ -3234,7 +3240,7 @@ components:
         tagId:
           type: string
           readOnly: true
-          
+
     VisitorSessionVisitedDeviceGroup:
       type: object
       required:
@@ -3346,6 +3352,7 @@ components:
       required:
         - name
         - language
+        - rooms
       properties:
         id:
           type: string
@@ -3361,6 +3368,11 @@ components:
           description: Human readable name of the content version
         language:
           type: string
+        rooms:
+          type: array
+          items:
+            type: string
+            format: uuid
         creatorId:
           type: string
           format: uuid
