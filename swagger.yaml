@@ -3265,11 +3265,16 @@ components:
       type: object
       required:
         - name
-        - readerDeviceId
+        - roomId
+        - readerId
         - antennaNumber
         - location
       properties:
         id:
+          type: string
+          format: uuid
+          readOnly: true
+        exhibitionId:
           type: string
           format: uuid
           readOnly: true
@@ -3281,9 +3286,9 @@ components:
           type: string
           format: uuid
           description: Device group id this antenna is conneted to
-        readerDeviceId:
+        readerId:
           type: string
-          description: RFID reader module device id
+          description: RFID reader module id
         antennaNumber:
           type: integer
           format: int32
