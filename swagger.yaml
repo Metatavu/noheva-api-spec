@@ -3089,7 +3089,7 @@ paths:
             type: string
       responses:
         "200":
-          description: A file list
+          description: A stored file
           content:
             application/json:
               schema:
