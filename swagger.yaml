@@ -3112,6 +3112,51 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Error"
+    put:
+      operationId: updateStoredFile
+      summary: Updates stored file
+      description: Updates stored file
+      tags:
+        - StoredFiles
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/StoredFile"
+        description: Payload
+        required: true
+      parameters:
+        - name: storedFileId
+          required: true
+          in: path
+          description: stored file id
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Updated stored file
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/StoredFile"
+        "400":
+          description: Invalid request was sent to the server
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "403":
+          description: Attempted to make a call with unauthorized client
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "500":
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
     delete:
       operationId: deleteStoredFile
       summary: Deletes stored file
@@ -4187,9 +4232,11 @@ components:
           readOnly: true
         uri:
           type: string
-        fileName:
-          type: string
+          readOnly: true
         contentType:
+          type: string
+          readOnly: true
+        fileName:
           type: string
 
     MqttExhibitionPageCreate:
