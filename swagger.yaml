@@ -3281,7 +3281,7 @@ components:
         roomId:
           type: string
           format: uuid
-          description: Id of room this RFID antenna is located
+          description: Id of room this RFID antenna is located at
         groupId:
           type: string
           format: uuid
