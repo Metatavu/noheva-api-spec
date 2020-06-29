@@ -4245,6 +4245,22 @@ components:
         fileName:
           type: string
 
+    DeviceSettigs:
+      type: object
+      required:
+        - exhibitionId
+        - deviceId
+      properties:
+        id:
+          type: string
+          readOnly: true
+        exhibitionId:
+          type: string
+          format: uuid
+        deviceId:
+          type: string
+          format: uuid
+
     MqttExhibitionPageCreate:
       type: object
       description: MQTT notification message about exhibition page creation. This is actually not part of REST API spec but a realtime notification via MQTT channel
