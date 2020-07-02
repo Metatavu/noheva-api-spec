@@ -3313,6 +3313,9 @@ components:
           format: uuid
         name:
           type: string
+        color: 
+          type: string
+          description: Room's color in CSS -color format
         geoShape:
           $ref: '#/components/schemas/Polygon'
         creatorId:
