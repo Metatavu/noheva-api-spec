@@ -4255,6 +4255,9 @@ components:
         uri:
           type: string
           readOnly: true
+        thumbnailUri:
+          type: string
+          readOnly: true
         contentType:
           type: string
           readOnly: true
