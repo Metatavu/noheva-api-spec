@@ -3319,7 +3319,7 @@ components:
           format: uuid
         name:
           type: string
-        color: 
+        color:
           type: string
           description: Room's color in CSS -color format
         geoShape:
@@ -3501,6 +3501,7 @@ components:
         - dimensions
         - displayMetrics
         - capabilities
+        - screenOrientation
       properties:
         id:
           type: string
@@ -3516,6 +3517,8 @@ components:
           $ref: '#/components/schemas/DeviceModelDisplayMetrics'
         capabilities:
           $ref: '#/components/schemas/DeviceModelCapabilities'
+        screenOrientation:
+          $ref: '#/components/schemas/ScreenOrientation'
         creatorId:
           type: string
           format: uuid
@@ -3810,7 +3813,7 @@ components:
         - MediaView
         - LinearLayout
         - FrameLayout
-        - RelativeLayout   
+        - RelativeLayout
 
     PageLayoutViewProperty:
       type: object
