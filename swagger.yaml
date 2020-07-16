@@ -2604,6 +2604,18 @@ paths:
           schema:
             type: string
             format: uuid
+        - name: contentVersionId
+          in: query
+          description: filter by content version id
+          schema:
+            type: string
+            format: uuid
+        - name: deviceGroupId
+          in: query
+          description: filter by device group id
+          schema:
+            type: string
+            format: uuid
       responses:
         "200":
           description: A content version list
@@ -3307,6 +3319,9 @@ components:
           format: uuid
         name:
           type: string
+        color:
+          type: string
+          description: Room's color in CSS -color format
         geoShape:
           $ref: '#/components/schemas/Polygon'
         creatorId:
@@ -3486,6 +3501,7 @@ components:
         - dimensions
         - displayMetrics
         - capabilities
+        - screenOrientation
       properties:
         id:
           type: string
@@ -3501,6 +3517,8 @@ components:
           $ref: '#/components/schemas/DeviceModelDisplayMetrics'
         capabilities:
           $ref: '#/components/schemas/DeviceModelCapabilities'
+        screenOrientation:
+          $ref: '#/components/schemas/ScreenOrientation'
         creatorId:
           type: string
           format: uuid
@@ -3774,7 +3792,7 @@ components:
         id:
           type: string
         widget:
-          type: string
+          $ref: '#/components/schemas/PageLayoutWidgetType'
         properties:
           type: array
           items:
@@ -3783,6 +3801,19 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/PageLayoutView'
+
+    PageLayoutWidgetType:
+      type: string
+      enum:
+        - TextView
+        - FlowTextView
+        - Button
+        - ImageView
+        - PlayerView
+        - MediaView
+        - LinearLayout
+        - FrameLayout
+        - RelativeLayout
 
     PageLayoutViewProperty:
       type: object
@@ -4233,6 +4264,9 @@ components:
         uri:
           type: string
           readOnly: true
+        thumbnailUri:
+          type: string
+          readOnly: true
         contentType:
           type: string
           readOnly: true
@@ -4368,7 +4402,7 @@ components:
           format: uuid
           readOnly: true
           description: Id of exhibition this visitor session belongs to
-        
+
     MqttProximityUpdate:
       type: object
       description: MQTT message about tag proximity
