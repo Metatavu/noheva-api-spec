@@ -3814,6 +3814,7 @@ components:
         - LinearLayout
         - FrameLayout
         - RelativeLayout
+        - MapView
 
     PageLayoutViewProperty:
       type: object
