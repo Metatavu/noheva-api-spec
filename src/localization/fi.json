@@ -440,6 +440,10 @@
     "imageView": {
       "src": "Kuvan polku"
     },
+    "mapView": {
+      "src": "Geopackage tiedoston polku",
+      "sqlFilterQuery": "SQL-lauseke tietojen suodattamiseen"
+    },
 
     "button": {
       "width": "Napin leveys",

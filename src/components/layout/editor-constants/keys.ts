@@ -50,6 +50,11 @@ export enum LayoutImageViewPropKeys {
   Src = "src",
 }
 
+export enum LayoutMapViewPropKeys {
+  Src = "src",
+  SqlFilterQuery = "sqlFilterQuery"
+}
+
 /**
  * Button property keys
  */

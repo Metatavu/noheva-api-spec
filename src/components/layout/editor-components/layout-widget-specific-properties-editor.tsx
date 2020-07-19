@@ -14,6 +14,7 @@ import FlowTextViewEditor from "./widget-editors/flow-text-view-editor";
 import ImageViewEditor from "./widget-editors/image-view-editor";
 import ButtonEditor from "./widget-editors/button-editor";
 import LinearLayoutEditor from "./widget-editors/linear-layout-editor";
+import MapViewEditor from "./widget-editors/map-view-editor";
 
 /**
  * Interface representing component properties
@@ -80,6 +81,8 @@ class LayoutWidgetSpecificPropertiesEditor extends React.Component<Props, State>
         return this.renderButtonEditor();
       case (PageLayoutWidgetType.LinearLayout):
         return this.renderLinearLayoutEditor();
+      case (PageLayoutWidgetType.MapView):
+        return this.renderMapViewEditor();
       default:
         return (<div/>);
     }
@@ -119,6 +122,15 @@ class LayoutWidgetSpecificPropertiesEditor extends React.Component<Props, State>
         onValueChange={ this.onSingleValueChange }
       />
     );
+  }
+
+  private renderMapViewEditor = () => {
+    return (
+      <MapViewEditor
+        pageLayoutView={ this.props.pageLayoutView }
+        onValueChange={ this.onSingleValueChange }
+      />
+    )
   }
 
   /**

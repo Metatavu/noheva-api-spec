@@ -444,6 +444,11 @@ export interface IStrings extends LocalizedStringsMethods {
       src: string;
     };
 
+    mapView: {
+      src: string;
+      sqlFilterQuery: string;
+    };
+
     button: {
       width: string;
       height: string;

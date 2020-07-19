@@ -443,6 +443,10 @@
     "imageView": {
       "src": "Image path"
     },
+    "mapView": {
+      "src": "Geopackage tiedoston polku",
+      "sqlFilterQuery": "SQL-lauseke tietojen suodattamiseen"
+    },
 
     "button": {
       "width": "Button width",
