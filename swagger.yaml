@@ -3044,6 +3044,201 @@ paths:
               schema:
                 $ref: "#/components/schemas/Error"
 
+  /subLayouts:
+    get:
+      operationId: listSubLayouts
+      summary: List sub layouts
+      description: List sub layouts
+      tags:
+        - SubLayouts
+      responses:
+        "200":
+          description: A sub layout list
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/SubLayout"
+        "400":
+          description: Invalid request was sent to the server
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "403":
+          description: Attempted to make a call with unauthorized client
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "500":
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+    post:
+      operationId: createSubLayout
+      summary: Create a sub layout
+      description: Creates new sub layout
+      tags:
+        - SubLayouts
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SubLayout"
+        description: Payload
+        required: true
+      responses:
+        "200":
+          description: Created sub layout
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SubLayout"
+        "400":
+          description: Invalid request was sent to the server
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "403":
+          description: Attempted to make a call with unauthorized client
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "500":
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
+  /subLayouts/{subLayoutId}:
+    get:
+      operationId: findSubLayout
+      summary: Find a sub layout
+      description: Finds a sub layout by id
+      tags:
+        - SubLayouts
+      parameters:
+        - name: subLayoutId
+          required: true
+          in: path
+          description: Sub layout id
+          schema:
+            type: string
+            format: uuid
+      responses:
+        "200":
+          description: A sub layout
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SubLayout"
+        "400":
+          description: Invalid request was sent to the server
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "403":
+          description: Attempted to make a call with unauthorized client
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "500":
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+    put:
+      operationId: updateSubLayout
+      summary: Updates sub layout.
+      description: Updates sub layout.
+      tags:
+        - SubLayouts
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SubLayout"
+        description: Payload
+        required: true
+      parameters:
+        - name: subLayoutId
+          required: true
+          in: path
+          description: Sub layout id
+          schema:
+            type: string
+            format: uuid
+      responses:
+        "200":
+          description: Updated sub layout
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SubLayout"
+        "400":
+          description: Invalid request was sent to the server
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "403":
+          description: Attempted to make a call with unauthorized client
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "500":
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+    delete:
+      operationId: deleteSubLayout
+      summary: Deletes sub layout.
+      description: Delets sub layout.
+      tags:
+        - SubLayouts
+      parameters:
+        - name: subLayoutId
+          required: true
+          in: path
+          description: Sub layout id
+          schema:
+            type: string
+            format: uuid
+      responses:
+        "204":
+          description: Success
+        "400":
+          description: Invalid request was sent to the server
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "403":
+          description: Attempted to make a call with unauthorized client
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "500":
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
   /storedFiles:
     get:
       operationId: listStoredFiles
@@ -3781,6 +3976,41 @@ components:
           description: Date modified
           readOnly: true
 
+    SubLayout:
+      type: object
+      description: Describes a sub layout for a page
+      required:
+        - name
+        - data
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        name:
+          type: string
+          description: Human readable name for the sub layout
+        data:
+          $ref: '#/components/schemas/PageLayoutView'
+        creatorId:
+          type: string
+          format: uuid
+          readOnly: true
+        lastModifierId:
+          type: string
+          format: uuid
+          readOnly: true
+        createdAt:
+          type: string
+          format: date-time
+          description: Created date
+          readOnly: true
+        modifiedAt:
+          type: string
+          format: date-time
+          description: Date modified
+          readOnly: true
+
     PageLayoutView:
       type: object
       required:
@@ -3801,6 +4031,11 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/PageLayoutView'
+        name:
+          type: string
+        sublayoutId:
+          type: string
+          format: uuid
 
     PageLayoutWidgetType:
       type: string
