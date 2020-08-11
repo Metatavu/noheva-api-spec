@@ -4031,6 +4031,8 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/PageLayoutView'
+        name:
+          type: string
         sublayoutId:
           type: string
           format: uuid
