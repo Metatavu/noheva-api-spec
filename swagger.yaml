@@ -4260,6 +4260,8 @@ components:
           type: string
         data:
           type: string
+        scripted:
+          type: boolean
         type:
           $ref: '#/components/schemas/ExhibitionPageResourceType'
 
