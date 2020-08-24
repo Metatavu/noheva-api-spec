@@ -4230,6 +4230,11 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/ExhibitionPageTransition'
+        pageOrder:
+          type: array
+          items:
+            type: string
+            format: uuid
         creatorId:
           type: string
           format: uuid
