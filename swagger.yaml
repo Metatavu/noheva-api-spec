@@ -3612,6 +3612,11 @@ components:
           $ref: '#/components/schemas/Point'
         screenOrientation:
           $ref: '#/components/schemas/ScreenOrientation'
+        pageOrder:
+          type: array
+          items:
+            type: string
+            format: uuid
         creatorId:
           type: string
           format: uuid
@@ -4230,11 +4235,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/ExhibitionPageTransition'
-        pageOrder:
-          type: array
-          items:
-            type: string
-            format: uuid
         creatorId:
           type: string
           format: uuid
