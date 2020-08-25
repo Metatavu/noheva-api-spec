@@ -3612,11 +3612,6 @@ components:
           $ref: '#/components/schemas/Point'
         screenOrientation:
           $ref: '#/components/schemas/ScreenOrientation'
-        pageOrder:
-          type: array
-          items:
-            type: string
-            format: uuid
         creatorId:
           type: string
           format: uuid
@@ -4235,6 +4230,11 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/ExhibitionPageTransition'
+        pageOrder:
+          type: array
+          items:
+            type: string
+            format: uuid
         creatorId:
           type: string
           format: uuid
@@ -4280,8 +4280,14 @@ components:
     ExhibitionPageEventTrigger:
       type: object
       required:
-        - eventId
+        - id
+        - name
       properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
         events:
           type: array
           items:
