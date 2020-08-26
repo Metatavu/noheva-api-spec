@@ -4281,8 +4281,14 @@ components:
     ExhibitionPageEventTrigger:
       type: object
       required:
-        - eventId
+        - id
+        - name
       properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
         events:
           type: array
           items:
