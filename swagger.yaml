@@ -4056,6 +4056,8 @@ components:
         - FrameLayout
         - RelativeLayout
         - MapView
+        - MaterialTabLayout
+        - MaterialTabItem
 
     PageLayoutViewProperty:
       type: object
