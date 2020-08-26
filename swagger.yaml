@@ -3585,6 +3585,7 @@ components:
         - groupId
         - modelId
         - screenOrientation
+        - pageOrder
       properties:
         id:
           type: string
