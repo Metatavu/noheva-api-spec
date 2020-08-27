@@ -4277,6 +4277,7 @@ components:
         - text
         - image
         - video
+        - html
 
     ExhibitionPageEventTrigger:
       type: object
