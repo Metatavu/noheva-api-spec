@@ -201,6 +201,243 @@ paths:
               schema:
                 $ref: "#/components/schemas/Error"
 
+  /exhibitions/{exhibitionId}/visitor:
+    get:
+      operationId: listVisitors
+      summary: List visitors
+      description: List exhibition visitors
+      tags:
+        - Visitors
+      parameters:
+        - name: exhibitionId
+          required: true
+          in: path
+          description: exhibition id
+          schema:
+            type: string
+            format: uuid
+        - name: tagId
+          in: query
+          description: query by RFID tag
+          schema:
+            type: string
+      responses:
+        "200":
+          description: A visitor list
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Visitor"
+        "400":
+          description: Invalid request was sent to the server
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "403":
+          description: Attempted to make a call with unauthorized client
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "500":
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+    post:
+      operationId: createVisitor
+      summary: Create a visitor
+      description: Creates a new exhibition visitor
+      tags:
+        - Visitors
+      parameters:
+        - name: exhibitionId
+          required: true
+          in: path
+          description: exhibition id
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Visitor"
+        description: Payload
+        required: true
+      responses:
+        "200":
+          description: Created exhibition visitor
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Visitor"
+        "400":
+          description: Invalid request was sent to the server
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "403":
+          description: Attempted to make a call with unauthorized client
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "500":
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
+  /exhibitions/{exhibitionId}/visitors/{visitorId}:
+    get:
+      operationId: findVisitor
+      summary: Find a visitor
+      description: Finds a visitor by id
+      tags:
+        - Visitors
+      parameters:
+        - name: exhibitionId
+          required: true
+          in: path
+          description: exhibition id
+          schema:
+            type: string
+            format: uuid
+        - name: visitorId
+          required: true
+          in: path
+          description: visitor id
+          schema:
+            type: string
+            format: uuid
+      responses:
+        "200":
+          description: A exhibition
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Visitor"
+        "400":
+          description: Invalid request was sent to the server
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "403":
+          description: Attempted to make a call with unauthorized client
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "500":
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+    put:
+      operationId: updateVisitor
+      summary: Updates a visitor.
+      description: Updates a visitor.
+      tags:
+        - Visitors
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Visitor"
+        description: Payload
+        required: true
+      parameters:
+        - name: exhibitionId
+          required: true
+          in: path
+          description: exhibition id
+          schema:
+            type: string
+            format: uuid
+        - name: visitorId
+          required: true
+          in: path
+          description: visitor id
+          schema:
+            type: string
+            format: uuid
+      responses:
+        "200":
+          description: Updated visitor
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Visitor"
+        "400":
+          description: Invalid request was sent to the server
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "403":
+          description: Attempted to make a call with unauthorized client
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "500":
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+    delete:
+      operationId: deleteVisitor
+      summary: Deletes a visitor.
+      description: Deletes an exhibition visitor.
+      tags:
+        - Visitors
+      parameters:
+        - name: exhibitionId
+          required: true
+          in: path
+          description: exhibition id
+          schema:
+            type: string
+            format: uuid
+        - name: visitorId
+          required: true
+          in: path
+          description: visitor id
+          schema:
+            type: string
+            format: uuid
+      responses:
+        "204":
+          description: Success
+        "400":
+          description: Invalid request was sent to the server
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "403":
+          description: Attempted to make a call with unauthorized client
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "500":
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
   /exhibitions/{exhibitionId}/visitorSessions:
     get:
       operationId: listVisitorSessions
@@ -216,6 +453,11 @@ paths:
           schema:
             type: string
             format: uuid
+        - name: tagId
+          in: query
+          description: query by RFID tag
+          schema:
+            type: string
       responses:
         "200":
           description: A visitor session list
@@ -433,6 +675,53 @@ paths:
               schema:
                 $ref: "#/components/schemas/Error"
 
+  /exhibitions/{exhibitionId}/visitorTags/{tagId}:
+    get:
+      operationId: findVisitorTag
+      summary: Find a visitor tag
+      description: Finds a visitor tag by tagId
+      tags:
+        - Visitors
+      parameters:
+        - name: exhibitionId
+          required: true
+          in: path
+          description: exhibition id
+          schema:
+            type: string
+            format: uuid
+        - name: tagId
+          required: true
+          in: path
+          description: visitor tag id
+          schema:
+            type: string
+      responses:
+        "200":
+          description: A visitor tag
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/VisitorTag"
+        "400":
+          description: Invalid request was sent to the server
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "403":
+          description: Attempted to make a call with unauthorized client
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "500":
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
   /exhibitions/{exhibitionId}/rooms:
     get:
       operationId: listExhibitionRooms
@@ -445,6 +734,12 @@ paths:
           required: true
           in: path
           description: exhibition id
+          schema:
+            type: string
+            format: uuid
+        - name: floorId
+          in: query
+          description: exhibition floor id
           schema:
             type: string
             format: uuid
@@ -665,6 +960,237 @@ paths:
               schema:
                 $ref: "#/components/schemas/Error"
 
+  /exhibitions/{exhibitionId}/floors:
+    get:
+      operationId: listExhibitionFloors
+      summary: List floors
+      description: List exhibition floors
+      tags:
+        - ExhibitionFloors
+      parameters:
+        - name: exhibitionId
+          required: true
+          in: path
+          description: exhibition id
+          schema:
+            type: string
+            format: uuid
+      responses:
+        "200":
+          description: A floor list
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/ExhibitionFloor"
+        "400":
+          description: Invalid request was sent to the server
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "403":
+          description: Attempted to make a call with unauthorized client
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "500":
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+    post:
+      operationId: createExhibitionFloor
+      summary: Create a floor
+      description: Creates new exhibition floor
+      tags:
+        - ExhibitionFloors
+      parameters:
+        - name: exhibitionId
+          required: true
+          in: path
+          description: exhibition id
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ExhibitionFloor"
+        description: Payload
+        required: true
+      responses:
+        "200":
+          description: Created exhibition floor
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ExhibitionFloor"
+        "400":
+          description: Invalid request was sent to the server
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "403":
+          description: Attempted to make a call with unauthorized client
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "500":
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
+  /exhibitions/{exhibitionId}/floors/{floorId}:
+    get:
+      operationId: findExhibitionFloor
+      summary: Find a floor
+      description: Finds a floor by id
+      tags:
+        - ExhibitionFloors
+      parameters:
+        - name: exhibitionId
+          required: true
+          in: path
+          description: exhibition id
+          schema:
+            type: string
+            format: uuid
+        - name: floorId
+          required: true
+          in: path
+          description: floor id
+          schema:
+            type: string
+            format: uuid
+      responses:
+        "200":
+          description: A exhibition
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ExhibitionFloor"
+        "400":
+          description: Invalid request was sent to the server
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "403":
+          description: Attempted to make a call with unauthorized client
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "500":
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+    put:
+      operationId: updateExhibitionFloor
+      summary: Updates floor.
+      description: Updates floor.
+      tags:
+        - ExhibitionFloors
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ExhibitionFloor"
+        description: Payload
+        required: true
+      parameters:
+        - name: exhibitionId
+          required: true
+          in: path
+          description: exhibition id
+          schema:
+            type: string
+            format: uuid
+        - name: floorId
+          required: true
+          in: path
+          description: floor id
+          schema:
+            type: string
+            format: uuid
+      responses:
+        "200":
+          description: Updated exhibition
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ExhibitionFloor"
+        "400":
+          description: Invalid request was sent to the server
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "403":
+          description: Attempted to make a call with unauthorized client
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "500":
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+    delete:
+      operationId: deleteExhibitionFloor
+      summary: Deletes floor.
+      description: Delets exhibition floor.
+      tags:
+        - ExhibitionFloors
+      parameters:
+        - name: exhibitionId
+          required: true
+          in: path
+          description: exhibition id
+          schema:
+            type: string
+            format: uuid
+        - name: floorId
+          required: true
+          in: path
+          description: floor id
+          schema:
+            type: string
+            format: uuid
+      responses:
+        "204":
+          description: Success
+        "400":
+          description: Invalid request was sent to the server
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "403":
+          description: Attempted to make a call with unauthorized client
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "500":
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
 
   /exhibitions/{exhibitionId}/deviceGroups:
     get:
@@ -678,6 +1204,12 @@ paths:
           required: true
           in: path
           description: exhibition id
+          schema:
+            type: string
+            format: uuid
+        - name: roomId
+          in: query
+          description: filter by room id
           schema:
             type: string
             format: uuid
@@ -898,21 +1430,13 @@ paths:
               schema:
                 $ref: "#/components/schemas/Error"
 
-  /exhibitions/{exhibitionId}/deviceModels:
+  /deviceModels:
     get:
-      operationId: listExhibitionDeviceModels
+      operationId: listDeviceModels
       summary: List device models
       description: List exhibition device models
       tags:
-        - ExhibitionDeviceModels
-      parameters:
-        - name: exhibitionId
-          required: true
-          in: path
-          description: exhibition id
-          schema:
-            type: string
-            format: uuid
+        - DeviceModels
       responses:
         "200":
           description: A device model list
@@ -921,7 +1445,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: "#/components/schemas/ExhibitionDeviceModel"
+                  $ref: "#/components/schemas/DeviceModel"
         "400":
           description: Invalid request was sent to the server
           content:
@@ -941,24 +1465,16 @@ paths:
               schema:
                 $ref: "#/components/schemas/Error"
     post:
-      operationId: createExhibitionDeviceModel
+      operationId: createDeviceModel
       summary: Create a device model
       description: Creates new exhibition device model
       tags:
-        - ExhibitionDeviceModels
-      parameters:
-        - name: exhibitionId
-          required: true
-          in: path
-          description: exhibition id
-          schema:
-            type: string
-            format: uuid
+        - DeviceModels
       requestBody:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/ExhibitionDeviceModel"
+              $ref: "#/components/schemas/DeviceModel"
         description: Payload
         required: true
       responses:
@@ -967,7 +1483,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/ExhibitionDeviceModel"
+                $ref: "#/components/schemas/DeviceModel"
         "400":
           description: Invalid request was sent to the server
           content:
@@ -987,21 +1503,14 @@ paths:
               schema:
                 $ref: "#/components/schemas/Error"
 
-  /exhibitions/{exhibitionId}/deviceModels/{deviceModelId}:
+  /deviceModels/{deviceModelId}:
     get:
-      operationId: findExhibitionDeviceModel
+      operationId: findDeviceModel
       summary: Find a device model
       description: Finds a device model by id
       tags:
-        - ExhibitionDeviceModels
+        - DeviceModels
       parameters:
-        - name: exhibitionId
-          required: true
-          in: path
-          description: exhibition id
-          schema:
-            type: string
-            format: uuid
         - name: deviceModelId
           required: true
           in: path
@@ -1015,7 +1524,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/ExhibitionDeviceModel"
+                $ref: "#/components/schemas/DeviceModel"
         "400":
           description: Invalid request was sent to the server
           content:
@@ -1035,26 +1544,19 @@ paths:
               schema:
                 $ref: "#/components/schemas/Error"
     put:
-      operationId: updateExhibitionDeviceModel
+      operationId: updateDeviceModel
       summary: Updates device model.
       description: Updates device model.
       tags:
-        - ExhibitionDeviceModels
+        - DeviceModels
       requestBody:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/ExhibitionDeviceModel"
+              $ref: "#/components/schemas/DeviceModel"
         description: Payload
         required: true
       parameters:
-        - name: exhibitionId
-          required: true
-          in: path
-          description: exhibition id
-          schema:
-            type: string
-            format: uuid
         - name: deviceModelId
           required: true
           in: path
@@ -1068,7 +1570,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/ExhibitionDeviceModel"
+                $ref: "#/components/schemas/DeviceModel"
         "400":
           description: Invalid request was sent to the server
           content:
@@ -1088,19 +1590,12 @@ paths:
               schema:
                 $ref: "#/components/schemas/Error"
     delete:
-      operationId: deleteExhibitionDeviceModel
+      operationId: deleteDeviceModel
       summary: Deletes device model.
       description: Delets exhibition device model.
       tags:
-        - ExhibitionDeviceModels
+        - DeviceModels
       parameters:
-        - name: exhibitionId
-          required: true
-          in: path
-          description: exhibition id
-          schema:
-            type: string
-            format: uuid
         - name: deviceModelId
           required: true
           in: path
@@ -1368,6 +1863,250 @@ paths:
               schema:
                 $ref: "#/components/schemas/Error"
 
+  /exhibitions/{exhibitionId}/rfidAntennas:
+    get:
+      operationId: listRfidAntennas
+      summary: List RFID antennas
+      description: List RFID antennas
+      tags:
+        - RfidAntennas
+      parameters:
+        - name: exhibitionId
+          required: true
+          in: path
+          description: Exhibition id
+          schema:
+            type: string
+            format: uuid
+        - name: roomId
+          in: query
+          description: Filter by room id
+          schema:
+            type: string
+            format: uuid
+        - name: deviceGroupId
+          in: query
+          description: Filter by device group id
+          schema:
+            type: string
+            format: uuid
+      responses:
+        "200":
+          description: A RFID antenna list
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/RfidAntenna"
+        "400":
+          description: Invalid request was sent to the server
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "403":
+          description: Attempted to make a call with unauthorized client
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "500":
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+    post:
+      operationId: createRfidAntenna
+      summary: Create an RFID antenna
+      description: Creates a new RFID antenna
+      tags:
+        - RfidAntennas
+      parameters:
+        - name: exhibitionId
+          required: true
+          in: path
+          description: exhibition id
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RfidAntenna"
+        description: Payload
+        required: true
+      responses:
+        "200":
+          description: Created RFID antenna
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RfidAntenna"
+        "400":
+          description: Invalid request was sent to the server
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "403":
+          description: Attempted to make a call with unauthorized client
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "500":
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
+  /exhibitions/{exhibitionId}/rfidAntennas/{rfidAntennaId}:
+    get:
+      operationId: findRfidAntenna
+      summary: Find an RFID antenna
+      description: Finds an RFID antenna by id
+      tags:
+        - RfidAntennas
+      parameters:
+        - name: exhibitionId
+          required: true
+          in: path
+          description: exhibition id
+          schema:
+            type: string
+            format: uuid
+        - name: rfidAntennaId
+          required: true
+          in: path
+          description: RFID antena id
+          schema:
+            type: string
+            format: uuid
+      responses:
+        "200":
+          description: A RFID antenna
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RfidAntenna"
+        "400":
+          description: Invalid request was sent to the server
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "403":
+          description: Attempted to make a call with unauthorized client
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "500":
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+    put:
+      operationId: updateRfidAntenna
+      summary: Updates RFID antenna.
+      description: Updates RFID antenna.
+      tags:
+        - RfidAntennas
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RfidAntenna"
+        description: Payload
+        required: true
+      parameters:
+        - name: exhibitionId
+          required: true
+          in: path
+          description: exhibition id
+          schema:
+            type: string
+            format: uuid
+        - name: rfidAntennaId
+          required: true
+          in: path
+          description: RFID antena id
+          schema:
+            type: string
+            format: uuid
+      responses:
+        "200":
+          description: Updated RFID antenna
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RfidAntenna"
+        "400":
+          description: Invalid request was sent to the server
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "403":
+          description: Attempted to make a call with unauthorized client
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "500":
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+    delete:
+      operationId: deleteRfidAntenna
+      summary: Deletes RFID antenna.
+      description: Deletes RFID antenna.
+      tags:
+        - RfidAntennas
+      parameters:
+        - name: exhibitionId
+          required: true
+          in: path
+          description: exhibition id
+          schema:
+            type: string
+            format: uuid
+        - name: rfidAntennaId
+          required: true
+          in: path
+          description: RFID antena id
+          schema:
+            type: string
+            format: uuid
+      responses:
+        "204":
+          description: Success
+        "400":
+          description: Invalid request was sent to the server
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "403":
+          description: Attempted to make a call with unauthorized client
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "500":
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
   /exhibitions/{exhibitionId}/pages:
     get:
       operationId: listExhibitionPages
@@ -1380,6 +2119,18 @@ paths:
           required: true
           in: path
           description: exhibition id
+          schema:
+            type: string
+            format: uuid
+        - name: contentVersionId
+          in: query
+          description: Filter by content id
+          schema:
+            type: string
+            format: uuid
+        - name: exhibitionDeviceId
+          in: query
+          description: Filter by device id
           schema:
             type: string
             format: uuid
@@ -1600,6 +2351,490 @@ paths:
               schema:
                 $ref: "#/components/schemas/Error"
 
+  /exhibitions/{exhibitionId}/contentVersions:
+    get:
+      operationId: listContentVersions
+      summary: List content versions
+      description: List content versions
+      tags:
+        - ContentVersions
+      parameters:
+        - name: exhibitionId
+          required: true
+          in: path
+          description: exhibition id
+          schema:
+            type: string
+            format: uuid
+        - name: roomId
+          in: query
+          description: Filter by room id
+          schema:
+            type: string
+            format: uuid
+      responses:
+        "200":
+          description: A content version list
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/ContentVersion"
+        "400":
+          description: Invalid request was sent to the server
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "403":
+          description: Attempted to make a call with unauthorized client
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "500":
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+    post:
+      operationId: createContentVersion
+      summary: Create a content version
+      description: Creates new content version
+      tags:
+        - ContentVersions
+      parameters:
+        - name: exhibitionId
+          required: true
+          in: path
+          description: exhibition id
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ContentVersion"
+        description: Payload
+        required: true
+      responses:
+        "200":
+          description: Created content version
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ContentVersion"
+        "400":
+          description: Invalid request was sent to the server
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "403":
+          description: Attempted to make a call with unauthorized client
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "500":
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
+  /exhibitions/{exhibitionId}/contentVersions/{contentVersionId}:
+    get:
+      operationId: findContentVersion
+      summary: Find a content version
+      description: Finds a content version by id
+      tags:
+        - ContentVersions
+      parameters:
+        - name: exhibitionId
+          required: true
+          in: path
+          description: exhibition id
+          schema:
+            type: string
+            format: uuid
+        - name: contentVersionId
+          required: true
+          in: path
+          description: contentVersion id
+          schema:
+            type: string
+            format: uuid
+      responses:
+        "200":
+          description: A exhibition
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ContentVersion"
+        "400":
+          description: Invalid request was sent to the server
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "403":
+          description: Attempted to make a call with unauthorized client
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "500":
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+    put:
+      operationId: updateContentVersion
+      summary: Updates content version.
+      description: Updates content version.
+      tags:
+        - ContentVersions
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ContentVersion"
+        description: Payload
+        required: true
+      parameters:
+        - name: exhibitionId
+          required: true
+          in: path
+          description: exhibition id
+          schema:
+            type: string
+            format: uuid
+        - name: contentVersionId
+          required: true
+          in: path
+          description: contentVersion id
+          schema:
+            type: string
+            format: uuid
+      responses:
+        "200":
+          description: Updated exhibition
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ContentVersion"
+        "400":
+          description: Invalid request was sent to the server
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "403":
+          description: Attempted to make a call with unauthorized client
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "500":
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+    delete:
+      operationId: deleteContentVersion
+      summary: Deletes content version.
+      description: Delets content version.
+      tags:
+        - ContentVersions
+      parameters:
+        - name: exhibitionId
+          required: true
+          in: path
+          description: exhibition id
+          schema:
+            type: string
+            format: uuid
+        - name: contentVersionId
+          required: true
+          in: path
+          description: contentVersion id
+          schema:
+            type: string
+            format: uuid
+      responses:
+        "204":
+          description: Success
+        "400":
+          description: Invalid request was sent to the server
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "403":
+          description: Attempted to make a call with unauthorized client
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "500":
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
+  /exhibitions/{exhibitionId}/groupContentVersions:
+    get:
+      operationId: listGroupContentVersions
+      summary: List group content versions
+      description: List group content versions
+      tags:
+        - GroupContentVersions
+      parameters:
+        - name: exhibitionId
+          required: true
+          in: path
+          description: exhibition id
+          schema:
+            type: string
+            format: uuid
+        - name: contentVersionId
+          in: query
+          description: filter by content version id
+          schema:
+            type: string
+            format: uuid
+        - name: deviceGroupId
+          in: query
+          description: filter by device group id
+          schema:
+            type: string
+            format: uuid
+      responses:
+        "200":
+          description: A content version list
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/GroupContentVersion"
+        "400":
+          description: Invalid request was sent to the server
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "403":
+          description: Attempted to make a call with unauthorized client
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "500":
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+    post:
+      operationId: createGroupContentVersion
+      summary: Create a group content version
+      description: Creates new group content version
+      tags:
+        - GroupContentVersions
+      parameters:
+        - name: exhibitionId
+          required: true
+          in: path
+          description: exhibition id
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GroupContentVersion"
+        description: Payload
+        required: true
+      responses:
+        "200":
+          description: Created content version
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GroupContentVersion"
+        "400":
+          description: Invalid request was sent to the server
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "403":
+          description: Attempted to make a call with unauthorized client
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "500":
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+
+                $ref: "#/components/schemas/Error"
+
+  /exhibitions/{exhibitionId}/groupContentVersions/{groupContentVersionId}:
+    get:
+      operationId: findGroupContentVersion
+      summary: Find a group content version
+      description: Finds a group content version by id
+      tags:
+        - GroupContentVersions
+      parameters:
+        - name: exhibitionId
+          required: true
+          in: path
+          description: exhibition id
+          schema:
+            type: string
+            format: uuid
+        - name: groupContentVersionId
+          required: true
+          in: path
+          description: group content version id
+          schema:
+            type: string
+            format: uuid
+      responses:
+        "200":
+          description: A exhibition
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GroupContentVersion"
+        "400":
+          description: Invalid request was sent to the server
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "403":
+          description: Attempted to make a call with unauthorized client
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "500":
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+    put:
+      operationId: updateGroupContentVersion
+      summary: Updates group content version.
+      description: Updates group content version.
+      tags:
+        - GroupContentVersions
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GroupContentVersion"
+        description: Payload
+        required: true
+      parameters:
+        - name: exhibitionId
+          required: true
+          in: path
+          description: exhibition id
+          schema:
+            type: string
+            format: uuid
+        - name: groupContentVersionId
+          required: true
+          in: path
+          description: group content version id
+          schema:
+            type: string
+            format: uuid
+      responses:
+        "200":
+          description: Updated exhibition
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GroupContentVersion"
+        "400":
+          description: Invalid request was sent to the server
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "403":
+          description: Attempted to make a call with unauthorized client
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "500":
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+    delete:
+      operationId: deleteGroupContentVersion
+      summary: Deletes group content version.
+      description: Delets group content version.
+      tags:
+        - GroupContentVersions
+      parameters:
+        - name: exhibitionId
+          required: true
+          in: path
+          description: exhibition id
+          schema:
+            type: string
+            format: uuid
+        - name: groupContentVersionId
+          required: true
+          in: path
+          description: group content version id
+          schema:
+            type: string
+            format: uuid
+      responses:
+        "204":
+          description: Success
+        "400":
+          description: Invalid request was sent to the server
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "403":
+          description: Attempted to make a call with unauthorized client
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "500":
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
+
   /pageLayouts:
     get:
       operationId: listPageLayouts
@@ -1607,6 +2842,20 @@ paths:
       description: List page layouts
       tags:
         - PageLayouts
+      parameters:
+        - name: deviceModelId
+          required: false
+          in: query
+          description: device model id
+          schema:
+            type: string
+            format: uuid
+        - name: screenOrientation
+          required: false
+          in: query
+          description: screen orientation
+          schema:
+            type: string
       responses:
         "200":
           description: A page layout list
@@ -1795,6 +3044,361 @@ paths:
               schema:
                 $ref: "#/components/schemas/Error"
 
+  /subLayouts:
+    get:
+      operationId: listSubLayouts
+      summary: List sub layouts
+      description: List sub layouts
+      tags:
+        - SubLayouts
+      responses:
+        "200":
+          description: A sub layout list
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/SubLayout"
+        "400":
+          description: Invalid request was sent to the server
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "403":
+          description: Attempted to make a call with unauthorized client
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "500":
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+    post:
+      operationId: createSubLayout
+      summary: Create a sub layout
+      description: Creates new sub layout
+      tags:
+        - SubLayouts
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SubLayout"
+        description: Payload
+        required: true
+      responses:
+        "200":
+          description: Created sub layout
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SubLayout"
+        "400":
+          description: Invalid request was sent to the server
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "403":
+          description: Attempted to make a call with unauthorized client
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "500":
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
+  /subLayouts/{subLayoutId}:
+    get:
+      operationId: findSubLayout
+      summary: Find a sub layout
+      description: Finds a sub layout by id
+      tags:
+        - SubLayouts
+      parameters:
+        - name: subLayoutId
+          required: true
+          in: path
+          description: Sub layout id
+          schema:
+            type: string
+            format: uuid
+      responses:
+        "200":
+          description: A sub layout
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SubLayout"
+        "400":
+          description: Invalid request was sent to the server
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "403":
+          description: Attempted to make a call with unauthorized client
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "500":
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+    put:
+      operationId: updateSubLayout
+      summary: Updates sub layout.
+      description: Updates sub layout.
+      tags:
+        - SubLayouts
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SubLayout"
+        description: Payload
+        required: true
+      parameters:
+        - name: subLayoutId
+          required: true
+          in: path
+          description: Sub layout id
+          schema:
+            type: string
+            format: uuid
+      responses:
+        "200":
+          description: Updated sub layout
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SubLayout"
+        "400":
+          description: Invalid request was sent to the server
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "403":
+          description: Attempted to make a call with unauthorized client
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "500":
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+    delete:
+      operationId: deleteSubLayout
+      summary: Deletes sub layout.
+      description: Delets sub layout.
+      tags:
+        - SubLayouts
+      parameters:
+        - name: subLayoutId
+          required: true
+          in: path
+          description: Sub layout id
+          schema:
+            type: string
+            format: uuid
+      responses:
+        "204":
+          description: Success
+        "400":
+          description: Invalid request was sent to the server
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "403":
+          description: Attempted to make a call with unauthorized client
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "500":
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
+  /storedFiles:
+    get:
+      operationId: listStoredFiles
+      summary: List stored files
+      description: List stored files
+      tags:
+        - StoredFiles
+      parameters:
+        - name: folder
+          required: true
+          in: query
+          schema:
+            type: string
+      responses:
+        "200":
+          description: A file list
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/StoredFile"
+        "400":
+          description: Invalid request was sent to the server
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "403":
+          description: Attempted to make a call with unauthorized client
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "500":
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
+  /storedFiles/{storedFileId}:
+    get:
+      operationId: findStoredFile
+      summary: Find stored file
+      description: Find stored file
+      tags:
+        - StoredFiles
+      parameters:
+        - name: storedFileId
+          required: true
+          in: path
+          description: stored file id
+          schema:
+            type: string
+      responses:
+        "200":
+          description: A stored file
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/StoredFile"
+        "400":
+          description: Invalid request was sent to the server
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "403":
+          description: Attempted to make a call with unauthorized client
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "500":
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+    put:
+      operationId: updateStoredFile
+      summary: Updates stored file
+      description: Updates stored file
+      tags:
+        - StoredFiles
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/StoredFile"
+        description: Payload
+        required: true
+      parameters:
+        - name: storedFileId
+          required: true
+          in: path
+          description: stored file id
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Updated stored file
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/StoredFile"
+        "400":
+          description: Invalid request was sent to the server
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "403":
+          description: Attempted to make a call with unauthorized client
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "500":
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+    delete:
+      operationId: deleteStoredFile
+      summary: Deletes stored file
+      description: Deletes stored file
+      tags:
+        - StoredFiles
+      parameters:
+        - name: storedFileId
+          required: true
+          in: path
+          description: stored file id
+          schema:
+            type: string
+      responses:
+        "204":
+          description: Success
+        "400":
+          description: Invalid request was sent to the server
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "403":
+          description: Attempted to make a call with unauthorized client
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "500":
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
   /system/ping:
     get:
       summary: System ping endpoint
@@ -1852,7 +3456,7 @@ components:
           description: Date modified
           readOnly: true
 
-    ExhibitionRoom:
+    ExhibitionFloor:
       type: object
       required:
         - name
@@ -1867,6 +3471,54 @@ components:
           readOnly: true
         name:
           type: string
+        floorPlanUrl:
+          type: string
+          format: url
+        floorPlanBounds:
+          $ref: '#/components/schemas/Bounds'
+        creatorId:
+          type: string
+          format: uuid
+          readOnly: true
+        lastModifierId:
+          type: string
+          format: uuid
+          readOnly: true
+        createdAt:
+          type: string
+          format: date-time
+          description: Created date
+          readOnly: true
+        modifiedAt:
+          type: string
+          format: date-time
+          description: Date modified
+          readOnly: true
+
+    ExhibitionRoom:
+      type: object
+      required:
+        - name
+        - floorId
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        exhibitionId:
+          type: string
+          format: uuid
+          readOnly: true
+        floorId:
+          type: string
+          format: uuid
+        name:
+          type: string
+        color:
+          type: string
+          description: Room's color in CSS -color format
+        geoShape:
+          $ref: '#/components/schemas/Polygon'
         creatorId:
           type: string
           format: uuid
@@ -1890,6 +3542,7 @@ components:
       type: object
       required:
         - name
+        - allowVisitorSessionCreation
       properties:
         id:
           type: string
@@ -1899,8 +3552,13 @@ components:
           type: string
           format: uuid
           readOnly: true
+        roomId:
+          type: string
+          format: uuid
         name:
           type: string
+        allowVisitorSessionCreation:
+          type: boolean
         creatorId:
           type: string
           format: uuid
@@ -1926,6 +3584,8 @@ components:
         - name
         - groupId
         - modelId
+        - screenOrientation
+        - pageOrder
       properties:
         id:
           type: string
@@ -1935,6 +3595,10 @@ components:
           type: string
           format: uuid
           readOnly: true
+        indexPageId:
+          type: string
+          format: uuid
+          description: Index page for a device
         groupId:
           type: string
           format: uuid
@@ -1945,6 +3609,69 @@ components:
           description: Device model id
         name:
           type: string
+        location:
+          $ref: '#/components/schemas/Point'
+        screenOrientation:
+          $ref: '#/components/schemas/ScreenOrientation'
+        pageOrder:
+          type: array
+          items:
+            type: string
+            format: uuid
+        creatorId:
+          type: string
+          format: uuid
+          readOnly: true
+        lastModifierId:
+          type: string
+          format: uuid
+          readOnly: true
+        createdAt:
+          type: string
+          format: date-time
+          description: Created date
+          readOnly: true
+        modifiedAt:
+          type: string
+          format: date-time
+          description: Date modified
+          readOnly: true
+
+    RfidAntenna:
+      type: object
+      required:
+        - name
+        - roomId
+        - readerId
+        - antennaNumber
+        - location
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        exhibitionId:
+          type: string
+          format: uuid
+          readOnly: true
+        roomId:
+          type: string
+          format: uuid
+          description: Id of room this RFID antenna is located at
+        groupId:
+          type: string
+          format: uuid
+          description: Device group id this antenna is conneted to
+        readerId:
+          type: string
+          description: RFID reader module id
+        antennaNumber:
+          type: integer
+          format: int32
+          description: RFID antenna number
+        name:
+          type: string
+          description: Human-readable name for this antenna
         location:
           $ref: '#/components/schemas/Point'
         creatorId:
@@ -1966,21 +3693,18 @@ components:
           description: Date modified
           readOnly: true
 
-    ExhibitionDeviceModel:
+    DeviceModel:
       type: object
       description: Describes device model used in exhibition
       required:
         - manufacturer
         - model
         - dimensions
-        - resolution
+        - displayMetrics
         - capabilities
+        - screenOrientation
       properties:
         id:
-          type: string
-          format: uuid
-          readOnly: true
-        exhibitionId:
           type: string
           format: uuid
           readOnly: true
@@ -1989,11 +3713,13 @@ components:
         model:
           type: string
         dimensions:
-          $ref: '#/components/schemas/ExhibitionDeviceModelDimensions'
-        resolution:
-          $ref: '#/components/schemas/ExhibitionDeviceModelResolution'
+          $ref: '#/components/schemas/DeviceModelDimensions'
+        displayMetrics:
+          $ref: '#/components/schemas/DeviceModelDisplayMetrics'
         capabilities:
-          $ref: '#/components/schemas/ExhibitionDeviceModelCapabilities'
+          $ref: '#/components/schemas/DeviceModelCapabilities'
+        screenOrientation:
+          $ref: '#/components/schemas/ScreenOrientation'
         creatorId:
           type: string
           format: uuid
@@ -2024,29 +3750,47 @@ components:
           type: number
           format: double
 
-    ExhibitionDeviceModelDimensions:
+    DeviceModelDimensions:
       type: object
       description: Describes device model physical dimensions
       properties:
-        width:
+        deviceWidth:
           type: number
           format: double
-        height:
+        deviceHeight:
+          type: number
+          format: double
+        deviceDepth:
+          type: number
+          format: double
+        screenWidth:
+          type: number
+          format: double
+        screenHeight:
           type: number
           format: double
 
-    ExhibitionDeviceModelResolution:
+    DeviceModelDisplayMetrics:
       type: object
-      description: Describes device model resolution
+      description: Describes device display information
       properties:
-        x:
+        heightPixels:
+          type: integer
+          format: int32
+        widthPixels:
+          type: integer
+          format: int32
+        density:
           type: number
           format: double
-        y:
+        xdpi:
+          type: number
+          format: double
+        ydpi:
           type: number
           format: double
 
-    ExhibitionDeviceModelCapabilities:
+    DeviceModelCapabilities:
       type: object
       description: Describes device model capabilities
       required:
@@ -2076,7 +3820,7 @@ components:
     VisitorSession:
       type: object
       required:
-        - users
+        - visitorIds
         - state
       properties:
         id:
@@ -2095,10 +3839,15 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/VisitorSessionVariable'
-        users:
+        visitorIds:
           type: array
           items:
-            $ref: '#/components/schemas/VisitorSessionUser'
+            type: string
+            format: uuid
+        visitedDeviceGroups:
+          type: array
+          items:
+            $ref: '#/components/schemas/VisitorSessionVisitedDeviceGroup'
         creatorId:
           type: string
           format: uuid
@@ -2118,17 +3867,75 @@ components:
           description: Date modified
           readOnly: true
 
-    VisitorSessionUser:
+    Visitor:
       type: object
       required:
-        - userId
         - tagId
+        - email
       properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+          description: Unique id for the visitor
+        exhibitionId:
+          type: string
+          format: uuid
+          readOnly: true
+          description: Exhibition id the visitor attended
+        email:
+          type: string
+          format: email
+        tagId:
+          type: string
         userId:
           type: string
           format: uuid
+          readOnly: true
+        creatorId:
+          type: string
+          format: uuid
+          readOnly: true
+        lastModifierId:
+          type: string
+          format: uuid
+          readOnly: true
+        createdAt:
+          type: string
+          format: date-time
+          description: Created date
+          readOnly: true
+        modifiedAt:
+          type: string
+          format: date-time
+          description: Date modified
+          readOnly: true
+
+    VisitorTag:
+      type: object
+      required:
+        - tagId
+      properties:
         tagId:
           type: string
+          readOnly: true
+
+    VisitorSessionVisitedDeviceGroup:
+      type: object
+      required:
+        - deviceGroupId
+      properties:
+        deviceGroupId:
+          type: string
+          format: uuid
+        enteredAt:
+          type: string
+          format: date-time
+          description: Time visitor session entered the device group
+        exitedAt:
+          type: string
+          format: date-time
+          description: Time visitor session exited the device group
 
     PageLayout:
       type: object
@@ -2136,6 +3943,7 @@ components:
       required:
         - name
         - data
+        - screenOrientation
       properties:
         id:
           type: string
@@ -2149,6 +3957,47 @@ components:
         thumbnailUrl:
           type: string
           format: url
+        modelId:
+          type: string
+          format: uuid
+          description: Device model id
+        screenOrientation:
+          $ref: '#/components/schemas/ScreenOrientation'
+        creatorId:
+          type: string
+          format: uuid
+          readOnly: true
+        lastModifierId:
+          type: string
+          format: uuid
+          readOnly: true
+        createdAt:
+          type: string
+          format: date-time
+          description: Created date
+          readOnly: true
+        modifiedAt:
+          type: string
+          format: date-time
+          description: Date modified
+          readOnly: true
+
+    SubLayout:
+      type: object
+      description: Describes a sub layout for a page
+      required:
+        - name
+        - data
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        name:
+          type: string
+          description: Human readable name for the sub layout
+        data:
+          $ref: '#/components/schemas/PageLayoutView'
         creatorId:
           type: string
           format: uuid
@@ -2179,7 +4028,7 @@ components:
         id:
           type: string
         widget:
-          type: string
+          $ref: '#/components/schemas/PageLayoutWidgetType'
         properties:
           type: array
           items:
@@ -2188,6 +4037,27 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/PageLayoutView'
+        name:
+          type: string
+        sublayoutId:
+          type: string
+          format: uuid
+
+    PageLayoutWidgetType:
+      type: string
+      enum:
+        - TextView
+        - FlowTextView
+        - Button
+        - ImageView
+        - PlayerView
+        - MediaView
+        - LinearLayout
+        - FrameLayout
+        - RelativeLayout
+        - MapView
+        - MaterialTabLayout
+        - WebView
 
     PageLayoutViewProperty:
       type: object
@@ -2211,14 +4081,13 @@ components:
         - number
         - color
 
-    ExhibitionPage:
+    ContentVersion:
       type: object
+      description: Content version (e.g. language) of an exhibition.
       required:
         - name
-        - layoutId
-        - resources
-        - eventTriggers
-        - events
+        - language
+        - rooms
       properties:
         id:
           type: string
@@ -2229,10 +4098,127 @@ components:
           format: uuid
           readOnly: true
           description: Id of exhibition this page belongs to
+        name:
+          type: string
+          description: Human readable name of the content version
+        language:
+          type: string
+        rooms:
+          type: array
+          items:
+            type: string
+            format: uuid
+        creatorId:
+          type: string
+          format: uuid
+          readOnly: true
+        lastModifierId:
+          type: string
+          format: uuid
+          readOnly: true
+        createdAt:
+          type: string
+          format: date-time
+          description: Created date
+          readOnly: true
+        modifiedAt:
+          type: string
+          format: date-time
+          description: Date modified
+          readOnly: true
+
+    GroupContentVersion:
+      type: object
+      description: Content version (e.g. language) of a device group.
+      required:
+        - name
+        - status
+        - contentVersionId
+        - deviceGroupId
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        exhibitionId:
+          type: string
+          format: uuid
+          readOnly: true
+          description: Id of exhibition this group content version belongs to
+        name:
+          type: string
+          description: Human readable name of the group content version
+        status:
+          $ref: '#/components/schemas/GroupContentVersionStatus'
+        contentVersionId:
+          type: string
+          format: uuid
+          description: Id of content version
+        deviceGroupId:
+          type: string
+          format: uuid
+          description: Id of device group
+        creatorId:
+          type: string
+          format: uuid
+          readOnly: true
+        lastModifierId:
+          type: string
+          format: uuid
+          readOnly: true
+        createdAt:
+          type: string
+          format: date-time
+          description: Created date
+          readOnly: true
+        modifiedAt:
+          type: string
+          format: date-time
+          description: Date modified
+          readOnly: true
+
+    GroupContentVersionStatus:
+      description: Content version status
+      type: string
+      enum:
+        - notstarted
+        - inprogress
+        - ready
+
+    ExhibitionPage:
+      type: object
+      required:
+        - name
+        - layoutId
+        - contentVersionId
+        - resources
+        - deviceId
+        - eventTriggers
+        - events
+        - enterTransitions
+        - exitTransitions
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        exhibitionId:
+          type: string
+          format: uuid
+          readOnly: true
+          description: Id of exhibition this page belongs to
+        deviceId:
+          type: string
+          format: uuid
+          description: Id of device this page belongs to
         layoutId:
           type: string
           format: uuid
           description: Id of page layout
+        contentVersionId:
+          type: string
+          format: uuid
+          description: Id of content version
         name:
           type: string
           description: Human readable name for the layout
@@ -2244,6 +4230,14 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/ExhibitionPageEventTrigger'
+        enterTransitions:
+          type: array
+          items:
+            $ref: '#/components/schemas/ExhibitionPageTransition'
+        exitTransitions:
+          type: array
+          items:
+            $ref: '#/components/schemas/ExhibitionPageTransition'
         creatorId:
           type: string
           format: uuid
@@ -2274,6 +4268,8 @@ components:
           type: string
         data:
           type: string
+        scripted:
+          type: boolean
         type:
           $ref: '#/components/schemas/ExhibitionPageResourceType'
 
@@ -2283,12 +4279,19 @@ components:
         - text
         - image
         - video
+        - html
 
     ExhibitionPageEventTrigger:
       type: object
       required:
-        - eventId
+        - id
+        - name
       properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
         events:
           type: array
           items:
@@ -2298,6 +4301,13 @@ components:
           format: int64
         clickViewId:
           type: string
+        deviceGroupEvent:
+          description: Name of triggering device group event
+          type: string
+        keyUp:
+          type: string
+        keyDown:
+          type: string
         next:
           type: array
           items:
@@ -2306,11 +4316,11 @@ components:
     ExhibitionPageEvent:
       type: object
       required:
-        - type
-        - data
+        - action
+        - properties
       properties:
-        type:
-          $ref: '#/components/schemas/ExhibitionPageEventType'
+        action:
+          $ref: '#/components/schemas/ExhibitionPageEventActionType'
         properties:
           type: array
           items:
@@ -2329,7 +4339,7 @@ components:
           type: string
         type:
           $ref: '#/components/schemas/ExhibitionPageEventPropertyType'
-        
+
     ExhibitionPageEventPropertyType:
       type: string
       enum:
@@ -2337,8 +4347,8 @@ components:
         - boolean
         - number
         - color
-        
-    ExhibitionPageEventType:
+
+    ExhibitionPageEventActionType:
       type: string
       enum:
         - hide
@@ -2347,11 +4357,95 @@ components:
         - navigate
         - setsrc
         - settext
+        - triggerdevicegroupevent
 
     ExhibitionPageEventTransition:
       type: string
       enum:
         - fade
+
+    ScreenOrientation:
+      type: string
+      enum:
+        - landscape
+        - portrait
+
+    Animation:
+      type: string
+      enum:
+        - fade
+        - morph
+
+    ExhibitionPageTransitionOptions:
+      type: object
+      properties:
+        morph:
+          $ref: '#/components/schemas/ExhibitionPageTransitionOptionsMorph'
+
+    ExhibitionPageTransitionOptionsMorph:
+      type: object
+      required:
+        - views
+      properties:
+        views:
+          type: array
+          items:
+            $ref: '#/components/schemas/ExhibitionPageTransitionOptionsMorphView'
+
+    ExhibitionPageTransitionOptionsMorphView:
+      type: object
+      required:
+        - sourceId
+        - targetId
+      properties:
+        sourceId:
+          type: string
+        targetId:
+          type: string
+
+    AnimationTimeInterpolation:
+      type: string
+      enum:
+        - acceleratedecelerate
+        - accelerate
+        - anticipate
+        - anticipateovershoot
+        - bounce
+        - decelerate
+        - linear
+        - overshoot
+
+    Transition:
+      required:
+        - animation
+        - timeInterpolation
+        - duration
+        - options
+      type: object
+      properties:
+        animation:
+          $ref: '#/components/schemas/Animation'
+        timeInterpolation:
+          $ref: '#/components/schemas/AnimationTimeInterpolation'
+        duration:
+          type: integer
+          format: int32
+
+    ExhibitionPageTransition:
+      required:
+        - transition
+      type: object
+      properties:
+        transition:
+          $ref: '#/components/schemas/Transition'
+        sourceLayoutId:
+          type: string
+          format: uuid
+        targetLayoutId:
+          type: string
+          format: uuid
+        options:
+          $ref: '#/components/schemas/ExhibitionPageTransitionOptions'
 
     Error:
       type: object
@@ -2364,3 +4458,440 @@ components:
           format: int32
         message:
           type: string
+
+    Polygon:
+      type: object
+      description: "GeoJson polygon object"
+      properties:
+        type:
+          type: string
+        coordinates:
+          type: array
+          description: Polygon shapes
+          items:
+            type: array
+            description: Coordinates
+            items:
+              type: array
+              description: Coordinate pair
+              items:
+                type: number
+                format: double
+
+    Bounds:
+      type: object
+      description: Geo bounds object
+      required:
+        - southWestCorner
+        - northEastCorner
+      properties:
+        southWestCorner:
+          $ref: '#/components/schemas/Coordinates'
+        northEastCorner:
+          $ref: '#/components/schemas/Coordinates'
+
+    Coordinates:
+      type: object
+      description: Coordinate object
+      required:
+        - latitude
+        - longitude
+      properties:
+        latitude:
+          type: number
+          format: double
+        longitude:
+          type: number
+          format: double
+
+    StoredFile:
+      type: object
+      required:
+        - contentType
+        - fileName
+        - uri
+      properties:
+        id:
+          type: string
+          readOnly: true
+        uri:
+          type: string
+          readOnly: true
+        thumbnailUri:
+          type: string
+          readOnly: true
+        contentType:
+          type: string
+          readOnly: true
+        fileName:
+          type: string
+
+    MqttExhibitionPageCreate:
+      type: object
+      description: MQTT notification message about exhibition page creation. This is actually not part of REST API spec but a realtime notification via MQTT channel
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        exhibitionId:
+          type: string
+          format: uuid
+          readOnly: true
+          description: Id of exhibition this page belongs to
+
+    MqttExhibitionPageUpdate:
+      type: object
+      description: MQTT notification message about exhibition page update. This is actually not part of REST API spec but a realtime notification via MQTT channel
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        exhibitionId:
+          type: string
+          format: uuid
+          readOnly: true
+          description: Id of exhibition this page belongs to
+
+    MqttExhibitionPageDelete:
+      type: object
+      description: MQTT notification message about exhibition page deletion. This is actually not part of REST API spec but a realtime notification via MQTT channel
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        exhibitionId:
+          type: string
+          format: uuid
+          readOnly: true
+          description: Id of exhibition this page belongs to
+
+    MqttLayoutCreate:
+      type: object
+      description: MQTT notification message about layout creation. This is actually not part of REST API spec but a realtime notification via MQTT channel
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+
+    MqttLayoutUpdate:
+      type: object
+      description: MQTT notification message about layout update. This is actually not part of REST API spec but a realtime notification via MQTT channel
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+
+    MqttLayoutDelete:
+      type: object
+      description: MQTT notification message about layout deletion. This is actually not part of REST API spec but a realtime notification via MQTT channel
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+
+    MqttExhibitionVisitorSessionCreate:
+      type: object
+      description: MQTT notification message about exhibition visitor session creation. This is actually not part of REST API spec but a realtime notification via MQTT channel
+      required:
+        - id
+        - exhibitionId
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        exhibitionId:
+          type: string
+          format: uuid
+          readOnly: true
+          description: Id of exhibition this visitor session belongs to
+
+    MqttExhibitionVisitorSessionUpdate:
+      type: object
+      description: MQTT notification message about exhibition visitor session update. This is actually not part of REST API spec but a realtime notification via MQTT channel
+      required:
+        - id
+        - exhibitionId
+        - variablesChanged
+        - visitorsChanged
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        exhibitionId:
+          type: string
+          format: uuid
+          readOnly: true
+          description: Id of exhibition this visitor session belongs to
+        variablesChanged:
+          type: boolean
+          description: Whether session variables have changed
+          readOnly: true
+        visitorsChanged:
+          type: boolean
+          description: Whether session visitors have changed
+          readOnly: true
+
+    MqttExhibitionVisitorSessionDelete:
+      type: object
+      description: MQTT notification message about exhibition visitor session deletion. This is actually not part of REST API spec but a realtime notification via MQTT channel
+      required:
+        - id
+        - exhibitionId
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        exhibitionId:
+          type: string
+          format: uuid
+          readOnly: true
+          description: Id of exhibition this visitor session belongs to
+
+    MqttProximityUpdate:
+      type: object
+      description: MQTT message about tag proximity
+      required:
+        - strength
+        - tag
+      properties:
+        strength:
+          type: integer
+          readOnly: true
+        tag:
+          type: string
+          readOnly: true
+          description: Id of exhibition this visitor session belongs to
+
+    MqttVisitorCreate:
+      type: object
+      description: MQTT notification message about exhibition visitor creation. This is actually not part of REST API spec but a realtime notification via MQTT channel
+      required:
+        - id
+        - exhibitionId
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        exhibitionId:
+          type: string
+          format: uuid
+          readOnly: true
+          description: Id of exhibition this visitor belongs to
+
+    MqttVisitorUpdate:
+      type: object
+      description: MQTT notification message about exhibition visitor update. This is actually not part of REST API spec but a realtime notification via MQTT channel
+      required:
+        - id
+        - exhibitionId
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        exhibitionId:
+          type: string
+          format: uuid
+          readOnly: true
+          description: Id of exhibition this visitor belongs to
+
+    MqttVisitorDelete:
+      type: object
+      description: MQTT notification message about exhibition visitor deletion. This is actually not part of REST API spec but a realtime notification via MQTT channel
+      required:
+        - id
+        - exhibitionId
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        exhibitionId:
+          type: string
+          format: uuid
+          readOnly: true
+          description: Id of exhibition this visitor belongs to
+
+    MqttDeviceGroupCreate:
+      type: object
+      description: MQTT notification message about device group creation. This is actually not part of REST API spec but a realtime notification via MQTT channel
+      required:
+        - id
+        - exhibitionId
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        exhibitionId:
+          type: string
+          format: uuid
+          readOnly: true
+          description: Id of exhibition this device group belongs to
+
+    MqttDeviceGroupUpdate:
+      type: object
+      description: MQTT notification message about device group update. This is actually not part of REST API spec but a realtime notification via MQTT channel
+      required:
+        - id
+        - exhibitionId
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        exhibitionId:
+          type: string
+          format: uuid
+          readOnly: true
+          description: Id of exhibition this device group belongs to
+
+    MqttDeviceGroupDelete:
+      type: object
+      description: MQTT notification message about device group deletion. This is actually not part of REST API spec but a realtime notification via MQTT channel
+      required:
+        - id
+        - exhibitionId
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        exhibitionId:
+          type: string
+          format: uuid
+          readOnly: true
+          description: Id of exhibition this device group belongs to
+
+    MqttRfidAntennaCreate:
+      type: object
+      description: MQTT notification message about MQTT antenna creation. This is actually not part of REST API spec but a realtime notification via MQTT channel
+      required:
+        - id
+        - exhibitionId
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        exhibitionId:
+          type: string
+          format: uuid
+          readOnly: true
+          description: Id of exhibition this RFID antenna belongs to
+
+    MqttRfidAntennaUpdate:
+      type: object
+      description: MQTT notification message about RFID antenna update. This is actually not part of REST API spec but a realtime notification via MQTT channel
+      required:
+        - id
+        - exhibitionId
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        exhibitionId:
+          type: string
+          format: uuid
+          readOnly: true
+          description: Id of exhibition this RFID antenna belongs to
+        groupChanged:
+          type: boolean
+          description: Whether antenna device group has changed
+          readOnly: true
+
+    MqttRfidAntennaDelete:
+      type: object
+      description: MQTT notification message about RFID antenna deletion. This is actually not part of REST API spec but a realtime notification via MQTT channel
+      required:
+        - id
+        - exhibitionId
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        exhibitionId:
+          type: string
+          format: uuid
+          readOnly: true
+          description: Id of exhibition this RFID antenna belongs to
+
+    MqttDeviceCreate:
+      type: object
+      description: MQTT notification message about antenna creation. This is actually not part of REST API spec but a realtime notification via MQTT channel
+      required:
+        - id
+        - exhibitionId
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        exhibitionId:
+          type: string
+          format: uuid
+          readOnly: true
+          description: Id of exhibition this device belongs to
+
+    MqttDeviceUpdate:
+      type: object
+      description: MQTT notification message about device update. This is actually not part of REST API spec but a realtime notification via MQTT channel
+      required:
+        - id
+        - exhibitionId
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        exhibitionId:
+          type: string
+          format: uuid
+          readOnly: true
+          description: Id of exhibition this device belongs to
+        groupChanged:
+          type: boolean
+          description: Whether antenna device group has changed
+          readOnly: true
+
+    MqttDeviceDelete:
+      type: object
+      description: MQTT notification message about device deletion. This is actually not part of REST API spec but a realtime notification via MQTT channel
+      required:
+        - id
+        - exhibitionId
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        exhibitionId:
+          type: string
+          format: uuid
+          readOnly: true
+          description: Id of exhibition this device belongs to
+
+    MqttTriggerDeviceGroupEvent:
+      type: object
+      required:
+        - name
+      description: |
+        MQTT notification message for informing device group members about tag proximity. Event in sent into /{device}/{antennaNumber} -topic.
+
+        This is actually not part of REST API spec but a realtime notification via MQTT channel
+      properties:
+        event:
+          type: string
+          description: name of triggered event
