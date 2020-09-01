@@ -4289,6 +4289,16 @@ components:
         - dynamic
         - scripted
 
+    PageResourceDynamicSubstituteParams:
+      type: object
+      required:
+        - type
+        - params
+      properties:
+        type:
+          type: string
+          description: name of triggered event
+
     ExhibitionPageEventTrigger:
       type: object
       required:
@@ -4903,3 +4913,75 @@ components:
         event:
           type: string
           description: name of triggered event
+          
+    DynamicPageResourceType:
+      type: string
+      enum:
+        - switch
+        - substitute
+        
+    DynamicPageResource:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/DynamicPageResourceType'
+        params:
+          type: object
+
+    DynamicPageResourceSwitch:
+      type: object
+      required:
+        - dataSource
+        - substitute
+      properties:
+        dataSource:
+          $ref: '#/components/schemas/DynamicPageResourceDataSource'
+        key:
+          type: string
+        when:
+          type: array
+          items:
+            type: object
+            required:
+              - equals
+              - value
+              - sourceKey
+            properties:
+              equals: 
+                type: string
+              value:
+                type: string
+              default:
+                type: string
+
+    DynamicPageResourceSubstitute:
+      type: object
+      required:
+        - input
+        - substitute
+      properties:
+        input:
+          type: string
+          description: input text
+        substitute:
+          type: array
+          items:
+            type: object
+            required:
+              - inputKey
+              - dataSource
+              - sourceKey
+            properties:
+              inputKey: 
+                type: string
+              dataSource:
+                $ref: '#/components/schemas/DynamicPageResourceDataSource'
+              sourceKey:
+                type: string
+              default:
+                type: string
+
+    DynamicPageResourceDataSource:
+      type: string
+      enum:
+        - UserValue
