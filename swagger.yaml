@@ -3585,7 +3585,6 @@ components:
         - groupId
         - modelId
         - screenOrientation
-        - pageOrder
       properties:
         id:
           type: string
@@ -3613,11 +3612,6 @@ components:
           $ref: '#/components/schemas/Point'
         screenOrientation:
           $ref: '#/components/schemas/ScreenOrientation'
-        pageOrder:
-          type: array
-          items:
-            type: string
-            format: uuid
         creatorId:
           type: string
           format: uuid
@@ -4197,6 +4191,7 @@ components:
         - events
         - enterTransitions
         - exitTransitions
+        - orderNumber
       properties:
         id:
           type: string
@@ -4238,6 +4233,9 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/ExhibitionPageTransition'
+        orderNumber:
+          type: integer
+          format: int64
         creatorId:
           type: string
           format: uuid
