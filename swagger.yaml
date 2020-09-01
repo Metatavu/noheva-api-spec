@@ -4266,8 +4266,8 @@ components:
           type: string
         data:
           type: string
-        scripted:
-          type: boolean
+        mode:
+          $ref: '#/components/schemas/PageResourceMode'
         type:
           $ref: '#/components/schemas/ExhibitionPageResourceType'
 
@@ -4279,6 +4279,13 @@ components:
         - video
         - html
         - svg
+
+    PageResourceMode:
+      type: string
+      enum:
+        - static
+        - dynamic
+        - scripted
 
     ExhibitionPageEventTrigger:
       type: object
