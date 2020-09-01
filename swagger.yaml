@@ -4191,7 +4191,6 @@ components:
         - events
         - enterTransitions
         - exitTransitions
-        - orderNumber
       properties:
         id:
           type: string
@@ -4235,7 +4234,7 @@ components:
             $ref: '#/components/schemas/ExhibitionPageTransition'
         orderNumber:
           type: integer
-          format: int64
+          format: int32
         creatorId:
           type: string
           format: uuid
