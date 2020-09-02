@@ -3594,10 +3594,6 @@ components:
           type: string
           format: uuid
           readOnly: true
-        indexPageId:
-          type: string
-          format: uuid
-          description: Index page for a device
         groupId:
           type: string
           format: uuid
