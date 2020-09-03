@@ -3827,6 +3827,7 @@ components:
       required:
         - visitorIds
         - state
+        - language
       properties:
         id:
           type: string
@@ -3840,6 +3841,8 @@ components:
           description: Exhibition id the visiotr was attending to
         state:
           $ref: '#/components/schemas/VisitorSessionState'
+        language:
+          type: string
         variables:
           type: array
           items:
@@ -4386,6 +4389,7 @@ components:
         - settext
         - triggerdevicegroupevent
         - executeWebScript
+        - visitorSessionEnd
 
     ExhibitionPageEventTransition:
       type: string
