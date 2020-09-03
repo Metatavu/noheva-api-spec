@@ -4374,6 +4374,7 @@ components:
         - settext
         - triggerdevicegroupevent
         - executeWebScript
+        - visitorSessionEnd
 
     ExhibitionPageEventTransition:
       type: string
