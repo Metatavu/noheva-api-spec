@@ -3659,14 +3659,18 @@ components:
           type: integer
           format: int32
           description: RFID antenna number
-        loginThreshold:
+        visitorSessionStartThreshold:
           type: integer
           format: int32
           description: Strength threshold for login events
-        logoutTreshold:
+        visitorSessionEndThreshold:
           type: integer
           format: int32
           description: Strength threshold for logout events
+        visitorSessionEndTimeout:
+          type: integer
+          format: int32
+          description: Timeout for visitor session
         name:
           type: string
           description: Human-readable name for this antenna
