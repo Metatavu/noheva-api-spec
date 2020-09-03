@@ -3543,6 +3543,7 @@ components:
       required:
         - name
         - allowVisitorSessionCreation
+        - visitorSessionEndTimeout
       properties:
         id:
           type: string
@@ -3559,6 +3560,10 @@ components:
           type: string
         allowVisitorSessionCreation:
           type: boolean
+        visitorSessionEndTimeout:
+          type: integer
+          format: int64
+          description: Timeout for visitor session
         creatorId:
           type: string
           format: uuid
@@ -3635,6 +3640,8 @@ components:
         - readerId
         - antennaNumber
         - location
+        - visitorSessionStartThreshold
+        - visitorSessionEndThreshold
       properties:
         id:
           type: string
@@ -3667,10 +3674,6 @@ components:
           type: integer
           format: int32
           description: Strength threshold for logout events
-        visitorSessionEndTimeout:
-          type: integer
-          format: int32
-          description: Timeout for visitor session
         name:
           type: string
           description: Human-readable name for this antenna
