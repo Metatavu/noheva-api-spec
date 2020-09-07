@@ -3613,6 +3613,8 @@ components:
           $ref: '#/components/schemas/Point'
         screenOrientation:
           $ref: '#/components/schemas/ScreenOrientation'
+        forcedPortraitMode:
+          type: boolean
         creatorId:
           type: string
           format: uuid
