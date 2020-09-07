@@ -4050,6 +4050,9 @@ components:
         sublayoutId:
           type: string
           format: uuid
+        contentContainerId:
+          type: string
+          format: uuid
 
     PageLayoutWidgetType:
       type: string
