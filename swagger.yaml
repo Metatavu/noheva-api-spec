@@ -3544,6 +3544,7 @@ components:
         - name
         - allowVisitorSessionCreation
         - visitorSessionEndTimeout
+        - visitorSessionStartStrategy
       properties:
         id:
           type: string
