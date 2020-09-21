@@ -3543,6 +3543,8 @@ components:
       required:
         - name
         - allowVisitorSessionCreation
+        - visitorSessionEndTimeout
+        - visitorSessionStartStrategy
       properties:
         id:
           type: string
@@ -3559,6 +3561,12 @@ components:
           type: string
         allowVisitorSessionCreation:
           type: boolean
+        visitorSessionEndTimeout:
+          type: integer
+          format: int64
+          description: Timeout for visitor session
+        visitorSessionStartStrategy:
+          $ref: '#/components/schemas/DeviceGroupVisitorSessionStartStrategy'
         creatorId:
           type: string
           format: uuid
@@ -3578,6 +3586,16 @@ components:
           description: Date modified
           readOnly: true
 
+    DeviceGroupVisitorSessionStartStrategy:
+      description: |
+        Defines how device group visitor sessions start.
+        * When "othersblock" is selected, group will not start a  visitor session when session is active on another group.
+        * When "endothers" is selected, group will end sessions in other groups and start new in this group
+      type: string
+      enum:
+        - othersblock
+        - endothers
+
     ExhibitionDevice:
       type: object
       required:
@@ -3585,7 +3603,6 @@ components:
         - groupId
         - modelId
         - screenOrientation
-        - pageOrder
       properties:
         id:
           type: string
@@ -3595,10 +3612,6 @@ components:
           type: string
           format: uuid
           readOnly: true
-        indexPageId:
-          type: string
-          format: uuid
-          description: Index page for a device
         groupId:
           type: string
           format: uuid
@@ -3613,11 +3626,6 @@ components:
           $ref: '#/components/schemas/Point'
         screenOrientation:
           $ref: '#/components/schemas/ScreenOrientation'
-        pageOrder:
-          type: array
-          items:
-            type: string
-            format: uuid
         creatorId:
           type: string
           format: uuid
@@ -3645,6 +3653,8 @@ components:
         - readerId
         - antennaNumber
         - location
+        - visitorSessionStartThreshold
+        - visitorSessionEndThreshold
       properties:
         id:
           type: string
@@ -3669,6 +3679,14 @@ components:
           type: integer
           format: int32
           description: RFID antenna number
+        visitorSessionStartThreshold:
+          type: integer
+          format: int32
+          description: Strength threshold for login events
+        visitorSessionEndThreshold:
+          type: integer
+          format: int32
+          description: Strength threshold for logout events
         name:
           type: string
           description: Human-readable name for this antenna
@@ -3822,6 +3840,7 @@ components:
       required:
         - visitorIds
         - state
+        - language
       properties:
         id:
           type: string
@@ -3835,6 +3854,8 @@ components:
           description: Exhibition id the visiotr was attending to
         state:
           $ref: '#/components/schemas/VisitorSessionState'
+        language:
+          type: string
         variables:
           type: array
           items:
@@ -4042,6 +4063,9 @@ components:
         sublayoutId:
           type: string
           format: uuid
+        contentContainerId:
+          type: string
+          format: uuid
 
     PageLayoutWidgetType:
       type: string
@@ -4195,6 +4219,7 @@ components:
         - deviceId
         - eventTriggers
         - events
+        - orderNumber
         - enterTransitions
         - exitTransitions
       properties:
@@ -4238,6 +4263,9 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/ExhibitionPageTransition'
+        orderNumber:
+          type: integer
+          format: int32
         creatorId:
           type: string
           format: uuid
@@ -4268,8 +4296,8 @@ components:
           type: string
         data:
           type: string
-        scripted:
-          type: boolean
+        mode:
+          $ref: '#/components/schemas/PageResourceMode'
         type:
           $ref: '#/components/schemas/ExhibitionPageResourceType'
 
@@ -4280,6 +4308,24 @@ components:
         - image
         - video
         - html
+        - svg
+
+    PageResourceMode:
+      type: string
+      enum:
+        - static
+        - dynamic
+        - scripted
+
+    PageResourceDynamicSubstituteParams:
+      type: object
+      required:
+        - type
+        - params
+      properties:
+        type:
+          type: string
+          description: name of triggered event
 
     ExhibitionPageEventTrigger:
       type: object
@@ -4358,6 +4404,8 @@ components:
         - setsrc
         - settext
         - triggerdevicegroupevent
+        - executeWebScript
+        - visitorSessionEnd
 
     ExhibitionPageEventTransition:
       type: string
@@ -4369,6 +4417,7 @@ components:
       enum:
         - landscape
         - portrait
+        - forcedPortrait
 
     Animation:
       type: string
@@ -4895,3 +4944,75 @@ components:
         event:
           type: string
           description: name of triggered event
+
+    DynamicPageResourceType:
+      type: string
+      enum:
+        - switch
+        - substitute
+
+    DynamicPageResource:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/DynamicPageResourceType'
+        params:
+          type: object
+
+    DynamicPageResourceSwitch:
+      type: object
+      required:
+        - dataSource
+        - substitute
+      properties:
+        dataSource:
+          $ref: '#/components/schemas/DynamicPageResourceDataSource'
+        key:
+          type: string
+        when:
+          type: array
+          items:
+            type: object
+            required:
+              - equals
+              - value
+              - sourceKey
+            properties:
+              equals:
+                type: string
+              value:
+                type: string
+              default:
+                type: string
+
+    DynamicPageResourceSubstitute:
+      type: object
+      required:
+        - input
+        - substitute
+      properties:
+        input:
+          type: string
+          description: input text
+        substitute:
+          type: array
+          items:
+            type: object
+            required:
+              - inputKey
+              - dataSource
+              - sourceKey
+            properties:
+              inputKey:
+                type: string
+              dataSource:
+                $ref: '#/components/schemas/DynamicPageResourceDataSource'
+              sourceKey:
+                type: string
+              default:
+                type: string
+
+    DynamicPageResourceDataSource:
+      type: string
+      enum:
+        - UserValue
