@@ -221,6 +221,11 @@ paths:
           description: query by RFID tag
           schema:
             type: string
+        - name: email
+          in: query
+          description: query by email
+          schema:
+            type: string
       responses:
         "200":
           description: A visitor list
