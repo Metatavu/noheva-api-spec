@@ -221,6 +221,11 @@ paths:
           description: query by RFID tag
           schema:
             type: string
+        - name: email
+          in: query
+          description: query by email
+          schema:
+            type: string
       responses:
         "200":
           description: A visitor list
@@ -3893,6 +3898,7 @@ components:
       required:
         - tagId
         - email
+        - language
       properties:
         id:
           type: string
@@ -3908,6 +3914,16 @@ components:
           type: string
           format: email
         tagId:
+          type: string
+        firstName:
+          type: string
+        lastName:
+          type: string
+        phone:
+          type: string
+        birthYear:
+          type: integer
+        language:
           type: string
         userId:
           type: string
