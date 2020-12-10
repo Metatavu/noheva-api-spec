@@ -443,6 +443,243 @@ paths:
               schema:
                 $ref: "#/components/schemas/Error"
 
+  /exhibitions/{exhibitionId}/visitorVariables:
+    get:
+      operationId: listVisitorVariables
+      summary: List Visitor variables
+      description: List exhibition Visitor variables
+      tags:
+        - VisitorVariables
+      parameters:
+        - name: exhibitionId
+          required: true
+          in: path
+          description: exhibition id
+          schema:
+            type: string
+            format: uuid
+        - name: name
+          in: query
+          description: query by variable name
+          schema:
+            type: string
+      responses:
+        "200":
+          description: A visitor variable list
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/VisitorVariable"
+        "400":
+          description: Invalid request was sent to the server
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "403":
+          description: Attempted to make a call with unauthorized client
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "500":
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+    post:
+      operationId: createVisitorVariable
+      summary: Create a visitor variable
+      description: Creates new exhibition visitor variable
+      tags:
+        - VisitorVariables
+      parameters:
+        - name: exhibitionId
+          required: true
+          in: path
+          description: exhibition id
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/VisitorVariable"
+        description: Payload
+        required: true
+      responses:
+        "200":
+          description: Created exhibition visitor variable
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/VisitorVariable"
+        "400":
+          description: Invalid request was sent to the server
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "403":
+          description: Attempted to make a call with unauthorized client
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "500":
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
+  /exhibitions/{exhibitionId}/visitorVariables/{visitorVariableId}:
+    get:
+      operationId: findVisitorVariable
+      summary: Find a visitor variable
+      description: Finds a visitor variable by id
+      tags:
+        - VisitorVariables
+      parameters:
+        - name: exhibitionId
+          required: true
+          in: path
+          description: exhibition id
+          schema:
+            type: string
+            format: uuid
+        - name: visitorVariableId
+          required: true
+          in: path
+          description: Visitor variable id
+          schema:
+            type: string
+            format: uuid
+      responses:
+        "200":
+          description: A exhibition
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/VisitorVariable"
+        "400":
+          description: Invalid request was sent to the server
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "403":
+          description: Attempted to make a call with unauthorized client
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "500":
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+    put:
+      operationId: updateVisitorVariable
+      summary: Updates visitor variable.
+      description: Updates visitor variable.
+      tags:
+        - VisitorVariables
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/VisitorVariable"
+        description: Payload
+        required: true
+      parameters:
+        - name: exhibitionId
+          required: true
+          in: path
+          description: exhibition id
+          schema:
+            type: string
+            format: uuid
+        - name: visitorVariableId
+          required: true
+          in: path
+          description: Visitor variable id
+          schema:
+            type: string
+            format: uuid
+      responses:
+        "200":
+          description: Updated visitor variable
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/VisitorVariable"
+        "400":
+          description: Invalid request was sent to the server
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "403":
+          description: Attempted to make a call with unauthorized client
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "500":
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+    delete:
+      operationId: deleteVisitorVariable
+      summary: Deletes visitor variable.
+      description: Delets exhibition visitor variable.
+      tags:
+        - VisitorVariables
+      parameters:
+        - name: exhibitionId
+          required: true
+          in: path
+          description: exhibition id
+          schema:
+            type: string
+            format: uuid
+        - name: visitorVariableId
+          required: true
+          in: path
+          description: Visitor variable id
+          schema:
+            type: string
+            format: uuid
+      responses:
+        "204":
+          description: Success
+        "400":
+          description: Invalid request was sent to the server
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "403":
+          description: Attempted to make a call with unauthorized client
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "500":
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
   /exhibitions/{exhibitionId}/visitorSessions:
     get:
       operationId: listVisitorSessions
@@ -3839,6 +4076,56 @@ components:
           type: string
         value:
           type: string
+
+    VisitorVariable:
+      type: object
+      description: Metadata for visitor session variable
+      required:
+        - name
+        - type
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        exhibitionId:
+          type: string
+          format: uuid
+          readOnly: true
+        name: 
+          type: string
+        type:
+          $ref: '#/components/schemas/VisitorVariableType'
+        enum:
+          type: array
+          items:
+            type: string
+        creatorId:
+          type: string
+          format: uuid
+          readOnly: true
+        lastModifierId:
+          type: string
+          format: uuid
+          readOnly: true
+        createdAt:
+          type: string
+          format: date-time
+          description: Created date
+          readOnly: true
+        modifiedAt:
+          type: string
+          format: date-time
+          description: Date modified
+          readOnly: true
+          
+    VisitorVariableType:
+      type: string
+      description: Visitor variable type
+      enum:
+        - text
+        - number
+        - boolean
 
     VisitorSession:
       type: object
