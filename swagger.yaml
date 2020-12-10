@@ -4126,6 +4126,7 @@ components:
         - text
         - number
         - boolean
+        - enumerated
 
     VisitorSession:
       type: object
