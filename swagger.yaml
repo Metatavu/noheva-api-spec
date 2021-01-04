@@ -4083,6 +4083,7 @@ components:
       required:
         - name
         - type
+        - editableFromUI
       properties:
         id:
           type: string
@@ -4096,6 +4097,9 @@ components:
           type: string
         type:
           $ref: '#/components/schemas/VisitorVariableType'
+        editableFromUI:
+          description: Whether the visitor variable should be editable from the customer service UI
+          type: boolean
         enum:
           type: array
           items:
