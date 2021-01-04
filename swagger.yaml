@@ -3868,6 +3868,9 @@ components:
           $ref: '#/components/schemas/Point'
         screenOrientation:
           $ref: '#/components/schemas/ScreenOrientation'
+        idlePageId:
+          type: string
+          format: uuid
         creatorId:
           type: string
           format: uuid
