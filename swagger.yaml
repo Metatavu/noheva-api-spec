@@ -5025,7 +5025,8 @@ components:
         - tag
       properties:
         strength:
-          type: integer
+          type: number
+          format: double
           readOnly: true
         tag:
           type: string
