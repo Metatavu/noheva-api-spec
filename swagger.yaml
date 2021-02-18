@@ -1496,13 +1496,20 @@ paths:
           schema:
             type: string
             format: uuid
+        - name: sourceDeviceGroupId
+          required: false
+          in: query
+          description: Create device group using existing device group as a source. When source is defined, request cannot have a body
+          schema:
+            type: string
+            format: uuid
       requestBody:
         content:
           application/json:
             schema:
               $ref: "#/components/schemas/ExhibitionDeviceGroup"
         description: Payload
-        required: true
+        required: false
       responses:
         "200":
           description: Created exhibition device group
@@ -4096,7 +4103,7 @@ components:
           type: string
           format: uuid
           readOnly: true
-        name: 
+        name:
           type: string
         type:
           $ref: '#/components/schemas/VisitorVariableType'
@@ -4125,7 +4132,7 @@ components:
           format: date-time
           description: Date modified
           readOnly: true
-          
+
     VisitorVariableType:
       type: string
       description: Visitor variable type
