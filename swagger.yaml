@@ -4451,6 +4451,8 @@ components:
           items:
             type: string
             format: uuid
+        activeCondition:
+          $ref: '#/components/schemas/ContentVersionActiveCondition'
         creatorId:
           type: string
           format: uuid
@@ -4469,6 +4471,16 @@ components:
           format: date-time
           description: Date modified
           readOnly: true
+
+    ContentVersionActiveCondition:
+      type: object
+      required:
+        - userVariable
+      properties:
+        userVariable:
+          type: string
+        equals:
+          type: string
 
     GroupContentVersion:
       type: object
@@ -5304,7 +5316,7 @@ components:
               value:
                 type: string
               default:
-                type: string
+                type: boolean
 
     DynamicPageResourceSubstitute:
       type: object
