@@ -1895,6 +1895,12 @@ paths:
           schema:
             type: string
             format: uuid
+        - name: deviceModelId
+          in: query
+          description: Filter by device model id
+          schema:
+            type: string
+            format: uuid
       responses:
         "200":
           description: A device list
@@ -2380,6 +2386,12 @@ paths:
         - name: exhibitionDeviceId
           in: query
           description: Filter by device id
+          schema:
+            type: string
+            format: uuid
+        - name: pageLayoutId
+          in: query
+          description: Filter by page layout id
           schema:
             type: string
             format: uuid
