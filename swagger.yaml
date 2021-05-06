@@ -3918,7 +3918,7 @@ components:
         Defines how device handles image loading.
 
         * MEMORY - Devices loads all images to memory. This is faster but requires more memory
-        * DISK - Device prescales images and serves then from disk. This is not as fast as serving images from disk but it does not require that much memory.
+        * DISK - Device prescales images and serves then from disk. This is not as fast as serving images from memory but it does not require that much memory.
       enum:
         - MEMORY
         - DISK
