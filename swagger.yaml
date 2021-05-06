@@ -3864,6 +3864,7 @@ components:
         - groupId
         - modelId
         - screenOrientation
+        - imageLoadStrategy
       properties:
         id:
           type: string
@@ -3887,6 +3888,8 @@ components:
           $ref: '#/components/schemas/Point'
         screenOrientation:
           $ref: '#/components/schemas/ScreenOrientation'
+        imageLoadStrategy:
+          $ref: '#/components/schemas/DeviceImageLoadStrategy'
         idlePageId:
           type: string
           format: uuid
@@ -3908,6 +3911,17 @@ components:
           format: date-time
           description: Date modified
           readOnly: true
+
+    DeviceImageLoadStrategy:
+      type: string
+      description: |
+        Defines how device handles image loading.
+
+        * MEMORY - Devices loads all images to memory. This is faster but requires more memory
+        * DISK - Device prescales images and serves then from disk. This is not as fast as serving images from disk but it does not require that much memory.
+      enum:
+        - MEMORY
+        - DISK
 
     RfidAntenna:
       type: object
