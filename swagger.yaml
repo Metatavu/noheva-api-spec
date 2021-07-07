@@ -3679,6 +3679,27 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
+
+  /system/memory:
+    get:
+      summary: System memory
+      operationId: memory
+      tags:
+        - system
+      responses:
+        '200':
+          description: System memory
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SystemMemory"
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+                
 components:
   securitySchemes:
     bearerAuth:
@@ -4933,6 +4954,19 @@ components:
           readOnly: true
         fileName:
           type: string
+
+    SystemMemory:
+      type: object
+      properties:
+        freeMemory:
+          type: string
+          readOnly: true
+        availableProcessors:
+          type: string
+          readOnly: true
+        maxMemory:
+          type: string
+          readOnly: true
 
     MqttExhibitionPageCreate:
       type: object
