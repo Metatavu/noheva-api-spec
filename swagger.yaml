@@ -6,7 +6,7 @@ security:
   - bearerAuth: []
 paths:
 
-  /exhibitions:
+  /v1/exhibitions:
     get:
       operationId: listExhibitions
       summary: List exhibitions.
@@ -79,7 +79,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/Error"
 
-  /exhibitions/{exhibitionId}:
+  /v1/exhibitions/{exhibitionId}:
     get:
       operationId: findExhibition
       summary: Find a exhibition.
@@ -201,8 +201,9 @@ paths:
               schema:
                 $ref: "#/components/schemas/Error"
 
-  /exhibitions/{exhibitionId}/visitor:
+  /v1/exhibitions/{exhibitionId}/visitor:
     get:
+      deprecated: true
       operationId: listVisitors
       summary: List visitors
       description: List exhibition visitors
@@ -254,6 +255,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/Error"
     post:
+      deprecated: true
       operationId: createVisitor
       summary: Create a visitor
       description: Creates a new exhibition visitor
@@ -300,7 +302,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/Error"
 
-  /exhibitions/{exhibitionId}/visitors/{visitorId}:
+  /v1/exhibitions/{exhibitionId}/visitors/{visitorId}:
     get:
       operationId: findVisitor
       summary: Find a visitor
@@ -443,7 +445,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/Error"
 
-  /exhibitions/{exhibitionId}/visitorVariables:
+  /v1/exhibitions/{exhibitionId}/visitorVariables:
     get:
       operationId: listVisitorVariables
       summary: List Visitor variables
@@ -537,7 +539,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/Error"
 
-  /exhibitions/{exhibitionId}/visitorVariables/{visitorVariableId}:
+  /v1/exhibitions/{exhibitionId}/visitorVariables/{visitorVariableId}:
     get:
       operationId: findVisitorVariable
       summary: Find a visitor variable
@@ -680,7 +682,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/Error"
 
-  /exhibitions/{exhibitionId}/visitorSessions:
+  /v1/exhibitions/{exhibitionId}/visitorSessions:
     get:
       operationId: listVisitorSessions
       summary: List visitor sessions
@@ -774,7 +776,106 @@ paths:
               schema:
                 $ref: "#/components/schemas/Error"
 
-  /exhibitions/{exhibitionId}/visitorSessions/{visitorSessionId}:
+  /v2/exhibitions/{exhibitionId}/visitorSessions:
+    get:
+      operationId: listVisitorSessionsV2
+      summary: List visitor sessions
+      description: List exhibition visitor sessions
+      tags:
+        - VisitorSessions
+      parameters:
+        - name: exhibitionId
+          required: true
+          in: path
+          description: exhibition id
+          schema:
+            type: string
+            format: uuid
+        - name: tagId
+          in: query
+          description: query by RFID tag
+          schema:
+            type: string
+        - name: modifiedAfter
+          in: query
+          description: filter list by modification time
+          schema:
+            type: string
+      responses:
+        "200":
+          description: A visitor session list
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/VisitorSessionV2"
+        "400":
+          description: Invalid request was sent to the server
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "403":
+          description: Attempted to make a call with unauthorized client
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "500":
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+    post:
+      operationId: createVisitorSessionV2
+      summary: Create a visitor session
+      description: Creates new exhibition visitor session
+      tags:
+        - VisitorSessions
+      parameters:
+        - name: exhibitionId
+          required: true
+          in: path
+          description: exhibition id
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/VisitorSessionV2"
+        description: Payload
+        required: true
+      responses:
+        "200":
+          description: Created exhibition visitor session
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/VisitorSessionV2"
+        "400":
+          description: Invalid request was sent to the server
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "403":
+          description: Attempted to make a call with unauthorized client
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "500":
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
+  /v1/exhibitions/{exhibitionId}/visitorSessions/{visitorSessionId}:
     get:
       operationId: findVisitorSession
       summary: Find a visitor session
@@ -917,7 +1018,150 @@ paths:
               schema:
                 $ref: "#/components/schemas/Error"
 
-  /exhibitions/{exhibitionId}/visitorTags/{tagId}:
+  /v2/exhibitions/{exhibitionId}/visitorSessions/{visitorSessionId}:
+    get:
+      operationId: findVisitorSessionV2
+      summary: Find a visitor session
+      description: Finds a visitor session by id
+      tags:
+        - VisitorSessions
+      parameters:
+        - name: exhibitionId
+          required: true
+          in: path
+          description: exhibition id
+          schema:
+            type: string
+            format: uuid
+        - name: visitorSessionId
+          required: true
+          in: path
+          description: visitor session id
+          schema:
+            type: string
+            format: uuid
+      responses:
+        "200":
+          description: A exhibition
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/VisitorSessionV2"
+        "400":
+          description: Invalid request was sent to the server
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "403":
+          description: Attempted to make a call with unauthorized client
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "500":
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+    put:
+      operationId: updateVisitorSessionV2
+      summary: Updates visitor session.
+      description: Updates visitor session.
+      tags:
+        - VisitorSessions
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/VisitorSessionV2"
+        description: Payload
+        required: true
+      parameters:
+        - name: exhibitionId
+          required: true
+          in: path
+          description: exhibition id
+          schema:
+            type: string
+            format: uuid
+        - name: visitorSessionId
+          required: true
+          in: path
+          description: visitor session id
+          schema:
+            type: string
+            format: uuid
+      responses:
+        "200":
+          description: Updated exhibition
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/VisitorSessionV2"
+        "400":
+          description: Invalid request was sent to the server
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "403":
+          description: Attempted to make a call with unauthorized client
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "500":
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+    delete:
+      operationId: deleteVisitorSessionV2
+      summary: Deletes visitor session.
+      description: Delets exhibition visitor session.
+      tags:
+        - VisitorSessions
+      parameters:
+        - name: exhibitionId
+          required: true
+          in: path
+          description: exhibition id
+          schema:
+            type: string
+            format: uuid
+        - name: visitorSessionId
+          required: true
+          in: path
+          description: visitor session id
+          schema:
+            type: string
+            format: uuid
+      responses:
+        "204":
+          description: Success
+        "400":
+          description: Invalid request was sent to the server
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "403":
+          description: Attempted to make a call with unauthorized client
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "500":
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
+  /v1/exhibitions/{exhibitionId}/visitorTags/{tagId}:
     get:
       operationId: findVisitorTag
       summary: Find a visitor tag
@@ -964,7 +1208,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/Error"
 
-  /exhibitions/{exhibitionId}/rooms:
+  /v1/exhibitions/{exhibitionId}/rooms:
     get:
       operationId: listExhibitionRooms
       summary: List rooms
@@ -1059,7 +1303,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/Error"
 
-  /exhibitions/{exhibitionId}/rooms/{roomId}:
+  /v1/exhibitions/{exhibitionId}/rooms/{roomId}:
     get:
       operationId: findExhibitionRoom
       summary: Find a room
@@ -1202,7 +1446,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/Error"
 
-  /exhibitions/{exhibitionId}/floors:
+  /v1/exhibitions/{exhibitionId}/floors:
     get:
       operationId: listExhibitionFloors
       summary: List floors
@@ -1291,7 +1535,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/Error"
 
-  /exhibitions/{exhibitionId}/floors/{floorId}:
+  /v1/exhibitions/{exhibitionId}/floors/{floorId}:
     get:
       operationId: findExhibitionFloor
       summary: Find a floor
@@ -1434,7 +1678,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/Error"
 
-  /exhibitions/{exhibitionId}/deviceGroups:
+  /v1/exhibitions/{exhibitionId}/deviceGroups:
     get:
       operationId: listExhibitionDeviceGroups
       summary: List device groups
@@ -1536,7 +1780,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/Error"
 
-  /exhibitions/{exhibitionId}/deviceGroups/{deviceGroupId}:
+  /v1/exhibitions/{exhibitionId}/deviceGroups/{deviceGroupId}:
     get:
       operationId: findExhibitionDeviceGroup
       summary: Find a device group
@@ -1679,7 +1923,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/Error"
 
-  /deviceModels:
+  /v1/deviceModels:
     get:
       operationId: listDeviceModels
       summary: List device models
@@ -1752,7 +1996,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/Error"
 
-  /deviceModels/{deviceModelId}:
+  /v1/deviceModels/{deviceModelId}:
     get:
       operationId: findDeviceModel
       summary: Find a device model
@@ -1874,7 +2118,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/Error"
 
-  /exhibitions/{exhibitionId}/devices:
+  /v1/exhibitions/{exhibitionId}/devices:
     get:
       operationId: listExhibitionDevices
       summary: List devices
@@ -1975,7 +2219,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/Error"
 
-  /exhibitions/{exhibitionId}/devices/{deviceId}:
+  /v1/exhibitions/{exhibitionId}/devices/{deviceId}:
     get:
       operationId: findExhibitionDevice
       summary: Find a device
@@ -2118,7 +2362,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/Error"
 
-  /exhibitions/{exhibitionId}/rfidAntennas:
+  /v1/exhibitions/{exhibitionId}/rfidAntennas:
     get:
       operationId: listRfidAntennas
       summary: List RFID antennas
@@ -2219,7 +2463,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/Error"
 
-  /exhibitions/{exhibitionId}/rfidAntennas/{rfidAntennaId}:
+  /v1/exhibitions/{exhibitionId}/rfidAntennas/{rfidAntennaId}:
     get:
       operationId: findRfidAntenna
       summary: Find an RFID antenna
@@ -2362,7 +2606,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/Error"
 
-  /exhibitions/{exhibitionId}/pages:
+  /v1/exhibitions/{exhibitionId}/pages:
     get:
       operationId: listExhibitionPages
       summary: List pages
@@ -2469,7 +2713,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/Error"
 
-  /exhibitions/{exhibitionId}/pages/{pageId}:
+  /v1/exhibitions/{exhibitionId}/pages/{pageId}:
     get:
       operationId: findExhibitionPage
       summary: Find a page
@@ -2612,7 +2856,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/Error"
 
-  /exhibitions/{exhibitionId}/contentVersions:
+  /v1/exhibitions/{exhibitionId}/contentVersions:
     get:
       operationId: listContentVersions
       summary: List content versions
@@ -2707,7 +2951,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/Error"
 
-  /exhibitions/{exhibitionId}/contentVersions/{contentVersionId}:
+  /v1/exhibitions/{exhibitionId}/contentVersions/{contentVersionId}:
     get:
       operationId: findContentVersion
       summary: Find a content version
@@ -2850,7 +3094,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/Error"
 
-  /exhibitions/{exhibitionId}/groupContentVersions:
+  /v1/exhibitions/{exhibitionId}/groupContentVersions:
     get:
       operationId: listGroupContentVersions
       summary: List group content versions
@@ -2952,7 +3196,7 @@ paths:
 
                 $ref: "#/components/schemas/Error"
 
-  /exhibitions/{exhibitionId}/groupContentVersions/{groupContentVersionId}:
+  /v1/exhibitions/{exhibitionId}/groupContentVersions/{groupContentVersionId}:
     get:
       operationId: findGroupContentVersion
       summary: Find a group content version
@@ -3095,8 +3339,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/Error"
 
-
-  /pageLayouts:
+  /v1/pageLayouts:
     get:
       operationId: listPageLayouts
       summary: List page layouts
@@ -3183,7 +3426,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/Error"
 
-  /pageLayouts/{pageLayoutId}:
+  /v1/pageLayouts/{pageLayoutId}:
     get:
       operationId: findPageLayout
       summary: Find a page layout
@@ -3305,7 +3548,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/Error"
 
-  /subLayouts:
+  /v1/subLayouts:
     get:
       operationId: listSubLayouts
       summary: List sub layouts
@@ -3378,7 +3621,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/Error"
 
-  /subLayouts/{subLayoutId}:
+  /v1/subLayouts/{subLayoutId}:
     get:
       operationId: findSubLayout
       summary: Find a sub layout
@@ -3500,7 +3743,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/Error"
 
-  /storedFiles:
+  /v1/storedFiles:
     get:
       operationId: listStoredFiles
       summary: List stored files
@@ -3541,7 +3784,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/Error"
 
-  /storedFiles/{storedFileId}:
+  /v1/storedFiles/{storedFileId}:
     get:
       operationId: findStoredFile
       summary: Find stored file
@@ -3660,7 +3903,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/Error"
 
-  /system/ping:
+  /v1/system/ping:
     get:
       summary: System ping endpoint
       operationId: ping
@@ -3680,7 +3923,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
 
-  /system/memory:
+  /v1/system/memory:
     get:
       summary: System memory
       operationId: memory
@@ -3699,7 +3942,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-                
+
 components:
   securitySchemes:
     bearerAuth:
@@ -4223,6 +4466,70 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/VisitorSessionVisitedDeviceGroup'
+        creatorId:
+          type: string
+          format: uuid
+          readOnly: true
+        lastModifierId:
+          type: string
+          format: uuid
+          readOnly: true
+        createdAt:
+          type: string
+          format: date-time
+          description: Created date
+          readOnly: true
+        modifiedAt:
+          type: string
+          format: date-time
+          description: Date modified
+          readOnly: true
+
+    VisitorSessionV2:
+      type: object
+      required:
+        - visitorIds
+        - state
+        - language
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+          description: Unique id for the session
+        exhibitionId:
+          type: string
+          format: uuid
+          readOnly: true
+          description: Exhibition id the visiotr was attending to
+        state:
+          $ref: '#/components/schemas/VisitorSessionState'
+        language:
+          type: string
+        variables:
+          type: array
+          items:
+            $ref: '#/components/schemas/VisitorSessionVariable'
+        visitorIds:
+          type: array
+          items:
+            type: string
+            format: uuid
+        visitedDeviceGroups:
+          type: array
+          items:
+            $ref: '#/components/schemas/VisitorSessionVisitedDeviceGroup'
+        tags:
+          type: array
+          description: Read-only list of tags associated with this session
+          readOnly: true
+          items:
+            type: string
+        expiresAt:
+          type: string
+          format: date-time
+          description: Time when the visitor session expires
+          readOnly: true
         creatorId:
           type: string
           format: uuid
