@@ -796,7 +796,7 @@ paths:
           description: query by RFID tag
           schema:
             type: string
-        - name: modifiedSince
+        - name: modifiedAfter
           in: query
           description: filter list by modification time
           schema:
