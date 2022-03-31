@@ -4090,6 +4090,10 @@ components:
           type: integer
           format: int64
           description: Timeout for visitor session
+        indexPageTimeout:
+          type: integer
+          format: int64
+          description: Time after inactive visitor will returned to the index page. Ignored if not specified
         visitorSessionStartStrategy:
           $ref: '#/components/schemas/DeviceGroupVisitorSessionStartStrategy'
         creatorId:
