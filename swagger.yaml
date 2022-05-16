@@ -52,7 +52,15 @@ paths:
             schema:
               $ref: "#/components/schemas/Exhibition"
         description: Payload
-        required: true
+        required: false
+      parameters:
+        - name: sourceExhibitionId
+          required: false
+          in: query
+          description: Create exhibition using existing exhibition as a source. When source is defined, request cannot have a body
+          schema:
+            type: string
+            format: uuid
       responses:
         "200":
           description: Created exhibition
