@@ -4660,7 +4660,8 @@ components:
           type: string
           description: Human readable name for the layout
         data:
-          $ref: '#/components/schemas/PageLayoutView'
+          type: object
+          description: Page layout data which can be either PageLayoutViewHtml or PageLayoutView
         thumbnailUrl:
           type: string
           format: url
@@ -4704,7 +4705,8 @@ components:
           type: string
           description: Human readable name for the sub layout
         data:
-          $ref: '#/components/schemas/PageLayoutView'
+          type: object
+          description: Page layout data which can be either PageLayoutViewHtml or PageLayoutView
         creatorId:
           type: string
           format: uuid
@@ -4724,8 +4726,24 @@ components:
           description: Date modified
           readOnly: true
 
+    PageLayoutViewHtml:
+      type: object
+      description: new version HTML layout data
+      required:
+        - id
+        - html
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        html:
+          type: string
+          description: HTML content
+
     PageLayoutView:
       type: object
+      description: old version Android layout data
       required:
         - id
         - widget
