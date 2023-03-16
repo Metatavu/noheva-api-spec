@@ -4743,13 +4743,8 @@ components:
       type: object
       description: new version HTML layout data
       required:
-        - id
         - html
       properties:
-        id:
-          type: string
-          format: uuid
-          readOnly: true
         html:
           type: string
           description: HTML content
