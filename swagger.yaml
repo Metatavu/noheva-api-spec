@@ -4651,6 +4651,7 @@ components:
         - name
         - data
         - screenOrientation
+        - layoutType
       properties:
         id:
           type: string
@@ -4662,6 +4663,8 @@ components:
         data:
           type: object
           description: Page layout data which can be either PageLayoutViewHtml or PageLayoutView
+        layoutType:
+          $ref: '#/components/schemas/LayoutType'
         thumbnailUrl:
           type: string
           format: url
@@ -4696,6 +4699,7 @@ components:
       required:
         - name
         - data
+        - layoutType
       properties:
         id:
           type: string
@@ -4707,6 +4711,8 @@ components:
         data:
           type: object
           description: Page layout data which can be either PageLayoutViewHtml or PageLayoutView
+        layoutType:
+          $ref: '#/components/schemas/LayoutType'
         creatorId:
           type: string
           format: uuid
@@ -4725,6 +4731,13 @@ components:
           format: date-time
           description: Date modified
           readOnly: true
+
+    LayoutType:
+      type: string
+      description: Format of the layout data
+      enum:
+        - ANDROID
+        - HTML
 
     PageLayoutViewHtml:
       type: object
