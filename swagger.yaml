@@ -4670,7 +4670,7 @@ components:
           description: Device model id
         screenOrientation:
           $ref: '#/components/schemas/ScreenOrientation'
-        resources:
+        defaultResources:
           type: array
           items:
             $ref: '#/components/schemas/ExhibitionPageResource'
@@ -4709,7 +4709,7 @@ components:
           description: Human readable name for the sub layout
         data:
           $ref: '#/components/schemas/PageLayoutView'
-        resources:
+        defaultResources:
           type: array
           items:
             $ref: '#/components/schemas/ExhibitionPageResource'
