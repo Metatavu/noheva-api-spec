@@ -4651,6 +4651,7 @@ components:
         - name
         - data
         - screenOrientation
+        - layoutType
       properties:
         id:
           type: string
@@ -4660,7 +4661,10 @@ components:
           type: string
           description: Human readable name for the layout
         data:
-          $ref: '#/components/schemas/PageLayoutView'
+          type: object
+          description: Page layout data which can be either PageLayoutViewHtml or PageLayoutView
+        layoutType:
+          $ref: '#/components/schemas/LayoutType'
         thumbnailUrl:
           type: string
           format: url
@@ -4699,6 +4703,7 @@ components:
       required:
         - name
         - data
+        - layoutType
       properties:
         id:
           type: string
@@ -4713,6 +4718,10 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/ExhibitionPageResource'
+          type: object
+          description: Page layout data which can be either PageLayoutViewHtml or PageLayoutView
+        layoutType:
+          $ref: '#/components/schemas/LayoutType'
         creatorId:
           type: string
           format: uuid
@@ -4732,8 +4741,26 @@ components:
           description: Date modified
           readOnly: true
 
+    LayoutType:
+      type: string
+      description: Format of the layout data
+      enum:
+        - ANDROID
+        - HTML
+
+    PageLayoutViewHtml:
+      type: object
+      description: new version HTML layout data
+      required:
+        - html
+      properties:
+        html:
+          type: string
+          description: HTML content
+
     PageLayoutView:
       type: object
+      description: old version Android layout data
       required:
         - id
         - widget
