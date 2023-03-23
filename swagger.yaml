@@ -4713,13 +4713,12 @@ components:
           type: string
           description: Human readable name for the sub layout
         data:
-          $ref: '#/components/schemas/PageLayoutView'
+          type: object
+          description: Page layout data which can be either PageLayoutViewHtml or PageLayoutView
         defaultResources:
           type: array
           items:
-            $ref: '#/components/schemas/ExhibitionPageResource'
-          type: object
-          description: Page layout data which can be either PageLayoutViewHtml or PageLayoutView
+            $ref: '#/components/schemas/ExhibitionPageResource'          
         layoutType:
           $ref: '#/components/schemas/LayoutType'
         creatorId:
