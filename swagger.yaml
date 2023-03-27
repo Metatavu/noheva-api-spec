@@ -3102,251 +3102,6 @@ paths:
               schema:
                 $ref: "#/components/schemas/Error"
 
-  /v1/exhibitions/{exhibitionId}/groupContentVersions:
-    get:
-      operationId: listGroupContentVersions
-      summary: List group content versions
-      description: List group content versions
-      tags:
-        - GroupContentVersions
-      parameters:
-        - name: exhibitionId
-          required: true
-          in: path
-          description: exhibition id
-          schema:
-            type: string
-            format: uuid
-        - name: contentVersionId
-          in: query
-          description: filter by content version id
-          schema:
-            type: string
-            format: uuid
-        - name: deviceGroupId
-          in: query
-          description: filter by device group id
-          schema:
-            type: string
-            format: uuid
-      responses:
-        "200":
-          description: A content version list
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: "#/components/schemas/GroupContentVersion"
-        "400":
-          description: Invalid request was sent to the server
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
-        "403":
-          description: Attempted to make a call with unauthorized client
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
-        "500":
-          description: Internal server error
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
-    post:
-      operationId: createGroupContentVersion
-      summary: Create a group content version
-      description: Creates new group content version
-      tags:
-        - GroupContentVersions
-      parameters:
-        - name: exhibitionId
-          required: true
-          in: path
-          description: exhibition id
-          schema:
-            type: string
-            format: uuid
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/GroupContentVersion"
-        description: Payload
-        required: true
-      responses:
-        "200":
-          description: Created content version
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/GroupContentVersion"
-        "400":
-          description: Invalid request was sent to the server
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
-        "403":
-          description: Attempted to make a call with unauthorized client
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
-        "500":
-          description: Internal server error
-          content:
-            application/json:
-              schema:
-
-                $ref: "#/components/schemas/Error"
-
-  /v1/exhibitions/{exhibitionId}/groupContentVersions/{groupContentVersionId}:
-    get:
-      operationId: findGroupContentVersion
-      summary: Find a group content version
-      description: Finds a group content version by id
-      tags:
-        - GroupContentVersions
-      parameters:
-        - name: exhibitionId
-          required: true
-          in: path
-          description: exhibition id
-          schema:
-            type: string
-            format: uuid
-        - name: groupContentVersionId
-          required: true
-          in: path
-          description: group content version id
-          schema:
-            type: string
-            format: uuid
-      responses:
-        "200":
-          description: A exhibition
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/GroupContentVersion"
-        "400":
-          description: Invalid request was sent to the server
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
-        "403":
-          description: Attempted to make a call with unauthorized client
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
-        "500":
-          description: Internal server error
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
-    put:
-      operationId: updateGroupContentVersion
-      summary: Updates group content version.
-      description: Updates group content version.
-      tags:
-        - GroupContentVersions
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/GroupContentVersion"
-        description: Payload
-        required: true
-      parameters:
-        - name: exhibitionId
-          required: true
-          in: path
-          description: exhibition id
-          schema:
-            type: string
-            format: uuid
-        - name: groupContentVersionId
-          required: true
-          in: path
-          description: group content version id
-          schema:
-            type: string
-            format: uuid
-      responses:
-        "200":
-          description: Updated exhibition
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/GroupContentVersion"
-        "400":
-          description: Invalid request was sent to the server
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
-        "403":
-          description: Attempted to make a call with unauthorized client
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
-        "500":
-          description: Internal server error
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
-    delete:
-      operationId: deleteGroupContentVersion
-      summary: Deletes group content version.
-      description: Delets group content version.
-      tags:
-        - GroupContentVersions
-      parameters:
-        - name: exhibitionId
-          required: true
-          in: path
-          description: exhibition id
-          schema:
-            type: string
-            format: uuid
-        - name: groupContentVersionId
-          required: true
-          in: path
-          description: group content version id
-          schema:
-            type: string
-            format: uuid
-      responses:
-        "204":
-          description: Success
-        "400":
-          description: Invalid request was sent to the server
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
-        "403":
-          description: Attempted to make a call with unauthorized client
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
-        "500":
-          description: Internal server error
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
-
   /v1/pageLayouts:
     get:
       operationId: listPageLayouts
@@ -4651,6 +4406,7 @@ components:
         - name
         - data
         - screenOrientation
+        - layoutType
       properties:
         id:
           type: string
@@ -4660,7 +4416,10 @@ components:
           type: string
           description: Human readable name for the layout
         data:
-          $ref: '#/components/schemas/PageLayoutView'
+          type: object
+          description: Page layout data which can be either PageLayoutViewHtml or PageLayoutView
+        layoutType:
+          $ref: '#/components/schemas/LayoutType'
         thumbnailUrl:
           type: string
           format: url
@@ -4670,6 +4429,10 @@ components:
           description: Device model id
         screenOrientation:
           $ref: '#/components/schemas/ScreenOrientation'
+        defaultResources:
+          type: array
+          items:
+            $ref: '#/components/schemas/ExhibitionPageResource'
         creatorId:
           type: string
           format: uuid
@@ -4695,6 +4458,7 @@ components:
       required:
         - name
         - data
+        - layoutType
       properties:
         id:
           type: string
@@ -4704,7 +4468,14 @@ components:
           type: string
           description: Human readable name for the sub layout
         data:
-          $ref: '#/components/schemas/PageLayoutView'
+          type: object
+          description: Page layout data which can be either PageLayoutViewHtml or PageLayoutView
+        defaultResources:
+          type: array
+          items:
+            $ref: '#/components/schemas/ExhibitionPageResource'          
+        layoutType:
+          $ref: '#/components/schemas/LayoutType'
         creatorId:
           type: string
           format: uuid
@@ -4724,8 +4495,26 @@ components:
           description: Date modified
           readOnly: true
 
+    LayoutType:
+      type: string
+      description: Format of the layout data
+      enum:
+        - ANDROID
+        - HTML
+
+    PageLayoutViewHtml:
+      type: object
+      description: new version HTML layout data
+      required:
+        - html
+      properties:
+        html:
+          type: string
+          description: HTML content
+
     PageLayoutView:
       type: object
+      description: old version Android layout data
       required:
         - id
         - widget
@@ -4822,6 +4611,12 @@ components:
             format: uuid
         activeCondition:
           $ref: '#/components/schemas/ContentVersionActiveCondition'
+        status:
+          $ref: '#/components/schemas/ContentVersionStatus'
+        deviceGroupId:
+          type: string
+          format: uuid
+          description: Id of device group
         creatorId:
           type: string
           format: uuid
@@ -4851,57 +4646,7 @@ components:
         equals:
           type: string
 
-    GroupContentVersion:
-      type: object
-      description: Content version (e.g. language) of a device group.
-      required:
-        - name
-        - status
-        - contentVersionId
-        - deviceGroupId
-      properties:
-        id:
-          type: string
-          format: uuid
-          readOnly: true
-        exhibitionId:
-          type: string
-          format: uuid
-          readOnly: true
-          description: Id of exhibition this group content version belongs to
-        name:
-          type: string
-          description: Human readable name of the group content version
-        status:
-          $ref: '#/components/schemas/GroupContentVersionStatus'
-        contentVersionId:
-          type: string
-          format: uuid
-          description: Id of content version
-        deviceGroupId:
-          type: string
-          format: uuid
-          description: Id of device group
-        creatorId:
-          type: string
-          format: uuid
-          readOnly: true
-        lastModifierId:
-          type: string
-          format: uuid
-          readOnly: true
-        createdAt:
-          type: string
-          format: date-time
-          description: Created date
-          readOnly: true
-        modifiedAt:
-          type: string
-          format: date-time
-          description: Date modified
-          readOnly: true
-
-    GroupContentVersionStatus:
+    ContentVersionStatus:
       description: Content version status
       type: string
       enum:
