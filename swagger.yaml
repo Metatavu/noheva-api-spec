@@ -4674,6 +4674,10 @@ components:
           description: Device model id
         screenOrientation:
           $ref: '#/components/schemas/ScreenOrientation'
+        defaultResources:
+          type: array
+          items:
+            $ref: '#/components/schemas/ExhibitionPageResource'
         creatorId:
           type: string
           format: uuid
@@ -4711,6 +4715,10 @@ components:
         data:
           type: object
           description: Page layout data which can be either PageLayoutViewHtml or PageLayoutView
+        defaultResources:
+          type: array
+          items:
+            $ref: '#/components/schemas/ExhibitionPageResource'          
         layoutType:
           $ref: '#/components/schemas/LayoutType'
         creatorId:
