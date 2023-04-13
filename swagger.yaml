@@ -2885,6 +2885,12 @@ paths:
           schema:
             type: string
             format: uuid
+        - name: deviceGroupId
+          in: query
+          description: Filter by device group id
+          schema:
+            type: string
+            format: uuid
       responses:
         "200":
           description: A content version list
