@@ -6021,6 +6021,7 @@ components:
       description: Device request object
       required:
         - serialNumber
+        - version
       properties:
         name:
           type: string
@@ -6031,6 +6032,9 @@ components:
         description:
           type: string
           description: Description of Device
+        version:
+          type: string
+          description: Version of the application on Device
 
     DeviceKey:
       type: object
