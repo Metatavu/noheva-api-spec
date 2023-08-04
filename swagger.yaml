@@ -6034,6 +6034,7 @@ components:
         - PENDING
         - PENDING_REAPPROVAL
         - APPROVED
+        - READY
 
     DeviceStatus:
       type: string
