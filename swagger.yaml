@@ -3911,46 +3911,6 @@ paths:
               schema:
                 $ref: "#/components/schemas/Error"
 
-  /v1/fleet/devices/requests:
-    get:
-      operationId: listDeviceRequests
-      summary: List device requests.
-      description: Lists device requests.
-      tags:
-        - DeviceRequests
-      parameters:
-        - name: firstResult
-          in: query
-          description: First result. Defaults to 0
-          schema:
-            type: integer
-        - name: maxResults
-          in: query
-          description: Max results. Defaults to 10
-          schema:
-            type: integer
-      responses:
-        "200":
-          description: List of Device Requests
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: "#/components/schemas/DeviceRequest"
-          headers:
-            X-Total-Count:
-              schema:
-                type: integer
-                format: int64
-              description: Total count of Device Requests with given filters.
-        "default":
-          description: Invalid request was sent to the server
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
-
   /v1/fleet/devices/requests/{serialNumber}:
     post:
       operationId: createDeviceRequest
@@ -3972,94 +3932,6 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/DeviceRequest"
-        "default":
-          description: Invalid request was sent to the server
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
-
-  /v1/fleet/devices/requests/{requestId}:
-    put:
-      operationId: updateDeviceRequest
-      summary: Updates Device Request
-      description: Updates Device Request.
-      tags:
-        - DeviceRequests
-      parameters:
-        - name: requestId
-          required: true
-          in: path
-          description: Device Request id
-          schema:
-            type: string
-            format: uuid
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/DeviceRequest"
-        description: Payload
-        required: true
-      responses:
-        "200":
-          description: Updated device request
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/DeviceRequest"
-        "default":
-          description: Invalid request was sent to the server
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
-    delete:
-      operationId: deleteDeviceRequest
-      summary: Deletes Device Request
-      description: Deletes Device Request
-      tags:
-        - DeviceRequests
-      parameters:
-        - name: requestId
-          required: true
-          in: path
-          description: Device Request id
-          schema:
-            type: string
-            format: uuid
-      responses:
-        "204":
-          description: Success
-        "default":
-          description: Invalid request was sent to the server
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
-
-  /v1/fleet/devices/requests/{requestId}/key:
-    put:
-      operationId: getDeviceKey
-      summary: Gets device key
-      description: Gets device key if device is approved.
-      tags:
-        - DeviceRequests
-      parameters:
-        - name: requestId
-          required: true
-          in: path
-          description: Device Request id
-          schema:
-            type: string
-            format: uuid
-      responses:
-        "200":
-          description: Device key
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/DeviceKey"
         "default":
           description: Invalid request was sent to the server
           content:
@@ -4090,6 +3962,11 @@ paths:
           description: Status
           schema:
             $ref: "#/components/schemas/DeviceStatus"
+        - name: approvalStatus
+          in: query
+          description: Approval status
+          schema:
+            $ref: "#/components/schemas/DeviceApprovalStatus"
       responses:
         "200":
           description: List of Devices
@@ -4105,6 +3982,34 @@ paths:
                 type: integer
                 format: int64
               description: Total count of Devices with given filters.
+        "default":
+          description: Invalid request was sent to the server
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
+  /v1/fleet/devices/{serialNumber}:
+    post:
+      operationId: createDevice
+      summary: Creates a Device
+      description: Creates a new Device
+      tags:
+        - Devices
+      parameters:
+        - name: serialNumber
+          required: true
+          in: path
+          description: Devices serial number
+          schema:
+            type: string
+      responses:
+        "201":
+          description: Created Device
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Device"
         "default":
           description: Invalid request was sent to the server
           content:
@@ -4191,6 +4096,35 @@ paths:
       responses:
         "204":
           description: Success
+        "default":
+          description: Invalid request was sent to the server
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
+  /v1/fleet/devices/{deviceId}/key:
+    put:
+      operationId: getDeviceKey
+      summary: Gets device key
+      description: Gets device key if device is approved.
+      tags:
+        - Devices
+      parameters:
+        - name: deviceId
+          required: true
+          in: path
+          description: Device id
+          schema:
+            type: string
+            format: uuid
+      responses:
+        "200":
+          description: Device key
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DeviceKey"
         "default":
           description: Invalid request was sent to the server
           content:
@@ -6053,64 +5987,6 @@ components:
       enum:
         - UserValue
 
-    DeviceRequest:
-      type: object
-      description: Device Request object
-      properties:
-        id:
-          type: string
-          format: uuid
-          description: ID of Device Request
-        deviceModelId:
-          type: string
-          format: uuid
-          description: |
-            Device Model ID
-            Added via management when approving the request.
-        serialNumber:
-          type: string
-          description: Serial Number of Device
-        name:
-          type: string
-          description: | 
-            Name of the Device requesting approval.
-            Can be added from the Device during initial setup or later from fleet management when approving the request.
-        description:
-          type: string
-          description: |
-            Description of the Device requesting approval.
-            Can be added from the Device during initial setup or later from fleet management when approving the request.
-        approvalStatus:
-          $ref: "#/components/schemas/DeviceApprovalStatus"
-        status:
-          $ref: "#/components/schemas/DeviceStatus"
-        version:
-          type: string
-          description: Version of the application on Device
-        lastSeen:
-          type: string
-          format: date-time
-          description: Last time the device was seen
-          readOnly: true
-        creatorId:
-          type: string
-          format: uuid
-          readOnly: true
-        lastModifierId:
-          type: string
-          format: uuid
-          readOnly: true
-        createdAt:
-          type: string
-          format: date-time
-          description: Created date
-          readOnly: true
-        modifiedAt:
-          type: string
-          format: date-time
-          description: Date modified
-          readOnly: true
-
     Device:
       type: object
       description: Device object
@@ -6133,7 +6009,15 @@ components:
         description:
           type: string
           description: Description of Device
+        approvalStatus:
+          description: |
+            Approval status of Device.
+            Will initially be PENDING once the setup process is started.
+            Can be toggled to APPROVED in management.
+            Will be toggled to PENDING_REAPPROVAL if an existing Device restarts the setup process.
+          $ref: "#/components/schemas/DeviceApprovalStatus"
         status:
+          description: Whether the Device is online or offline
           $ref: "#/components/schemas/DeviceStatus"
         version:
           type: string
