@@ -6087,6 +6087,11 @@ components:
         version:
           type: string
           description: Version of the application on Device
+        lastSeen:
+          type: string
+          format: date-time
+          description: Last time the device was seen
+          readOnly: true
         creatorId:
           type: string
           format: uuid
@@ -6133,6 +6138,11 @@ components:
         version:
           type: string
           description: Version of the application on Device
+        lastSeen:
+          type: string
+          format: date-time
+          description: Last time the device was seen
+          readOnly: true
         creatorId:
           type: string
           format: uuid
