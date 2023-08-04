@@ -6080,11 +6080,6 @@ components:
           description: |
             Description of the Device requesting approval.
             Can be added from the Device during initial setup or later from fleet management when approving the request.
-        location:
-          type: string
-          description: |
-            Location of the Device requesting approval.
-            Can be added from the Device during initial setup or later from fleet management when approving the request.
         approvalStatus:
           $ref: "#/components/schemas/DeviceApprovalStatus"
         status:
@@ -6133,9 +6128,6 @@ components:
         description:
           type: string
           description: Description of Device
-        location:
-          type: string
-          description: Location of Device
         status:
           $ref: "#/components/schemas/DeviceStatus"
         version:
