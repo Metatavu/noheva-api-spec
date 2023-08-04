@@ -3960,21 +3960,19 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Error"
-
-  /v1/fleet/devices/{serialNumber}:
     post:
       operationId: createDevice
       summary: Creates a Device
       description: Creates a new Device
       tags:
         - Devices
-      parameters:
-        - name: serialNumber
-          required: true
-          in: path
-          description: Devices serial number
-          schema:
-            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DeviceRequest"
+        description: Payload
+        required: true
       responses:
         "201":
           description: Created Device
@@ -6017,6 +6015,22 @@ components:
           format: date-time
           description: Date modified
           readOnly: true
+          
+    DeviceRequest:
+      type: object
+      description: Device request object
+      required:
+        - serialNumber
+      properties:
+        name:
+          type: string
+          description: Name of Device
+        serialNumber:
+          type: string
+          description: Serial Number of Device
+        description:
+          type: string
+          description: Description of Device
 
     DeviceKey:
       type: object
