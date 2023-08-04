@@ -5985,10 +5985,6 @@ components:
           format: date-time
           description: Last time the device was seen
           readOnly: true
-        creatorId:
-          type: string
-          format: uuid
-          readOnly: true
         lastModifierId:
           type: string
           format: uuid
