@@ -6061,6 +6061,12 @@ components:
           type: string
           format: uuid
           description: ID of Device Request
+        deviceModelId:
+          type: string
+          format: uuid
+          description: |
+            Device Model ID
+            Added via management when approving the request.
         serialNumber:
           type: string
           description: Serial Number of Device
@@ -6114,6 +6120,10 @@ components:
           format: uuid
           description: ID of Device
           readOnly: true
+        deviceModelId:
+          type: string
+          format: uuid
+          description: Device Model ID
         name:
           type: string
           description: Name of Device
