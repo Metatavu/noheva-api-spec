@@ -5944,6 +5944,10 @@ components:
     Device:
       type: object
       description: Device object
+      required:
+        - status
+        - approvalStatus
+        - version
       properties:
         id:
           type: string
