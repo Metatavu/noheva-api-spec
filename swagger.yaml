@@ -3911,34 +3911,6 @@ paths:
               schema:
                 $ref: "#/components/schemas/Error"
 
-  /v1/fleet/devices/requests/{serialNumber}:
-    post:
-      operationId: createDeviceRequest
-      summary: Creates a Device Request
-      description: Creates a Device Request.
-      tags:
-        - DeviceRequests
-      parameters:
-        - name: serialNumber
-          required: true
-          in: path
-          description: Device serial number
-          schema:
-            type: string
-      responses:
-        "201":
-          description: Created Device Request
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/DeviceRequest"
-        "default":
-          description: Invalid request was sent to the server
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
-
   /v1/fleet/devices:
     get:
       operationId: listDevices
