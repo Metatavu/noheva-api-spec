@@ -3938,12 +3938,6 @@ paths:
                 type: array
                 items:
                   $ref: "#/components/schemas/Device"
-          headers:
-            X-Total-Count:
-              schema:
-                type: integer
-                format: int64
-              description: Total count of Devices with given filters.
         "default":
           description: Invalid request was sent to the server
           content:
