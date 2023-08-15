@@ -4314,6 +4314,7 @@ components:
         - name
         - groupId
         - modelId
+        - deviceId
         - screenOrientation
         - imageLoadStrategy
       properties:
@@ -4333,6 +4334,10 @@ components:
           type: string
           format: uuid
           description: Device model id
+        deviceId:
+          type: string
+          format: uuid
+          description: Device id
         name:
           type: string
         location:
