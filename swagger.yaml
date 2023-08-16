@@ -4313,7 +4313,6 @@ components:
       required:
         - name
         - groupId
-        - modelId
         - deviceId
         - screenOrientation
         - imageLoadStrategy
@@ -4330,10 +4329,6 @@ components:
           type: string
           format: uuid
           description: Device group id
-        modelId:
-          type: string
-          format: uuid
-          description: Device model id
         deviceId:
           type: string
           format: uuid
