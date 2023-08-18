@@ -4313,7 +4313,6 @@ components:
       required:
         - name
         - groupId
-        - deviceId
         - screenOrientation
         - imageLoadStrategy
       properties:
