@@ -5946,6 +5946,7 @@ components:
       required:
         - status
         - approvalStatus
+        - serialNumber
         - version
       properties:
         id:
