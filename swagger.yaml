@@ -1,7 +1,7 @@
 openapi: 3.0.0
 info:
   version: 1.0.0
-  title: Muisti API
+  title: Noheva API
 security:
   - bearerAuth: []
 paths:
@@ -3672,6 +3672,181 @@ paths:
               schema:
                 $ref: "#/components/schemas/Error"
 
+  /v1/fleet/devices:
+    get:
+      operationId: listDevices
+      summary: List devices.
+      description: Lists devices.
+      tags:
+        - Devices
+      parameters:
+        - name: status
+          in: query
+          description: Status
+          schema:
+            $ref: "#/components/schemas/DeviceStatus"
+        - name: approvalStatus
+          in: query
+          description: Approval status
+          schema:
+            $ref: "#/components/schemas/DeviceApprovalStatus"
+      responses:
+        "200":
+          description: List of Devices
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Device"
+        "default":
+          description: Invalid request was sent to the server
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+    post:
+      operationId: createDevice
+      summary: Creates a Device
+      description: Creates a new Device
+      tags:
+        - Devices
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DeviceRequest"
+        description: Payload
+        required: true
+      responses:
+        "201":
+          description: Created Device
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Device"
+        "default":
+          description: Invalid request was sent to the server
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
+  /v1/fleet/devices/{deviceId}:
+    get:
+      operationId: findDevice
+      summary: Find a Device.
+      description: Finds a Device by id.
+      tags:
+        - Devices
+      parameters:
+        - name: deviceId
+          required: true
+          in: path
+          description: Device id
+          schema:
+            type: string
+            format: uuid
+      responses:
+        "200":
+          description: Device
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Device"
+        "default":
+          description: Invalid request was sent to the server
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+    put:
+      operationId: updateDevice
+      summary: Updates Device
+      description: Updates Device
+      tags:
+        - Devices
+      parameters:
+        - name: deviceId
+          required: true
+          in: path
+          description: Device id
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Device"
+        description: Payload
+        required: true
+      responses:
+        "200":
+          description: Updated Device
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Device"
+        "default":
+          description: Invalid request was sent to the server
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+    delete:
+      operationId: deleteDevice
+      summary: Deletes Device
+      description: Deletes Device
+      tags:
+        - Devices
+      parameters:
+        - name: deviceId
+          required: true
+          in: path
+          description: Device id
+          schema:
+            type: string
+            format: uuid
+      responses:
+        "204":
+          description: Success
+        "default":
+          description: Invalid request was sent to the server
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
+  /v1/fleet/devices/{deviceId}/key:
+    put:
+      operationId: getDeviceKey
+      summary: Gets device key
+      description: Gets device key if device is approved.
+      tags:
+        - Devices
+      parameters:
+        - name: deviceId
+          required: true
+          in: path
+          description: Device id
+          schema:
+            type: string
+            format: uuid
+      responses:
+        "200":
+          description: Device key
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DeviceKey"
+        "default":
+          description: Invalid request was sent to the server
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
   /v1/system/ping:
     get:
       summary: System ping endpoint
@@ -3899,7 +4074,6 @@ components:
       required:
         - name
         - groupId
-        - modelId
         - screenOrientation
         - imageLoadStrategy
       properties:
@@ -3915,10 +4089,10 @@ components:
           type: string
           format: uuid
           description: Device group id
-        modelId:
+        deviceId:
           type: string
           format: uuid
-          description: Device model id
+          description: Device id
         name:
           type: string
         location:
@@ -5482,3 +5656,108 @@ components:
       type: string
       enum:
         - UserValue
+
+    Device:
+      type: object
+      description: Device object
+      required:
+        - status
+        - approvalStatus
+        - serialNumber
+        - version
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: ID of Device
+          readOnly: true
+        deviceModelId:
+          type: string
+          format: uuid
+          description: Device Model ID
+        name:
+          type: string
+          description: Name of Device
+        serialNumber:
+          type: string
+          description: Serial Number of Device
+        description:
+          type: string
+          description: Description of Device
+        approvalStatus:
+          description: |
+            Approval status of Device.
+            Will initially be PENDING once the setup process is started.
+            Can be toggled to APPROVED in management.
+            Will be toggled to PENDING_REAPPROVAL if an existing Device restarts the setup process.
+          $ref: "#/components/schemas/DeviceApprovalStatus"
+        status:
+          description: Whether the Device is online or offline
+          $ref: "#/components/schemas/DeviceStatus"
+        version:
+          type: string
+          description: Version of the application on Device
+          readOnly: true
+        lastSeen:
+          type: string
+          format: date-time
+          description: Last time the device was seen
+          readOnly: true
+        lastModifierId:
+          type: string
+          format: uuid
+          readOnly: true
+        createdAt:
+          type: string
+          format: date-time
+          description: Created date
+          readOnly: true
+        modifiedAt:
+          type: string
+          format: date-time
+          description: Date modified
+          readOnly: true
+          
+    DeviceRequest:
+      type: object
+      description: Device request object
+      required:
+        - serialNumber
+        - version
+      properties:
+        name:
+          type: string
+          description: Name of Device
+        serialNumber:
+          type: string
+          description: Serial Number of Device
+        description:
+          type: string
+          description: Description of Device
+        version:
+          type: string
+          description: Version of the application on Device
+
+    DeviceKey:
+      type: object
+      description: Device key object
+      required:
+        - key
+      properties:
+        key:
+          type: string
+          description: Device Key
+
+    DeviceApprovalStatus:
+      type: string
+      enum:
+        - PENDING
+        - PENDING_REAPPROVAL
+        - APPROVED
+        - READY
+
+    DeviceStatus:
+      type: string
+      enum:
+        - ONLINE
+        - OFFLINE
