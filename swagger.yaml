@@ -3867,6 +3867,84 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
 
+  /v1/deviceData/{exhibitionDeviceId}/layouts:
+    get:
+      operationId: listDeviceDataLayouts
+      summary: List layouts for this device.
+      description: List device layouts for this device. Only devices access this endpoint.
+      tags:
+        - DeviceData
+      security:
+        - deviceAuth: []
+      parameters:
+        - name: exhibitionDeviceId
+          required: true
+          in: path
+          description: Exhibition device id
+          schema:
+            type: string
+            format: uuid
+      responses:
+        "200":
+          description: List of layouts for the given device
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/DeviceLayout"
+          headers:
+            X-Total-Count:
+              schema:
+                type: integer
+                format: int64
+              description: Total count of pages for this device
+        "default":
+          description: Invalid request was sent to the server
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
+  /v1/deviceData/{exhibitionDeviceId}/pages:
+    get:
+      operationId: listDeviceDataPages
+      summary: List pages for this device.
+      description: List pages for this device. Only devices access this endpoint.
+      tags:
+        - DeviceData
+      security:
+        - deviceAuth: []
+      parameters:
+        - name: exhibitionDeviceId
+          required: true
+          in: path
+          description: Exhibition device id
+          schema:
+            type: string
+            format: uuid
+      responses:
+        "200":
+          description: List of pages for the given device
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/DevicePage"
+          headers:
+            X-Total-Count:
+              schema:
+                type: integer
+                format: int64
+              description: Total count of pages for this device
+        "default":
+          description: Invalid request was sent to the server
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
   /v1/system/memory:
     get:
       summary: System memory
@@ -3893,6 +3971,11 @@ components:
       type: http
       scheme: bearer
       bearerFormat: JWT
+
+    deviceAuth:
+      type: apiKey
+      in: header
+      name: X-DEVICE-KEY
 
   schemas:
     Exhibition:
@@ -4653,7 +4736,7 @@ components:
         defaultResources:
           type: array
           items:
-            $ref: '#/components/schemas/ExhibitionPageResource'          
+            $ref: '#/components/schemas/ExhibitionPageResource'
         layoutType:
           $ref: '#/components/schemas/LayoutType'
         creatorId:
@@ -5717,7 +5800,7 @@ components:
           format: date-time
           description: Date modified
           readOnly: true
-          
+
     DeviceRequest:
       type: object
       description: Device request object
@@ -5761,3 +5844,99 @@ components:
       enum:
         - ONLINE
         - OFFLINE
+
+    DevicePage:
+      description: Read-only version of page, that is used to deliver page data to visitor ui devices.
+      required:
+        - id
+        - exhibitionId
+        - layoutId
+        - resources
+        - orderNumber
+        - language
+        - modifiedAt
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+          description: Page id.
+        exhibitionId:
+          type: string
+          format: uuid
+          readOnly: true
+          description: Id of exhibition this page belongs to
+        layoutId:
+          type: string
+          format: uuid
+          description: Id of page layout
+          readOnly: true
+        name:
+          type: string
+          description: Human readable name for the page
+          readOnly: true
+        resources:
+          type: array
+          items:
+            $ref: '#/components/schemas/ExhibitionPageResource'
+          readOnly: true
+        eventTriggers:
+          type: array
+          items:
+            $ref: '#/components/schemas/ExhibitionPageEventTrigger'
+          readOnly: true
+        enterTransitions:
+          type: array
+          items:
+            $ref: '#/components/schemas/ExhibitionPageTransition'
+          readOnly: true
+        exitTransitions:
+          type: array
+          items:
+            $ref: '#/components/schemas/ExhibitionPageTransition'
+          readOnly: true
+        orderNumber:
+          type: integer
+          format: int32
+          readOnly: true
+        language:
+          type: string
+          description: Language of the given page. Language is detected from content version this page belongs to.
+        activeConditionUserVariable:
+          type: string
+          description: Active condition user variable. This property is present only when page belongs to conditionally active content version.
+          readOnly: true
+        activeConditionEquals:
+          type: string
+          description: Active condition equals value. This property is present only when page belongs to conditionally active content version.
+          readOnly: true
+        modifiedAt:
+          type: string
+          format: date-time
+          description: Date modified
+          readOnly: true
+
+    DeviceLayout:
+      type: object
+      description: Read-only version of layout, that is used to deliver layout data to visitor ui devices.
+      required:
+        - id
+        - screenOrientation
+        - data
+        - modifiedAt
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Layout id.
+          readOnly: true
+        screenOrientation:
+          $ref: '#/components/schemas/ScreenOrientation'
+          readOnly: true
+        data:
+          $ref: '#/components/schemas/PageLayoutViewHtml'
+          readOnly: true
+        modifiedAt:
+          type: string
+          format: date-time
+          readOnly: true
