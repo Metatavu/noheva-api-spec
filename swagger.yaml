@@ -5697,7 +5697,6 @@ components:
         version:
           type: string
           description: Version of the application on Device
-          readOnly: true
         lastSeen:
           type: string
           format: date-time
