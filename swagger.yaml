@@ -5693,6 +5693,31 @@ components:
           readOnly: true
           description: Id of ExhibitionDeviceGroup that ExhibitionDevice belongs to
 
+    MqttDeviceDetachedFromExhibition:
+      type: object
+      description: MQTT notification message about Device being detached from an Exhibition. This is actually not part of REST API spec but a realtime notification via MQTT channel
+      properties:
+        exhibitionId:
+          type: string
+          format: uuid
+          readOnly: true
+          description: Id of Exhibition the ExhibitionDevice belongs to
+        deviceId:
+          type: string
+          format: uuid
+          readOnly: true
+          description: Id of Device that was attached to ExhibitionDevice
+        exhibitionDeviceId:
+          type: string
+          format: uuid
+          readOnly: true
+          description: Id of ExhibitionDevice that Device belongs to
+        exhibitionDeviceGroupId:
+          type: string
+          format: uuid
+          readOnly: true
+          description: Id of ExhibitionDeviceGroup that ExhibitionDevice belongs to
+
     DynamicPageResourceType:
       type: string
       enum:
