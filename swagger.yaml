@@ -5717,6 +5717,20 @@ components:
           format: uuid
           readOnly: true
           description: Id of ExhibitionDeviceGroup that ExhibitionDevice belongs to
+          
+    MqttDeviceStatus:
+      type: object
+      description: |
+        MQTT notification message about devices status. This is actually not part of the REST API spec but a realtime notification via MQTT channel.
+        It is periodically sent by all devices to the server.
+      properties:
+        deviceId:
+          type: string
+          format: uuid
+          readOnly: true
+          description: ID of the device
+        status:
+          ref: '#/components/schemas/DeviceStatus'          
 
     DynamicPageResourceType:
       type: string
@@ -5830,6 +5844,18 @@ components:
         version:
           type: string
           description: Version of the application on Device
+        warrantyExpiry:
+          type: string
+          description: Date when the warranty expires
+        usageHours:
+          type: number
+          format: double
+          description: Number of hours the Device has been used
+        lastConnected:
+          type: string
+          format: date-time
+          description: Last time the Device was connected
+          readOnly: true
         lastSeen:
           type: string
           format: date-time
