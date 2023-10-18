@@ -5730,7 +5730,11 @@ components:
           readOnly: true
           description: ID of the device
         status:
-          $ref: "#/components/schemas/DeviceStatus"       
+          $ref: "#/components/schemas/DeviceStatus"
+        version:
+          type: string
+          description: Current software version running on the device
+          readOnly: true   
 
     DynamicPageResourceType:
       type: string
