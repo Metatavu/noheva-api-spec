@@ -5853,8 +5853,7 @@ components:
           format: date-time
           description: Date when the warranty expires
         usageHours:
-          type: number
-          format: double
+          type: integer
           description: Number of hours the Device has been used
         lastConnected:
           type: string
