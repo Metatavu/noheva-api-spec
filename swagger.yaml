@@ -5850,6 +5850,7 @@ components:
           description: Version of the application on Device
         warrantyExpiry:
           type: string
+          format: date-time
           description: Date when the warranty expires
         usageHours:
           type: number
