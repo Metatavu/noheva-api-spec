@@ -5731,7 +5731,6 @@ components:
         deviceId:
           type: string
           format: uuid
-          readOnly: true
           description: ID of the device
         status:
           $ref: "#/components/schemas/DeviceStatus"
