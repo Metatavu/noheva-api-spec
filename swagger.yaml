@@ -5737,7 +5737,6 @@ components:
         version:
           type: string
           description: Current software version running on the device
-          readOnly: true   
 
     DynamicPageResourceType:
       type: string
