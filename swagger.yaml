@@ -5723,6 +5723,10 @@ components:
       description: |
         MQTT notification message about devices status. This is actually not part of the REST API spec but a realtime notification via MQTT channel.
         It is periodically sent by all devices to the server.
+      required:
+        - deviceId
+        - status
+        - version
       properties:
         deviceId:
           type: string
@@ -5856,6 +5860,7 @@ components:
           type: number
           format: double
           description: Number of hours the Device has been used
+          readOnly: true
         lastConnected:
           type: string
           format: date-time
