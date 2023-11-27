@@ -5961,7 +5961,7 @@ components:
         resources:
           type: array
           items:
-            $ref: '#/components/schemas/ExhibitionPageResource'
+            $ref: '#/components/schemas/DevicePageResource'
           readOnly: true
         eventTriggers:
           type: array
@@ -5998,6 +5998,33 @@ components:
           format: date-time
           description: Date modified
           readOnly: true
+
+    DevicePageResource:
+      type: object
+      required:
+        - id
+        - data
+        - type
+      properties:
+        id:
+          type: string
+          description: Resource id.
+        data:
+          type: string
+          description: Resource data. This is either string or an URL to resource data.
+        mode:
+          $ref: '#/components/schemas/PageResourceMode'
+        type:
+          $ref: '#/components/schemas/ExhibitionPageResourceType'
+        component:
+          type: string
+          description: Name of the layout component this resource is attached to.
+        property:
+          type: string
+          description: |
+            Name of the property this resource is attached to. Property name be one of the following:
+            - #text (element text content)
+            - style-<style name> (element style)
 
     DeviceLayout:
       type: object
