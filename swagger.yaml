@@ -3867,7 +3867,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
 
-  /v1/deviceData/{exhibitionDeviceId}/layouts:
+  /v1/deviceData/{deviceId}/layouts:
     get:
       operationId: listDeviceDataLayouts
       summary: List layouts for this device.
@@ -3877,10 +3877,10 @@ paths:
       security:
         - deviceAuth: []
       parameters:
-        - name: exhibitionDeviceId
+        - name: deviceId
           required: true
           in: path
-          description: Exhibition device id
+          description: Device id of the device. Device id is resolved into exhibition device by using active exhibition.
           schema:
             type: string
             format: uuid
@@ -3906,7 +3906,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/Error"
 
-  /v1/deviceData/{exhibitionDeviceId}/pages:
+  /v1/deviceData/{deviceId}/pages:
     get:
       operationId: listDeviceDataPages
       summary: List pages for this device.
@@ -3916,10 +3916,10 @@ paths:
       security:
         - deviceAuth: []
       parameters:
-        - name: exhibitionDeviceId
+        - name: deviceId
           required: true
           in: path
-          description: Exhibition device id
+          description: Device id of the device. Device id is resolved into exhibition device by using active exhibition.
           schema:
             type: string
             format: uuid
@@ -3989,6 +3989,9 @@ components:
           readOnly: true
         name:
           type: string
+        active:
+          type: boolean
+          description: Whether the exhibition is active or not. Only one exhibition can be active at a time so if this is set to true, all other exhibitions will be set to false.
         creatorId:
           type: string
           format: uuid
@@ -5818,6 +5821,7 @@ components:
         - approvalStatus
         - serialNumber
         - version
+        - deviceType
       properties:
         id:
           type: string
@@ -5847,6 +5851,9 @@ components:
         status:
           description: Whether the Device is online or offline
           $ref: "#/components/schemas/DeviceStatus"
+        deviceType:
+          description: Type of Device
+          $ref: "#/components/schemas/DeviceType"
         version:
           type: string
           description: Version of the application on Device
@@ -5890,6 +5897,7 @@ components:
       required:
         - serialNumber
         - version
+        - deviceType
       properties:
         name:
           type: string
@@ -5897,6 +5905,9 @@ components:
         serialNumber:
           type: string
           description: Serial Number of Device
+        deviceType:
+          description: Type of Device
+          $ref: "#/components/schemas/DeviceType"
         description:
           type: string
           description: Description of Device
@@ -5927,6 +5938,14 @@ components:
       enum:
         - ONLINE
         - OFFLINE
+
+    DeviceType:
+      type: string
+      description: Device type object
+      enum:
+        - NOHEVA_ANDROID
+        - NOHEVA_MACOS
+        - CUSTOM
 
     DevicePage:
       description: Read-only version of page, that is used to deliver page data to visitor ui devices.
