@@ -5020,6 +5020,7 @@ components:
         - video
         - html
         - svg
+        - color
 
     PageResourceMode:
       type: string
