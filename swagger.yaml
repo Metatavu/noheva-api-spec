@@ -3945,6 +3945,45 @@ paths:
               schema:
                 $ref: "#/components/schemas/Error"
 
+  /v1/deviceData/{deviceId}/settings:
+    get:
+      operationId: listDeviceDataSettings
+      summary: List device settings for this device
+      description: List device settings for this device. Only devices can access this endpoint.
+      tags:
+        - DeviceData
+      security:
+        - deviceAuth: []
+      parameters:
+        - name: deviceId
+          required: true
+          in: path
+          description: Device id of the device. Device id is resolved into exhibition device by using active exhibition.
+          schema:
+            type: string
+            format: uuid
+      responses:
+        "200":
+          description: List of settings for the given device. List contains only defined settings for the device, not all available settings. If setting is not defined for the device, device default should be used.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/DeviceSetting"
+          headers:
+            X-Total-Count:
+              schema:
+                type: integer
+                format: int64
+              description: Total count of pages for this device
+        "default":
+          description: Invalid request was sent to the server
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
   /v1/system/memory:
     get:
       summary: System memory
@@ -5721,7 +5760,7 @@ components:
           format: uuid
           readOnly: true
           description: Id of ExhibitionDeviceGroup that ExhibitionDevice belongs to
-          
+
     MqttDeviceStatus:
       type: object
       description: |
@@ -6070,3 +6109,30 @@ components:
           type: string
           format: date-time
           readOnly: true
+
+    DeviceSetting:
+      type: object
+      description: Read-only setting for a device. This entity is used to deliver device settings to visitor ui devices
+      required:
+        - key
+        - value
+        - modifiedAt
+      properties:
+        key:
+          $ref: '#/components/schemas/DeviceSettingKey'
+        value:
+          type: string
+          readOnly: true
+        modifiedAt:
+          description:
+          type: string
+          format: date-time
+          readOnly: true
+
+    DeviceSettingKey:
+      type: string
+      description: Device setting key
+      readOnly: true
+      enum:
+        - SCREEN_DENSITY
+
