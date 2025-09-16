@@ -5985,6 +5985,7 @@ components:
       enum:
         - NOHEVA_ANDROID
         - NOHEVA_MACOS
+        - MUISTI_ANDROID
         - CUSTOM
 
     DevicePage:
