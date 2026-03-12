@@ -6143,3 +6143,4 @@ components:
         - DEVICE_IMAGE_LOAD_STRATEGY
         - INDEX_PAGE_TIMEOUT
         - IDLE_PAGE_ID
+        - DEVICE_GROUP_ID
