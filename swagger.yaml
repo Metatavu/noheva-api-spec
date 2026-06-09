@@ -5985,6 +5985,7 @@ components:
       enum:
         - NOHEVA_ANDROID
         - NOHEVA_MACOS
+        - MUISTI_ANDROID
         - CUSTOM
 
     DevicePage:
@@ -6136,4 +6137,10 @@ components:
       readOnly: true
       enum:
         - SCREEN_DENSITY
-
+        - SCREEN_ORIENTATION
+        - VISITOR_SESSION_END_TIMEOUT
+        - ALLOW_VISITOR_SESSION_CREATION
+        - DEVICE_IMAGE_LOAD_STRATEGY
+        - INDEX_PAGE_TIMEOUT
+        - IDLE_PAGE_ID
+        - DEVICE_GROUP_ID
